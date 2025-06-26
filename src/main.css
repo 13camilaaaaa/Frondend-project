@@ -1,0 +1,642 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*
+Variables CSS Globales
+*/
+:root {
+    --color-green: #41634C;
+    --color-beige: #FFEBB6;
+    --color-blue: #6366f1;
+    --color-otros: #9ca3af;
+    --color-fondo: #ffffff;
+    --color-sombras: rgb(58, 101, 82);
+}
+
+/* PROJECT/src/main.css */
+
+/* --- ESTILOS BASE (MOBILE FIRST: <= 768px) --- */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color-green);
+    margin: 0;
+    padding: 10px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#app {
+    flex-grow: 1;
+}
+
+/* --- HEADER --- */
+.header {
+    background-color: var(--color-fondo);
+    padding: 15px 20px;
+    box-shadow: 0 3px 4px var(--color-sombras);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.menu {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    order: 2;
+}
+
+.menu__left,
+.menu__center,
+.menu__right {
+    display: none;
+    align-items: center;
+}
+
+.menu__left {
+    justify-content: flex-start;
+}
+
+.menu__center {
+    justify-content: center;
+}
+
+.menu__right {
+    justify-content: flex-end;
+}
+
+/* Estilos para el logo/marca ROSS MILLE / RM */
+.menu__brand {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--color-green);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    /* Fuente por defecto */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    /* O la fuente que uses por defecto */
+    transition: font-family 0.3s ease, font-size 0.3s ease;
+    /* Transición suave para la fuente y tamaño */
+}
+
+/* **NUEVO ESTILO PARA LA FUENTE LIHAM** */
+.liham-font {
+    font-family: 'Liham', cursive;
+    /* Asegúrate que 'Liham' sea el nombre correcto de la fuente */
+    font-size: 1.8rem !important;
+    /* Puedes ajustar el tamaño para RM si es necesario */
+}
+
+
+/* Estilos generales para los enlaces del header (Login, Carrito, Contacto) */
+.menu__link {
+    text-decoration: none;
+    color: var(--color-green);
+    font-weight: 500;
+    padding: 8px 0;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu__link:hover {
+    font-weight: bold;
+}
+
+.menu__link i {
+    color: var(--color-green);
+    margin-right: 0px;
+    font-size: 1.2rem;
+}
+
+.menu__link-text {
+    display: none;
+    margin-left: 8px;
+}
+
+/* --- ICONO MENÚ HAMBURGUESA --- */
+.hamburger-menu-icon {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--color-green);
+    padding: 10px;
+    order: 1;
+    z-index: 100;
+}
+
+.hamburger-menu-icon:hover {
+    font-weight: bold;
+}
+
+.hamburger-menu-icon.is-active i {
+    transform: rotate(90deg);
+    transition: transform 0.3s ease;
+}
+
+/* --- MENÚ MÓVIL / TABLET (EL QUE APARECE CON LA HAMBURGUESA) --- */
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 70%;
+    height: 100%;
+    background-color: var(--color-green);
+    box-shadow: 2px 0 5px var(--color-sombras);
+    transition: left 0.3s ease-in-out;
+    padding-top: 60px;
+    z-index: 99;
+}
+
+.mobile-nav.is-open {
+    left: 0;
+}
+
+.mobile-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu__list li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu__link {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--color-fondo);
+    font-size: 1.1rem;
+    transition: background-color 0.2s ease;
+}
+
+.mobile-menu__link:hover {
+    background-color: var(--color-otros);
+}
+
+.mobile-menu__link i {
+    margin-right: 10px;
+    color: var(--color-green)
+}
+
+
+/* --- BARRA DE CATEGORÍAS (DEBAJO DEL HEADER) --- */
+.categories-bar {
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    width: 100%;
+    display: none;
+    z-index: 5;
+}
+
+.categories-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.categories-menu__group {
+    display: none;
+}
+
+.category__link {
+    text-decoration: none;
+    color: var(--color-green);
+    font-weight: 600;
+    padding: 5px 12px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.category__link:hover {
+    font-weight: bold;
+    background-color: #d0d5da;
+}
+
+.search-desktop-container {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.search-header-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 15px;
+    /* Espacio a la derecha del buscador en el header */
+}
+
+.search__input {
+    background-color: #f4f4f4;
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 1px solid var(--color-green);
+    border-radius: 4px 4px 0 0;
+    font-size: 0.9rem;
+    color: var(--color-green);
+    outline: none;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.search__input:focus {
+    border-bottom-color: var(--color-green);
+}
+
+.search__input::placeholder {
+    color: var(--color-green);
+    opacity: 10;
+}
+
+.search-header-input {
+    width: 120px;
+    font-size: 0.85rem;
+}
+
+.search-desktop-input {
+    width: 250px;
+    font-size: 1rem;
+}
+
+.categories-menu__search i,
+.search-header-container i {
+    color: var(--color-green);
+    margin-right: 0px;
+    font-size: 1.2rem;
+}
+
+
+/* --- MEDIA QUERIES --- */
+
+/* MÓVILES (max-width: 768px) - ESTILOS PREDETERMINADOS (Base) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .header {
+        padding: 15px 15px;
+        justify-content: space-between;
+    }
+
+    .hamburger-menu-icon {
+        display: block;
+        order: 1;
+    }
+
+    .menu {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
+    .menu__left {
+        display: none;
+    }
+
+    .menu__center {
+        display: flex;
+        justify-content: flex-start;
+        flex-grow: 1;
+        font-size: 1.6rem;
+    }
+
+    .menu__right {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+        /* Espacio entre Login/Carrito y buscador */
+        flex-grow: 1;
+    }
+
+    .menu__link-text {
+        display: none;
+    }
+
+    .menu__link i {
+        margin-right: 0;
+        font-size: 1.2rem;
+    }
+
+    .search-header-container {
+        display: flex;
+    }
+
+    .search-header-input {
+        width: 100px;
+        font-size: 0.8rem;
+    }
+
+    .categories-bar {
+        display: none;
+    }
+
+    .categories-menu__group {
+        display: none;
+    }
+
+    .search-desktop-container {
+        display: none;
+    }
+}
+
+
+/* TABLETAS (min-width: 769px y max-width: 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        padding: 15px;
+    }
+
+    .header {
+        padding: 15px 20px;
+        justify-content: space-between;
+    }
+
+    .hamburger-menu-icon {
+        display: block;
+        order: 1;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+    }
+
+    .menu__left {
+        display: none;
+    }
+
+    .menu__center {
+        display: flex;
+        justify-content: flex-start;
+        flex-grow: 1;
+        font-size: 1.7rem;
+    }
+
+    .menu__right {
+        display: flex;
+        justify-content: flex-end;
+        gap: 20px;
+        /* Espacio entre Login/Carrito y buscador */
+        flex-grow: 1;
+    }
+
+    .menu__link-text {
+        display: none;
+    }
+
+    .menu__link i {
+        margin-right: 0;
+        font-size: 1.3rem;
+    }
+
+    .search-header-container {
+        display: flex;
+    }
+
+    .search-header-input {
+        width: 150px;
+        font-size: 0.9rem;
+    }
+
+    .categories-bar {
+        display: none;
+    }
+
+    .categories-menu__group {
+        display: none;
+    }
+
+    .search-desktop-container {
+        display: none;
+    }
+}
+
+
+/* ESCRITORIO COMPACTO (min-width: 1025px y max-width: 1099px) */
+@media (min-width: 1025px) and (max-width: 1099px) {
+    body {
+        padding: 20px;
+    }
+
+    .header {
+        /* Padding lateral del header para escritorio grande */
+        padding: 15px 30px;
+        /* Un padding generoso */
+    }
+
+    .hamburger-menu-icon {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: none !important;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+        font-size: 0.95rem;
+    }
+
+    .menu__left,
+    .menu__center,
+    .menu__right {
+        gap: 25px;
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .menu__left {
+        justify-content: flex-start;
+    }
+
+    .menu__center {
+        justify-content: center;
+        flex-grow: 2;
+    }
+
+    .menu__right {
+        justify-content: flex-end;
+        gap: 25px;
+        flex-grow: 1;
+    }
+
+    .menu__link-text {
+        display: none;
+    }
+
+    .menu__link i {
+        margin-right: 0;
+        font-size: 1.3rem;
+    }
+
+    .menu__brand {
+        font-size: 1.9rem;
+    }
+
+    .search-header-container {
+        display: none;
+    }
+
+    .categories-bar {
+        display: block;
+    }
+
+    .categories-menu {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .categories-menu__group {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        flex-grow: 1;
+        font-size: 0.95rem;
+    }
+
+    .categories-menu__search {
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 0;
+    }
+
+    .search-desktop-container {
+        display: flex;
+    }
+
+    .search-desktop-input {
+        width: 200px;
+        font-size: 0.95rem;
+    }
+}
+
+
+/* ESCRITORIO GRANDE (min-width: 1100px) */
+@media (min-width: 1100px) {
+    body {
+        padding: 25px;
+    }
+
+    .header {
+        /* Padding lateral del header para escritorio grande */
+        padding: 15px 40px; /* Un padding generoso */
+    }
+
+    .hamburger-menu-icon {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: none !important;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+        font-size: 1rem;
+    }
+
+    .menu__left,
+    .menu__center,
+    .menu__right {
+        gap: 30px;
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .menu__left {
+        justify-content: flex-start;
+    }
+
+    .menu__center {
+        justify-content: center;
+        flex-grow: 2;
+    }
+
+    .menu__right {
+        justify-content: flex-end;
+        gap: 30px;
+    }
+
+    .menu__link-text {
+        display: block;
+        margin-left: 8px;
+    }
+
+    .menu__link i {
+        margin-right: 8px;
+        font-size: 1.2rem;
+    }
+
+    .menu__brand {
+        font-size: 2rem;
+    }
+
+    .search-header-container {
+        display: none;
+    }
+
+    .categories-bar {
+        display: block;
+    }
+
+    .categories-menu {
+        justify-content: space-between;
+    }
+
+    .categories-menu__group {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        flex-grow: 1;
+        font-size: 1rem;
+    }
+
+    .categories-menu__search {
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 0;
+    }
+
+    .search-desktop-container {
+        display: flex;
+    }
+
+    .search-desktop-input {
+        width: 250px;
+        font-size: 1rem;
+    }
+}

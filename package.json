@@ -1,0 +1,21 @@
+{
+  "name": "project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "axios": "^1.10.0",
+    "js-cookie": "^3.0.5",
+    "sweetalert2": "^11.22.0"
+  }
+}

@@ -28,8 +28,18 @@ body {
     padding: 10px;
     background-color: #f4f4f4;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 132px 1fr 60px;
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer";
+    height: 100vh;
+    gap: 10px;
+    padding: 10px;
+    /* display: flex;
+    flex-direction: column; */
     box-sizing: border-box;
 }
 
@@ -45,136 +55,187 @@ body {
 }
 
 /* --- HEADER --- */
-.header {
-    background-color: var(--color-fondo);
-    padding: 15px 20px;
-    box-shadow: 0 3px 4px var(--color-sombras);
-    width: 100%;
+/* src/main.css o styles/header.css */
+
+/* El header general */
+#header.header { /* Usa #header.header para más especificidad */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 10;
+    flex-direction: column; /* Esto es CLAVE: apila sus hijos verticalmente */
+    width: 100%;
+    /* Puedes añadir un poco de sombra o borde inferior si quieres un separador visual */
+    box-shadow: 0 4px 15px rgba(3, 3, 3, 0.1);
+    background-color: white; /* Si el header tiene un fondo */
+    position: sticky; /* O fixed, si quieres que se quede pegado al top */
+    top: 0;
+    z-index: 999; /* Asegura que esté por encima de otros elementos */
 }
 
+/* El menú superior (Servicio al cliente, ROSS MILLE, Login, Carrito) */
 .menu {
     display: flex;
-    flex-grow: 1;
     justify-content: space-between;
     align-items: center;
-    order: 2;
+    padding: 15px 20px; /* Ajusta el padding según necesites */
+    width: 100%; /* Ocupa todo el ancho del header */
+    box-sizing: border-box; /* Incluye padding en el ancho */
+    /* Puedes añadir un borde inferior aquí si quieres una línea de separación */
+    border-bottom: 1px solid #eee; /* Línea de separación entre la barra superior y categorías */
 }
 
-.menu__left,
-.menu__center,
-.menu__right {
-    display: none;
-    align-items: center;
-}
-
-.menu__left {
-    justify-content: flex-start;
-}
-
-.menu__center {
-    justify-content: center;
-}
-
-.menu__right {
-    justify-content: flex-end;
-}
-
-/* Estilos para el logo/marca ROSS MILLE / RM */
-.menu__brand {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: var(--color-green);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    /* Fuente por defecto */
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    /* O la fuente que uses por defecto */
-    transition: font-family 0.3s ease, font-size 0.3s ease;
-    /* Transición suave para la fuente y tamaño */
-}
-
-/* **NUEVO ESTILO PARA LA FUENTE LIHAM** */
-.liham-font {
-    font-family: 'Liham', cursive;
-    /* Asegúrate que 'Liham' sea el nombre correcto de la fuente */
-    font-size: 1.8rem !important;
-    /* Puedes ajustar el tamaño para RM si es necesario */
-}
-
-
-/* Estilos generales para los enlaces del header (Login, Carrito, Contacto) */
-.menu__link {
-    text-decoration: none;
-    color: var(--color-green);
-    font-weight: 500;
-    padding: 8px 0;
-    transition: color 0.3s ease, background-color 0.3s ease;
+/* Los grupos de menú (izquierdo, central, derecho) */
+.menu__left, .menu__center, .menu__right {
     display: flex;
     align-items: center;
-    white-space: nowrap;
+    /* Ajusta el gap si necesitas espacio entre elementos */
+    gap: 20px; /* Ejemplo */
+}
+
+.menu__link {
+    color: #41634C; /* Tu color verde oscuro */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
 }
 
 .menu__link:hover {
+    color: #3a5641;
     font-weight: bold;
+    transition: 0.1s ease;
 }
 
-.menu__link i {
-    color: var(--color-green);
-    margin-right: 0px;
-    font-size: 1.2rem;
+.menu__brand {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: #41634C; /* Verde oscuro para el lema */
 }
 
+/* Iconos en el menú derecho */
+.menu__right .fas {
+    margin-right: 5px; /* Espacio entre icono y texto */
+    color: #41634C; /* Color del icono */
+}
+
+/* Estilos para el texto 'Iniciar sesión' y 'Carrito' en escritorio */
 .menu__link-text {
-    display: none;
-    margin-left: 8px;
+    display: inline; /* Visible por defecto en escritorio */
 }
 
-/* --- ICONO MENÚ HAMBURGUESA --- */
-.hamburger-menu-icon {
-    display: block;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: var(--color-green);
-    padding: 10px;
-    order: 1;
-    z-index: 100;
+/* Contenedor de búsqueda para el header (móvil) */
+.search-header-container {
+    display: none; /* Oculto por defecto en escritorio */
+    align-items: center;
+    position: relative; /* Para posicionar el icono dentro del input si es necesario */
 }
 
-.hamburger-menu-icon:hover {
-    font-weight: bold;
+.search-header-container .fas {
+    color: #888;
+    position: absolute;
+    left: 10px;
 }
 
-.hamburger-menu-icon.is-active i {
-    transform: rotate(90deg);
-    transition: transform 0.3s ease;
+.search-header-input {
+    padding-left: 35px; /* Espacio para el icono de búsqueda */
+    border-radius: 20px; /* Bordes redondeados */
+    border: 1px solid #ccc;
+    height: 38px;
+    width: 150px; /* Ajusta ancho para móvil */
 }
 
-/* --- MENÚ MÓVIL / TABLET (EL QUE APARECE CON LA HAMBURGUESA) --- */
-.mobile-nav {
+
+/* --- BARRA DE CATEGORÍAS (NUEVA POSICIÓN DENTRO DEL HEADER) --- */
+.categories-bar {
+    width: 100%; /* Ocupa todo el ancho del header */
+    padding: 10px 20px; /* Padding interno */
+    background-color: #f8f8f8; /* Un fondo ligeramente diferente para la barra de categorías */
+    box-sizing: border-box;
+    /* Puedes añadir un borde superior si quieres doble línea de separación o un color de fondo diferente */
+    border-top: 1px solid #eee;
+}
+
+.categories-menu {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between; /* Espacia las categorías y el buscador */
+    align-items: center;
+    width: 100%;
+}
+
+.categories-menu__group {
+    display: flex;
+    gap: 25px; /* Espacio entre los enlaces de categoría */
+}
+
+.category__link {
+    color: var(--color-green);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.category__link:hover {
+    font-weight: bold;
+    transition: 0.1s ease;
+}
+
+/* Contenedor de búsqueda para el escritorio */
+.search-desktop-container {
+    display: flex; /* Visible por defecto en escritorio */
+    align-items: center;
+    position: relative;
+}
+
+.search-desktop-container .fas {
+    color: #888;
+    position: absolute;
+    left: 10px;
+}
+
+.search-desktop-input {
+    padding-left: 35px; /* Espacio para el icono de búsqueda */
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    height: 38px;
+    width: 250px; /* Ancho para el buscador de escritorio */
+}
+
+.search-desktop-input:focus,
+.search-header-input:focus {
+    outline: none;
+    border-color: #41634C; /* Verde al enfocar */
+    box-shadow: 0 0 0 2px rgba(65, 99, 76, 0.2);
+}
+
+
+/* --- MENÚ MÓVIL/TABLET (RESPONSIVIDAD) --- */
+
+.hamburger-menu-icon {
+    display: none; /* Oculto en escritorio */
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: #41634C;
+    padding: 10px;
+    z-index: 1001; /* Asegura que esté por encima del menú móvil */
+}
+
+.mobile-nav {
+    display: none; /* Oculto por defecto */
     position: fixed;
     top: 0;
-    left: -100%;
-    width: 70%;
-    height: 100%;
-    background-color: var(--color-green);
-    box-shadow: 2px 0 5px var(--color-sombras);
+    left: -100%; /* Fuera de la pantalla */
+    width: 70%; /* Ancho del menú desplegable */
+    height: 100vh; /* Altura completa de la ventana */
+    background-color: white;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
     transition: left 0.3s ease-in-out;
-    padding-top: 60px;
-    z-index: 99;
+    z-index: 1000;
+    padding-top: 60px; /* Espacio para que el header no lo cubra */
 }
 
 .mobile-nav.is-open {
-    left: 0;
+    left: 0; /* Desliza hacia la vista */
+    display: block; /* Muestra el menú */
 }
-
 .mobile-menu__list {
     list-style: none;
     padding: 0;
@@ -182,461 +243,94 @@ body {
 }
 
 .mobile-menu__list li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #eee;
 }
 
 .mobile-menu__link {
     display: block;
     padding: 15px 20px;
+    color: #333;
     text-decoration: none;
-    color: var(--color-fondo);
     font-size: 1.1rem;
     transition: background-color 0.2s ease;
 }
 
 .mobile-menu__link:hover {
-    background-color: var(--color-otros);
-}
-
-.mobile-menu__link i {
-    margin-right: 10px;
-    color: var(--color-green)
+    background-color: #f0f0f0;
+    color: #41634C;
 }
 
 
-/* --- BARRA DE CATEGORÍAS (DEBAJO DEL HEADER) --- */
-.categories-bar {
-    background-color: #f4f4f4;
-    padding: 10px 0;
-    width: 100%;
-    display: none;
-    z-index: 5;
-}
-
-.categories-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.categories-menu__group {
-    display: none;
-}
-
-.category__link {
-    text-decoration: none;
-    color: var(--color-green);
-    font-weight: 600;
-    padding: 5px 12px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-    border-radius: 4px;
-    white-space: nowrap;
-}
-
-.category__link:hover {
-    font-weight: bold;
-    background-color: #d0d5da;
-}
-
-.search-desktop-container {
-    display: none;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.search-header-container {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-right: 15px;
-    /* Espacio a la derecha del buscador en el header */
-}
-
-.search__input {
-    background-color: #f4f4f4;
-    padding: 8px 12px;
-    border: none;
-    border-bottom: 1px solid var(--color-green);
-    border-radius: 4px 4px 0 0;
-    font-size: 0.9rem;
-    color: var(--color-green);
-    outline: none;
-    transition: border-bottom-color 0.3s ease;
-}
-
-.search__input:focus {
-    border-bottom-color: var(--color-green);
-}
-
-.search__input::placeholder {
-    color: var(--color-green);
-    opacity: 10;
-}
-
-.search-header-input {
-    width: 120px;
-    font-size: 0.85rem;
-}
-
-.search-desktop-input {
-    width: 250px;
-    font-size: 1rem;
-}
-
-.categories-menu__search i,
-.search-header-container i {
-    color: var(--color-green);
-    margin-right: 0px;
-    font-size: 1.2rem;
-}
-
-
-/* --- MEDIA QUERIES --- */
-
-/* MÓVILES (max-width: 768px) - ESTILOS PREDETERMINADOS (Base) */
+/* Media Queries */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .header {
-        padding: 15px 15px;
-        justify-content: space-between;
-    }
-
-    .hamburger-menu-icon {
-        display: block;
-        order: 1;
-    }
-
     .menu {
-        display: flex;
-        flex-grow: 1;
-        justify-content: space-between;
+        padding: 10px 15px; /* Menor padding para la barra superior */
     }
 
-    .menu__left {
-        display: none;
-    }
-
-    .menu__center {
-        display: flex;
-        justify-content: flex-start;
-        flex-grow: 1;
-        font-size: 1.6rem;
-    }
-
-    .menu__right {
-        display: flex;
-        justify-content: flex-end;
-        gap: 20px;
-        /* Espacio entre Login/Carrito y buscador */
-        flex-grow: 1;
+    .menu__left, .menu__right {
+        gap: 15px;
     }
 
     .menu__link-text {
+        display: none; /* Oculta el texto para Iniciar Sesión y Carrito en móvil */
+    }
+
+    .hamburger-menu-icon {
+        display: block; /* Muestra el icono de hamburguesa */
+    }
+    
+    .menu__link--contacto{
         display: none;
     }
 
-    .menu__link i {
-        margin-right: 0;
-        font-size: 1.2rem;
+    .menu {
+        justify-content: space-between; /* Espacia elementos */
+        padding: 10px 20px;
+    }
+
+    .menu__center {
+        order: -1; /* Mueve el logo ROSS MILLE a la izquierda para estar cerca de la hamburguesa */
+    }
+
+    .menu__right {
+        order: 1; /* Mantiene login/carrito a la derecha */
     }
 
     .search-header-container {
-        display: flex;
+        display: flex; /* Muestra el buscador móvil en el header */
+        flex-grow: 1; /* Permite que crezca */
+        max-width: 200px; /* Limita su tamaño */
+        margin-left: 10px; /* Espacio */
     }
 
-    .search-header-input {
-        width: 100px;
-        font-size: 0.8rem;
-    }
-
-    .categories-bar {
-        display: none;
-    }
-
-    .categories-menu__group {
-        display: none;
-    }
-
-    .search-desktop-container {
-        display: none;
+    .categories-bar, .search-desktop-container {
+        display: none; /* Oculta la barra de categorías y el buscador de escritorio en móvil/tablet */
     }
 }
 
-
-/* TABLETAS (min-width: 769px y max-width: 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    body {
-        padding: 15px;
-    }
-
-    .header {
-        padding: 15px 20px;
-        justify-content: space-between;
-    }
-
-    .hamburger-menu-icon {
-        display: block;
-        order: 1;
-    }
-
+/* Si quieres que el menú de hamburguesa esté SIEMPRE a la izquierda del logo en móvil: */
+@media (max-width: 768px) {
     .menu {
-        display: flex;
-        justify-content: space-between;
-        flex-grow: 1;
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben */
     }
-
-    .menu__left {
-        display: none;
-    }
-
-    .menu__center {
-        display: flex;
-        justify-content: flex-start;
-        flex-grow: 1;
-        font-size: 1.7rem;
-    }
-
-    .menu__right {
-        display: flex;
-        justify-content: flex-end;
-        gap: 20px;
-        /* Espacio entre Login/Carrito y buscador */
-        flex-grow: 1;
-    }
-
-    .menu__link-text {
-        display: none;
-    }
-
-    .menu__link i {
-        margin-right: 0;
-        font-size: 1.3rem;
-    }
-
-    .search-header-container {
-        display: flex;
-    }
-
-    .search-header-input {
-        width: 150px;
-        font-size: 0.9rem;
-    }
-
-    .categories-bar {
-        display: none;
-    }
-
-    .categories-menu__group {
-        display: none;
-    }
-
-    .search-desktop-container {
-        display: none;
-    }
-}
-
-
-/* ESCRITORIO COMPACTO (min-width: 1025px y max-width: 1099px) */
-@media (min-width: 1025px) and (max-width: 1099px) {
-    body {
-        padding: 20px;
-    }
-
-    .header {
-        /* Padding lateral del header para escritorio grande */
-        padding: 15px 30px;
-        /* Un padding generoso */
-    }
-
     .hamburger-menu-icon {
-        display: none;
+        order: -2; /* Posición más a la izquierda */
+        margin-right: 15px; /* Espacio con el logo */
     }
-
-    .mobile-nav {
-        display: none !important;
-    }
-
-    .menu {
-        display: flex;
-        justify-content: space-between;
-        flex-grow: 1;
-        font-size: 0.95rem;
-    }
-
-    .menu__left,
-    .menu__center,
-    .menu__right {
-        gap: 25px;
-        display: flex;
-        flex-grow: 1;
-    }
-
-    .menu__left {
-        justify-content: flex-start;
-    }
-
     .menu__center {
-        justify-content: center;
-        flex-grow: 2;
+        order: -1; /* El logo ROSS MILLE va después de la hamburguesa */
+        flex-grow: 1; /* Permite que el logo ocupe el espacio */
+        text-align: left; /* Alinea el texto a la izquierda en el espacio ganado */
     }
-
     .menu__right {
-        justify-content: flex-end;
-        gap: 25px;
-        flex-grow: 1;
+        order: 0; /* Login y Carrito */
+        margin-left: auto; /* Empuja a la derecha */
     }
-
-    .menu__link-text {
-        display: none;
-    }
-
-    .menu__link i {
-        margin-right: 0;
-        font-size: 1.3rem;
-    }
-
-    .menu__brand {
-        font-size: 1.9rem;
-    }
-
+    /* Si el buscador de header es para móvil, asegúrate de que tenga espacio o esté bien ubicado */
     .search-header-container {
-        display: none;
-    }
-
-    .categories-bar {
-        display: block;
-    }
-
-    .categories-menu {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .categories-menu__group {
-        display: flex;
-        margin-left: auto;
-        margin-right: auto;
-        flex-grow: 1;
-        font-size: 0.95rem;
-    }
-
-    .categories-menu__search {
-        display: flex;
-        justify-content: flex-end;
-        flex-grow: 0;
-    }
-
-    .search-desktop-container {
-        display: flex;
-    }
-
-    .search-desktop-input {
-        width: 200px;
-        font-size: 0.95rem;
-    }
-}
-
-
-/* ESCRITORIO GRANDE (min-width: 1100px) */
-@media (min-width: 1100px) {
-    body {
-        padding: 25px;
-    }
-
-    .header {
-        /* Padding lateral del header para escritorio grande */
-        padding: 15px 40px; /* Un padding generoso */
-    }
-
-    .hamburger-menu-icon {
-        display: none;
-    }
-
-    .mobile-nav {
-        display: none !important;
-    }
-
-    .menu {
-        display: flex;
-        justify-content: space-between;
-        flex-grow: 1;
-        font-size: 1rem;
-    }
-
-    .menu__left,
-    .menu__center,
-    .menu__right {
-        gap: 30px;
-        display: flex;
-        flex-grow: 1;
-    }
-
-    .menu__left {
-        justify-content: flex-start;
-    }
-
-    .menu__center {
-        justify-content: center;
-        flex-grow: 2;
-    }
-
-    .menu__right {
-        justify-content: flex-end;
-        gap: 30px;
-    }
-
-    .menu__link-text {
-        display: block;
-        margin-left: 8px;
-    }
-
-    .menu__link i {
-        margin-right: 8px;
-        font-size: 1.2rem;
-    }
-
-    .menu__brand {
-        font-size: 2rem;
-    }
-
-    .search-header-container {
-        display: none;
-    }
-
-    .categories-bar {
-        display: block;
-    }
-
-    .categories-menu {
-        justify-content: space-between;
-    }
-
-    .categories-menu__group {
-        display: flex;
-        margin-left: auto;
-        margin-right: auto;
-        flex-grow: 1;
-        font-size: 1rem;
-    }
-
-    .categories-menu__search {
-        display: flex;
-        justify-content: flex-end;
-        flex-grow: 0;
-    }
-
-    .search-desktop-container {
-        display: flex;
-    }
-
-    .search-desktop-input {
-        width: 250px;
-        font-size: 1rem;
+        order: 2; /* Después de todo lo demás, en una nueva línea si hay flex-wrap */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        margin-top: 10px; /* Espacio con los elementos de arriba */
+        justify-content: center; /* Centra el input de búsqueda */
     }
 }

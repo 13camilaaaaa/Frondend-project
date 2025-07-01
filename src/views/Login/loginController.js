@@ -1,5 +1,64 @@
+import Swal from "sweetalert2";
 
-export const loginController = async (params) => {
-console.log("Controlador de Login");
+export const loginController = async () => {
+    await new Promise(requestAnimationFrame);
 
+    const form = document.querySelector(".login-form");
+    const email = document.querySelector("#login-username");
+    const password = document.querySelector("#login-password");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const data = {
+            correo_usuario: email.value,
+            contrasena: password.value
+        };
+
+        try {
+            const response = await fetch("http://localhost:3000/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                const { usuario, token, token_refresco } = result.data;
+
+                // guardar los datos en localStorage
+                localStorage.setItem("token", token);
+                localStorage.setItem("refresh_token", token_refresco); // opcional
+                localStorage.setItem("usuario", JSON.stringify(usuario));
+
+                // mostrar mensaje de bienvenida
+                Swal.fire({
+                    icon: "success",
+                    title: `¡Bienvenido, ${usuario.nombre_usuario || 'usuario'}!`,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+                // redireccionar a inicio y actualizar el header
+                location.hash = "#";
+                window.dispatchEvent(new CustomEvent("modificandoHeader", {}));
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: result.message || "Credenciales incorrectas"
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                icon: "error",
+                title: "Error de conexión",
+                text: "No se pudo conectar al servidor."
+            });
+        }
+    });
 };

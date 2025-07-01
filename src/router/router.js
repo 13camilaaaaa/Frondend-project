@@ -1,8 +1,8 @@
 // src/router/router.js
 import { inicioController } from "../views/Inicio/inicioController.js";
-import { productosController } from "../views/Productos/productoController.js"; // Asegúrate de esta importación
+import { generosController } from "../views/Generos/generosController.js"; // Asegúrate de esta importación
 import { contactoController } from "../views/Contacto/contactoController.js";
-
+import { buscarController } from "../views/Buscar/buscarController.js"; // Asegúrate de esta importación
 // Controladores para Autenticación (separados)
 import { loginController } from "../views/Login/loginController.js";
 import { registroController } from "../views/Registro/registroController.js";
@@ -13,27 +13,33 @@ import { loadView } from "../helpers/loadView.js";
 const routes = {
     "/": {// lo que se visualiza al ingresar a la aplicación
         template: "Inicio/index.html",
-        controlador: inicioController
-    },
-    // inicio: {// lo que se visualiza al ingresar a la aplicación
-    //     template: "Inicio/index.html",
-    //     controlador: inicioController
-    // },
-    tienda: { // se visualiza todos los productos
-        template: "Tienda/index.html",
-        controlador: productosController
+        controlador: inicioController,
+        // private: false
     },
     contacto: { // se visualiza el servicio al cliente
         template: "Contacto/index.html",
-        controlador: contactoController
+        controlador: contactoController,
+        // private: false
     },
     login: { // se visualiza el formulario de inicio de sesión
         template: "Login/index.html",
-        controlador: loginController
+        controlador: loginController,
+        // private: false 
     },
     registro: { // se visualiza el formulario de registro
         template: "Registro/index.html",
-        controlador: registroController
+        controlador: registroController,
+        // private: false
+    },
+    'productos/:generos': {
+        template: "Generos/index.html",
+        controlador: generosController,
+        // private: false
+    },
+    'buscar/:query': {
+        template: "Buscar/index.html",
+        controlador: buscarController,
+        // private: false
     }
 };
 
@@ -41,7 +47,11 @@ export const router = async (app) => {
     const hash = location.hash.slice(1);
     const [rutas, params] = matchRoute(hash);
     // 
-    
+    if (!rutas) {
+        await loadView(app, 'Inicio/index.html');
+        inicioController();
+        return;
+    }
 
     // if (rutas.private && !estaAutenticado()) {
     //     location.hash = "#login"
@@ -50,7 +60,9 @@ export const router = async (app) => {
     // Llamando la vista
     await loadView(app, rutas.template);
     // Ejecutar el controldor
-    rutas.controlador(params);
+    requestAnimationFrame(() => {
+        rutas.controlador(params);
+    });
 
 };
 

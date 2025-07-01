@@ -1,22 +1,37 @@
+// src/views/Buscar/buscarController.js
 import { listar_productos } from "../../casos de uso/listarProductos.js";
 
-export const inicioController = async () => {
-    const app = document.getElementById('app');
-    app.innerHTML = ''; // limpiar contenido previo
+/**
+ * Controlador para la vista de búsqueda
+ * @param {Object} params - Objeto que contiene los parámetros de la URL, como { query: "camisa" }
+ */
+export const buscarController = async (params) => {
+    const contenedor = document.getElementById("resultadosBusqueda");
 
-    const titulo = document.createElement('h2');
-    titulo.textContent = 'Novedades';
-    app.append(titulo); // agregar título al app
+    if (!contenedor) {
+        console.warn("contenedor no encontrado en buscarController");
+        return;
+    }
 
-    // crear contenedor dinámico dentro del app
-    const contenedor = document.createElement('div');
-    contenedor.id = 'contenedor-productos';
-    contenedor.classList.add('grid-productos'); // opcional para estilos
+    const productos = await listar_productos();
 
-    app.appendChild(contenedor); // insertamos el contenedor dentro de #app
+    const query = decodeURIComponent(params?.query || "").toLowerCase();
 
-    // función para crear tarjetas
-    const crearCard = (producto) => {
+    const resultados = productos.filter(prod =>
+        prod.nombre.toLowerCase().includes(query)
+    );
+
+    mostrarResultados(resultados, contenedor);
+};
+
+const mostrarResultados = (productos, contenedor) => {
+
+    if (productos.length === 0) {
+        contenedor.innerHTML += "<p>No se encontraron productos.</p>";
+        return;
+    }
+
+    productos.forEach(producto => {
         const card = document.createElement('div');
         card.classList.add('card');
 
@@ -44,16 +59,7 @@ export const inicioController = async () => {
         precio.textContent = `$${producto.precio.toLocaleString()}`;
         
         divinfo.append(nombre, descripcion, precio); 
-        card.append(divimg, divinfo); // agregamos la imagen y la info a la tarjeta
-
-        return card;
-    };
-
-    // obtener productos y mostrarlos
-    const productos = await listar_productos();
-    productos.slice(0,12).forEach(producto => {
-        const card = crearCard(producto);
-        contenedor.appendChild(card);
+        card.append(divimg, divinfo);
+        contenedor.append(card);
     });
 };
-

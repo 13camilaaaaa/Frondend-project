@@ -1,14 +1,48 @@
 import Swal from "sweetalert2";
+import { Validation } from "../../helpers/Validation";
 
 export const loginController = async () => {
     await new Promise(requestAnimationFrame);
+
+    console.log("loginController loaded and executed!"); // Verifica si el controlador se carga
+
 
     const form = document.querySelector(".login-form");
     const email = document.querySelector("#login-username");
     const password = document.querySelector("#login-password");
 
+
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
+        if (!Validation.isNotEmpty(email.value) || !Validation.isNotEmpty(password.value)) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Por favor, completa todos los campos.",
+            });
+            return;
+        }
+
+        if (!Validation.isValidEmail(email.value)) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Por favor, ingresa un correo electrónico válido.",
+            });
+            return;
+        }
+
+
+        if (!Validation.isValidPassword(password.value)) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "La contraseña debe tener al menos 6 caracteres, incluyendo al menos una mayúscula y un número.",
+            });
+            return;
+        }
 
         const data = {
             correo_usuario: email.value,
@@ -43,8 +77,9 @@ export const loginController = async () => {
                 });
 
                 // redireccionar a inicio y actualizar el header
-                location.hash = "#";
-                window.dispatchEvent(new CustomEvent("modificandoHeader", {}));
+                location.hash = "";
+                window.dispatchEvent(new CustomEvent("modificarBotonSesion"));
+
             } else {
                 Swal.fire({
                     icon: "error",
@@ -62,3 +97,4 @@ export const loginController = async () => {
         }
     });
 };
+

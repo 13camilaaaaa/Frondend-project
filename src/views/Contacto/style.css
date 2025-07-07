@@ -1,0 +1,119 @@
+:root {
+    --color-green: #41634C;
+    --color-beige: #FFEBB6;
+    --color-blue: #6366f1;
+    --color-otros: #9ca3af;
+    --color-fondo: #ffffff;
+    --color-sombras: rgb(58, 101, 82);
+}
+
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f8f8;
+    color: #333;
+} */
+
+.customer-service-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.section-title {
+    font-size: 1.1em;
+
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+.grid-item {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+    min-height: 150px; /* Adjust as needed */
+
+    /* Link specific styles */
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color from parent */
+}
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item i {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: var(--color-green); /* Icon color */
+}
+
+.grid-item span {
+    font-size: 0.95em;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+}
+
+
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .grid-item {
+        padding: 20px 10px;
+    }
+
+    .grid-item i {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Stack items on small screens */
+    }
+
+    .solo-item {
+        grid-column: auto; /* Reset for stacking */
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+}

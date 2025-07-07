@@ -1,5 +1,3 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
-
 * {
     margin: 0;
     padding: 0;
@@ -16,11 +14,15 @@ Variables CSS Globales
     --color-otros: #9ca3af;
     --color-fondo: #ffffff;
     --color-sombras: rgb(58, 101, 82);
+    --color-letra: #000000;
 }
 
-/* PROJECT/src/main.css */
+html {
+    height: 100%;
+    /* Asegura que html ocupe el 100% del viewport */
+    /* Elimina el scroll del html */
+}
 
-/* --- ESTILOS BASE (MOBILE FIRST: <= 768px) --- */
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: var(--color-green);
@@ -30,17 +32,37 @@ body {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 132px 1fr 60px;
-    grid-template-areas: 
-    "header"
-    "main"
-    "footer";
+    grid-template-rows: 155px 1fr 60px;
+    grid-template-areas:
+        "header"
+        "app"
+        "footer";
     height: 100vh;
     gap: 10px;
     padding: 10px;
     /* display: flex;
     flex-direction: column; */
     box-sizing: border-box;
+}
+
+/* Asigna los elementos a sus áreas de la cuadrícula */
+#header {
+    grid-area: header;
+    /* Tu padding y estilos de header deben ir aquí o en su propio archivo CSS */
+    padding: 15px 0px;
+    /* Ejemplo de padding para el header */
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#app {
+    grid-area: app;
+    
+    flex-grow: 1;
+}
+
+#footer {
+    grid-area: footer;
 }
 
 .container {
@@ -58,16 +80,21 @@ body {
 /* src/main.css o styles/header.css */
 
 /* El header general */
-#header.header { /* Usa #header.header para más especificidad */
+#header.header {
+    /* Usa #header.header para más especificidad */
     display: flex;
-    flex-direction: column; /* Esto es CLAVE: apila sus hijos verticalmente */
+    flex-direction: column;
+    /* Esto es CLAVE: apila sus hijos verticalmente */
     width: 100%;
     /* Puedes añadir un poco de sombra o borde inferior si quieres un separador visual */
     box-shadow: 0 4px 15px rgba(3, 3, 3, 0.1);
-    background-color: white; /* Si el header tiene un fondo */
-    position: sticky; /* O fixed, si quieres que se quede pegado al top */
+    background-color: white;
+    /* Si el header tiene un fondo */
+    position: sticky;
+    /* O fixed, si quieres que se quede pegado al top */
     top: 0;
-    z-index: 999; /* Asegura que esté por encima de otros elementos */
+    z-index: 999;
+    /* Asegura que esté por encima de otros elementos */
 }
 
 /* El menú superior (Servicio al cliente, ROSS MILLE, Login, Carrito) */
@@ -75,25 +102,32 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px; /* Ajusta el padding según necesites */
-    width: 100%; /* Ocupa todo el ancho del header */
-    box-sizing: border-box; /* Incluye padding en el ancho */
+    padding: 15px 20px;
+    /* Ajusta el padding según necesites */
+    width: 100%;
+    /* Ocupa todo el ancho del header */
+    box-sizing: border-box;
+    /* Incluye padding en el ancho */
     /* Puedes añadir un borde inferior aquí si quieres una línea de separación */
-    border-bottom: 1px solid #eee; /* Línea de separación entre la barra superior y categorías */
+    border-bottom: 1px solid #eee;
+    /* Línea de separación entre la barra superior y categorías */
 }
 
 /* Los grupos de menú (izquierdo, central, derecho) */
-.menu__left, .menu__center, .menu__right {
+.menu__left,
+.menu__center,
+.menu__right {
     display: flex;
     align-items: center;
     /* Ajusta el gap si necesitas espacio entre elementos */
-    gap: 20px; /* Ejemplo */
+    gap: 20px;
+    /* Ejemplo */
 }
 
 .menu__link {
-    color: #41634C; /* Tu color verde oscuro */
+    color: var(--color-letra);
+    /* Tu color verde oscuro */
     text-decoration: none;
-    font-weight: 500;
     transition: color 0.3s ease;
 }
 
@@ -108,26 +142,33 @@ body {
     font-size: 2rem;
     font-weight: bold;
     letter-spacing: 1.5px;
-    color: #41634C; /* Verde oscuro para el lema */
+    color: #41634C;
+    /* Verde oscuro para el lema */
 }
 
 /* Iconos en el menú derecho */
 .menu__right .fas {
-    margin-right: 5px; /* Espacio entre icono y texto */
-    color: #41634C; /* Color del icono */
+    margin-right: 5px;
+    /* Espacio entre icono y texto */
+    color: #41634C;
+    /* Color del icono */
 }
 
 /* Estilos para el texto 'Iniciar sesión' y 'Carrito' en escritorio */
 .menu__link-text {
-    display: inline; /* Visible por defecto en escritorio */
+    display: inline;
+    /* Visible por defecto en escritorio */
 }
 
 /* Contenedor de búsqueda para el header (móvil) */
 .search-header-container {
-    display: none; /* Oculto por defecto en escritorio */
+    display: none;
+    /* Oculto por defecto en escritorio */
     align-items: center;
-    position: relative; /* Para posicionar el icono dentro del input si es necesario */
+    position: relative;
+    /* Para posicionar el icono dentro del input si es necesario */
 }
+
 
 .search-header-container .fas {
     color: #888;
@@ -136,19 +177,25 @@ body {
 }
 
 .search-header-input {
-    padding-left: 35px; /* Espacio para el icono de búsqueda */
-    border-radius: 20px; /* Bordes redondeados */
+    padding-left: 35px;
+    /* Espacio para el icono de búsqueda */
+    border-radius: 20px;
+    /* Bordes redondeados */
     border: 1px solid #ccc;
     height: 38px;
-    width: 150px; /* Ajusta ancho para móvil */
+    width: 150px;
+    /* Ajusta ancho para móvil */
 }
 
 
 /* --- BARRA DE CATEGORÍAS (NUEVA POSICIÓN DENTRO DEL HEADER) --- */
 .categories-bar {
-    width: 100%; /* Ocupa todo el ancho del header */
-    padding: 10px 20px; /* Padding interno */
-    background-color: #f8f8f8; /* Un fondo ligeramente diferente para la barra de categorías */
+    width: 100%;
+    /* Ocupa todo el ancho del header */
+    padding: 10px 20px;
+    /* Padding interno */
+    background-color: #f8f8f8;
+    /* Un fondo ligeramente diferente para la barra de categorías */
     box-sizing: border-box;
     /* Puedes añadir un borde superior si quieres doble línea de separación o un color de fondo diferente */
     border-top: 1px solid #eee;
@@ -156,53 +203,59 @@ body {
 
 .categories-menu {
     display: flex;
-    justify-content: space-between; /* Espacia las categorías y el buscador */
+    justify-content: space-between;
+    /* Espacia las categorías y el buscador */
     align-items: center;
     width: 100%;
 }
 
 .categories-menu__group {
     display: flex;
-    gap: 25px; /* Espacio entre los enlaces de categoría */
+    gap: 25px;
+    /* Espacio entre los enlaces de categoría */
 }
 
 .category__link {
-    color: var(--color-green);
+    color: var(--color-letra);
     text-decoration: none;
-    font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .category__link:hover {
+    color: var(--color-green);
     font-weight: bold;
     transition: 0.1s ease;
 }
 
 /* Contenedor de búsqueda para el escritorio */
 .search-desktop-container {
-    display: flex; /* Visible por defecto en escritorio */
+    display: flex;
+    /* Visible por defecto en escritorio */
     align-items: center;
     position: relative;
 }
 
 .search-desktop-container .fas {
-    color: #888;
+    color: var(--color-green);
     position: absolute;
     left: 10px;
 }
 
 .search-desktop-input {
-    padding-left: 35px; /* Espacio para el icono de búsqueda */
+    padding-left: 35px;
+    /* Espacio para el icono de búsqueda */
     border-radius: 20px;
     border: 1px solid #ccc;
     height: 38px;
-    width: 250px; /* Ancho para el buscador de escritorio */
+    width: 250px;
+    /* Ancho para el buscador de escritorio */
 }
 
 .search-desktop-input:focus,
 .search-header-input:focus {
     outline: none;
-    border-color: #41634C; /* Verde al enfocar */
+    border-color: #41634C;
+    /* Verde al enfocar */
     box-shadow: 0 0 0 2px rgba(65, 99, 76, 0.2);
 }
 
@@ -210,32 +263,43 @@ body {
 /* --- MENÚ MÓVIL/TABLET (RESPONSIVIDAD) --- */
 
 .hamburger-menu-icon {
-    display: none; /* Oculto en escritorio */
+    display: none;
+    /* Oculto en escritorio */
     cursor: pointer;
     font-size: 1.8rem;
     color: #41634C;
     padding: 10px;
-    z-index: 1001; /* Asegura que esté por encima del menú móvil */
+    z-index: 1001;
+    /* Asegura que esté por encima del menú móvil */
 }
 
 .mobile-nav {
-    display: none; /* Oculto por defecto */
+    display: none;
+    /* Oculto por defecto */
     position: fixed;
     top: 0;
-    left: -100%; /* Fuera de la pantalla */
-    width: 70%; /* Ancho del menú desplegable */
-    height: 100vh; /* Altura completa de la ventana */
+    left: -100%;
+    /* Fuera de la pantalla */
+    width: 40%;
+    /* Ancho del menú desplegable */
+    height: 100vh;
+    /* Altura completa de la ventana */
     background-color: white;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     transition: left 0.3s ease-in-out;
     z-index: 1000;
-    padding-top: 60px; /* Espacio para que el header no lo cubra */
+    padding-top: 60px;
+    /* Espacio para que el header no lo cubra */
 }
 
 .mobile-nav.is-open {
-    left: 0; /* Desliza hacia la vista */
-    display: block; /* Muestra el menú */
+    left: 0;
+    /* Desliza hacia la vista */
+    display: block;
+    transition: 2s ease-in-out;
+    /* Muestra el menú */
 }
+
 .mobile-menu__list {
     list-style: none;
     padding: 0;
@@ -247,6 +311,7 @@ body {
 }
 
 .mobile-menu__link {
+    margin-top: 7px;
     display: block;
     padding: 15px 20px;
     color: #333;
@@ -261,76 +326,357 @@ body {
 }
 
 
+/* --------------------- FOOTER ------------------- */
+
+/* --- FOOTER STYLES --- */
+#footer {
+    background-color: #f5f5f5;
+    /* Un gris muy claro como en la imagen */
+    padding: 40px 20px;
+    /* Padding general */
+    font-family: Arial, sans-serif;
+    /* O la fuente que uses en tu proyecto */
+    color: #333;
+    border-top: 1px solid #e0e0e0;
+    /* Línea superior sutil */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    /* Por defecto para móvil, una columna por sección */
+    grid-template-columns: 1fr;
+    gap: 30px;
+    /* Espacio entre secciones */
+}
+
+/* Estilos para las secciones principales (Colecciones, Ayuda) */
+.footer-section h4 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9em;
+    transition: color 0.2s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #000;
+}
+
+/* Estilos para la sección de Newsletter */
+.footer-newsletter h4 {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.newsletter-input-group {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.newsletter-input-group input[type="email"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    /* Sin bordes redondeados */
+    font-size: 0.9em;
+}
+
+.newsletter-input-group button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease;
+}
+
+.newsletter-input-group button:hover {
+    background-color: #333;
+}
+
+.conoce-mas {
+    display: block;
+    /* Para que tome su propia línea */
+    font-size: 0.9em;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: color 0.2s ease;
+}
+
+.conoce-mas:hover {
+    color: #666;
+}
+
+/* Estilos para la sección de Redes Sociales */
+.footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    /* Espacio con las secciones de arriba */
+    padding-top: 20px;
+    /* Separador visual si quieres */
+    border-top: 1px solid #eee;
+    /* Línea de separación */
+    justify-content: center;
+    /* Centra los iconos en móvil */
+}
+
+.footer-social a {
+    color: #333;
+    font-size: 1.5em;
+    transition: color 0.2s ease;
+}
+
+.footer-social a:hover {
+    color: #000;
+}
+
+/* Estilos para la sección inferior del footer (Copyright, Logos, Selector de país) */
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    /* Línea de separación */
+}
+
+.footer-bottom p {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.footer-logos img {
+    height: 40px;
+    /* Ajusta el tamaño del logo de H&M */
+    margin-bottom: 10px;
+}
+
+.country-selector {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Media Queries para responsividad */
+
+/* Tablets y pantallas pequeñas de escritorio */
+@media (min-width: 768px) {
+    .footer-container {
+        /* Dos columnas: Colecciones + Ayuda, y Newsletter + Social */
+        grid-template-columns: repeat(2, 1fr);
+        /* Esto es un ejemplo, puedes ajustar el diseño */
+    }
+
+    /* Ajustar el orden si es necesario */
+    .footer-newsletter {
+        grid-column: span 1;
+        /* Para que ocupe una columna */
+    }
+
+    .footer-social {
+        grid-column: span 1;
+        /* Para que ocupe otra columna */
+        justify-content: flex-start;
+        /* Alinea a la izquierda en lugar de centrar */
+        padding-top: 0;
+        /* Elimina el padding top si está al lado de newsletter */
+        border-top: none;
+        /* Elimina la línea si está al lado de newsletter */
+    }
+
+    .footer-bottom {
+        grid-column: 1 / -1;
+        /* Ocupa todo el ancho */
+        display: flex;
+        flex-direction: column;
+        /* Apila los elementos */
+        align-items: center;
+        /* Centra horizontalmente */
+    }
+}
+
+/* Escritorio */
+@media (min-width: 992px) {
+    .footer-container {
+        /* Tres columnas: Colecciones, Ayuda, Newsletter/Social */
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer-newsletter {
+        grid-column: span 1;
+    }
+
+    .footer-social {
+        grid-column: span 1;
+        /* Puedes moverlo a su propia línea o debajo del newsletter */
+        /* Si quieres que los social y newsletter estén en una misma columna */
+        /* puedes anidarlos en un div extra en el HTML */
+    }
+
+    /* Si quieres el social debajo del newsletter en la misma columna */
+    .footer-newsletter {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-newsletter .newsletter-input-group {
+        margin-bottom: 20px;
+    }
+
+    .footer-newsletter .conoce-mas {
+        margin-top: 0;
+        /* Ajusta si es necesario */
+    }
+
+    .footer-social {
+        margin-top: 0;
+        /* Elimina el margen superior */
+        padding-top: 0;
+        border-top: none;
+    }
+
+    .footer-bottom {
+        flex-direction: row;
+        /* Vuelve a poner en fila */
+        justify-content: space-between;
+        /* Espacio entre elementos */
+        align-items: center;
+        text-align: left;
+        /* Alinea el texto a la izquierda */
+    }
+
+    .footer-bottom p {
+        margin-bottom: 0;
+    }
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
     .menu {
-        padding: 10px 15px; /* Menor padding para la barra superior */
+        padding: 10px 15px;
+        /* Menor padding para la barra superior */
     }
 
-    .menu__left, .menu__right {
+    .menu__left,
+    .menu__right {
         gap: 15px;
     }
 
     .menu__link-text {
-        display: none; /* Oculta el texto para Iniciar Sesión y Carrito en móvil */
+        display: none;
+        /* Oculta el texto para Iniciar Sesión y Carrito en móvil */
     }
 
     .hamburger-menu-icon {
-        display: block; /* Muestra el icono de hamburguesa */
+        display: block;
+        max-width: 10%;
+        /* Muestra el icono de hamburguesa */
     }
-    
-    .menu__link--contacto{
+
+    .menu__link--contacto {
         display: none;
     }
 
     .menu {
-        justify-content: space-between; /* Espacia elementos */
+        justify-content: space-between;
+        /* Espacia elementos */
         padding: 10px 20px;
     }
 
     .menu__center {
-        order: -1; /* Mueve el logo ROSS MILLE a la izquierda para estar cerca de la hamburguesa */
+        order: -1;
+        /* Mueve el logo ROSS MILLE a la izquierda para estar cerca de la hamburguesa */
     }
 
     .menu__right {
-        order: 1; /* Mantiene login/carrito a la derecha */
+        order: 1;
+        /* Mantiene login/carrito a la derecha */
     }
 
     .search-header-container {
-        display: flex; /* Muestra el buscador móvil en el header */
-        flex-grow: 1; /* Permite que crezca */
-        max-width: 200px; /* Limita su tamaño */
-        margin-left: 10px; /* Espacio */
+        display: flex;
+        /* Muestra el buscador móvil en el header */
+        flex-grow: 1;
+        /* Permite que crezca */
+        max-width: 200px;
+        /* Limita su tamaño */
+        margin-left: 10px;
+        /* Espacio */
     }
 
-    .categories-bar, .search-desktop-container {
-        display: none; /* Oculta la barra de categorías y el buscador de escritorio en móvil/tablet */
+    .categories-bar,
+    .search-desktop-container {
+        display: none;
+        /* Oculta la barra de categorías y el buscador de escritorio en móvil/tablet */
     }
 }
 
 /* Si quieres que el menú de hamburguesa esté SIEMPRE a la izquierda del logo en móvil: */
 @media (max-width: 768px) {
     .menu {
-        flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben */
+        flex-wrap: wrap;
+        /* Permite que los elementos se envuelvan si no caben */
     }
+
     .hamburger-menu-icon {
-        order: -2; /* Posición más a la izquierda */
-        margin-right: 15px; /* Espacio con el logo */
+        order: -2;
+        /* Posición más a la izquierda */
+        margin-right: 15px;
+        /* Espacio con el logo */
     }
+
     .menu__center {
-        order: -1; /* El logo ROSS MILLE va después de la hamburguesa */
-        flex-grow: 1; /* Permite que el logo ocupe el espacio */
-        text-align: left; /* Alinea el texto a la izquierda en el espacio ganado */
+        order: -1;
+        /* El logo ROSS MILLE va después de la hamburguesa */
+        flex-grow: 1;
+        /* Permite que el logo ocupe el espacio */
+        text-align: left;
+        /* Alinea el texto a la izquierda en el espacio ganado */
     }
+
     .menu__right {
-        order: 0; /* Login y Carrito */
-        margin-left: auto; /* Empuja a la derecha */
+        order: 0;
+        /* Login y Carrito */
+        margin-left: auto;
+        /* Empuja a la derecha */
     }
+
     /* Si el buscador de header es para móvil, asegúrate de que tenga espacio o esté bien ubicado */
     .search-header-container {
-        order: 2; /* Después de todo lo demás, en una nueva línea si hay flex-wrap */
-        width: 100%; /* Ocupa todo el ancho disponible */
-        margin-top: 10px; /* Espacio con los elementos de arriba */
-        justify-content: center; /* Centra el input de búsqueda */
+        order: 2;
+        /* Después de todo lo demás, en una nueva línea si hay flex-wrap */
+        width: 100%;
+        /* Ocupa todo el ancho disponible */
+        margin-top: 10px;
+        /* Espacio con los elementos de arriba */
+        justify-content: center;
+        /* Centra el input de búsqueda */
     }
 }

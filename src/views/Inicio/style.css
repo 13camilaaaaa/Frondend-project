@@ -5,62 +5,199 @@
     --color-otros: #9ca3af;
     --color-fondo: #ffffff;
     --color-sombras: rgb(58, 101, 82);
+    --color-letras: #000000;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f9f9f9;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.grid-productos {
+/* Estilos para el contenedor principal de productos (grid) */
+#contenedor-productos {
     display: grid;
+    /* Columna por defecto para móviles */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-auto-rows: minmax(400px, auto);
-    gap: 15px;
+    gap: 20px;
+    padding: 20px;
     max-width: 1200px;
-    padding: 25px 20px 20px 15px;
     margin: 0 auto;
 }
 
-.titulo-genero {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-    padding-top: 15px;
-    color: var(--color-green);
+h2{
+    color: var(--color-letras);
+    font-size: 2em;
 }
 
+/* Estilos para cada tarjeta individual */
 .card {
-    padding: 15px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    /* Borde sutil */
+    border-radius: 0px;
+    /* Bordes rectos como en la imagen */
     overflow: hidden;
-    transition: transform 0.2s;
-    border: solid 1px var(--color-green);
+    /* Asegura que la imagen no se salga */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    /* Sombra suave */
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    /* Si la tarjeta es un enlace */
+    color: inherit;
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
 }
 
 .card:hover {
-    transform: scale(1.03);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra más pronunciada al pasar el mouse */
+}
+
+/* Contenedor de la imagen (para posicionar el corazón) */
+.card-img-container {
+    position: relative;
+    /* Para que el ícono de corazón se posicione relativo a él */
+    width: 100%;
+    /* Relación de aspecto 4:3 (o la que se ajuste a tus imágenes) */
+    padding-bottom: 133%;
+    /* 4:3 -> 75%, H&M usa más alto para sus productos (ej. 300px/400px -> 133%) */
+    overflow: hidden;
 }
 
 .card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
+    /* Cubre el contenedor sin distorsionar */
+    transition: transform 0.3s ease;
+    /* Efecto al pasar el mouse */
 }
 
+.card:hover .card-img {
+    transform: scale(1.05);
+    /* Ligeramente más grande al pasar el mouse */
+}
+
+/* Ícono de corazón */
+.heart-icon {
+    position: absolute;
+    bottom: 10px;
+    /* Distancia desde abajo */
+    right: 10px;
+    /* Distancia desde la derecha */
+    background-color: rgba(255, 255, 255, 0.8);
+    /* Fondo blanco semitransparente */
+    border: none;
+    border-radius: 50%;
+    /* Redondo */
+    width: 35px;
+    /* Tamaño del botón */
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+    /* Asegura que esté por encima de la imagen */
+}
+
+.heart-icon:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.1);
+}
+
+.heart-icon i {
+    font-size: 1.2em;
+    color: #333;
+    /* Color del corazón */
+}
+
+/* Estilos de la información del producto */
 .card-info {
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Permite que la información ocupe el espacio restante */
+}
+
+.card-info h3 {
+    font-size: 1.1em;
+    font-weight: normal;
+    /* No tan bold, más parecido a la imagen */
+    margin: 0 0 5px 0;
+    color: #333;
+    line-height: 1.3;
+}
+
+.card-info p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0 0 10px 0;
 }
 
 .precio {
+    font-size: 1em;
     font-weight: bold;
-    color: #bf1818;
+    color: #bb2525;
+    margin-top: auto;
+    /* Empuja el precio y los colores hacia abajo */
+    margin-bottom: 10px;
+}
+
+/* Media queries para responsividad (ajusta los puntos de ruptura si es necesario) */
+@media (max-width: 768px) {
+    #contenedor-productos {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+    }
+
+    .card-info h3 {
+        font-size: 1em;
+    }
+
+    .card-info p,
+    .precio {
+        font-size: 0.85em;
+    }
+
+    .heart-icon {
+        width: 30px;
+        height: 30px;
+        bottom: 8px;
+        right: 8px;
+    }
+
+    .heart-icon i {
+        font-size: 1em;
+    }
+
+    .color-dot {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #contenedor-productos {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .card-info {
+        padding: 10px;
+    }
+
+    .card-info h3 {
+        font-size: 0.9em;
+    }
+
+    .precio {
+        font-size: 0.9em;
+    }
 }

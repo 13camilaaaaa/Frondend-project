@@ -20,40 +20,50 @@ export const inicioController = async () => {
         const card = document.createElement('div');
         card.classList.add('card');
 
+        // --- Contenedor de Imagen y Corazón ---
         const divimg = document.createElement('div');
         divimg.classList.add('card-img-container');
-        // agregar imagen y contenido a la tarjeta
+
         const img = document.createElement('img');
-        // img.setAttribute('src', `/src/uploads/${producto.img}`); // ruta de la imagen por db
         img.setAttribute('src', `/src/uploads/fashion-1.jpg`); // ruta de la imagen por defecto
         img.setAttribute('alt', producto.nombre);
         img.classList.add('card-img');
         divimg.append(img);
 
-
-        // agregar información del producto
+        // --- Información del producto ---
         const divinfo = document.createElement('div');
         divinfo.classList.add('card-info');
+
         const nombre = document.createElement('h3');
         nombre.textContent = producto.nombre;
 
         const descripcion = document.createElement('p');
         descripcion.textContent = producto.descripcion;
+
         const precio = document.createElement('span');
         precio.classList.add('precio');
         precio.textContent = `$${producto.precio.toLocaleString()}`;
-        
-        divinfo.append(nombre, descripcion, precio); 
-        card.append(divimg, divinfo); // agregamos la imagen y la info a la tarjeta
+
+
+        // Agregamos la información al divinfo
+        divinfo.append(nombre, descripcion, precio); // Añade colorOptions aquí
+
+        // Agregamos la imagen y la info a la tarjeta principal
+        card.append(divimg, divinfo);
+
+        // Opcional: Hacer que toda la tarjeta sea clickable
+        // redirige al hacer clic
+        card.addEventListener("click", () => {
+            window.location.hash = `#productos/${producto.id}`;
+        });
 
         return card;
     };
 
     // obtener productos y mostrarlos
     const productos = await listar_productos();
-    productos.slice(0,12).forEach(producto => {
+    productos.slice(0, 12).forEach(producto => {
         const card = crearCard(producto);
         contenedor.appendChild(card);
     });
 };
-

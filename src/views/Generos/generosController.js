@@ -1,10 +1,10 @@
 export const generosController = async (params) => {
-    const generoSolicitado = params.generos; // viene de la ruta #productos/Mujer, #productos/Hombre, etc.
+    const generoSolicitado = params.nombre; // viene de la ruta #productos/Mujer, #productos/Hombre, etc.
     const app = document.getElementById("app");
 
     console.log(generoSolicitado);
 
-    const title = document.createElement("h3");
+    const title = document.createElement("h2");
     title.classList.add("titulo-genero");
     title.textContent = `Explora nuestra colección de ${generoSolicitado}`;
 
@@ -60,11 +60,16 @@ export const generosController = async (params) => {
             const precio = document.createElement('span');
             precio.classList.add('precio');
             precio.textContent = `$${producto.precio.toLocaleString()}`;
+            // redirige al hacer clic
 
             divinfo.append(nombre, descripcion, precio);
             card.append(divimg, divinfo);
 
             container_card.appendChild(card);
+
+            card.addEventListener("click", () => {
+                window.location.hash = `#productos/${producto.id}`;
+            });
         });
 
     } catch (error) {

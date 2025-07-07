@@ -1,110 +1,144 @@
 
-/* --- Estilos Globales Esenciales (en src/main.css o un reset.css) --- */
-/* Aseguran que el body ocupe toda la altura de la ventana para un centrado efectivo */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Puedes usar tu fuente principal aquí */
-}
-
-/* --- Variables de Color (Puedes colocarlas en :root en src/main.css si quieres) --- */
 :root {
-    --color-green-dark: #41634C; /* Verde oscuro para el panel superior */
-    --color-white: #ffffff; /* Blanco para el panel inferior y fondo general */
-    --color-beige: #FFEBB6; 
-    --color-text-dark: #333; /* Color oscuro para títulos */
-    --color-text-medium: #555; /* Color medio para labels */
-    --color-input-border: #ddd; /* Color para bordes de input */
-    --color-button-hover: #3a5641; /* Un tono más oscuro para el hover del botón */
-    --color-link-hover: #0056b3; /* Color azul para enlaces al pasar el mouse */
+    --color-green-dark: #41634C;
+    /* Verde oscuro para el panel superior */
+    --color-white: #ffffff;
+    /* Blanco para el panel inferior y fondo general */
+    --color-beige: #FFEBB6;
+    --color-text-dark: #333;
+    /* Color oscuro para títulos */
+    --color-text-medium: #555;
+    /* Color medio para labels */
+    --color-input-border: #ddd;
+    /* Color para bordes de input */
+    --color-button-hover: #3a5641;
+    /* Un tono más oscuro para el hover del botón */
+    --color-link-hover: #0056b3;
+    /* Color azul para enlaces al pasar el mouse */
 }
 
 /* --- Contenedor Principal de la Interfaz de Login --- */
 /* Este será el div que contiene ambos paneles (verde y blanco) */
 .login-container {
     /* Centrar el contenedor en la pantalla */
-    margin-top: 65px; /* Espacio superior para que no esté pegado al borde */
+    margin-top: 65px;
+    /* Espacio superior para que no esté pegado al borde */
     display: flex;
-    flex-direction: column; /* Apila el panel verde arriba y el blanco abajo */
-    justify-content: center; /* Centra verticalmente el contenido dentro de este contenedor */
-    align-items: center; /* Centra horizontalmente el contenido dentro de este contenedor */
+    flex-direction: column;
+    /* Apila el panel verde arriba y el blanco abajo */
+    justify-content: center;
+    /* Centra verticalmente el contenido dentro de este contenedor */
+    align-items: center;
+    /* Centra horizontalmente el contenido dentro de este contenedor */
 
     /* Dimensiones generales del contenedor */
-    width: 350px; /* Ancho fijo para el contenedor completo, ajusta a tu gusto */
-    height: 500px; /* Altura fija para el contenedor completo, ajusta a tu gusto */
-    max-width: 90%; /* Asegura que no sea demasiado ancho en pantallas pequeñas */
-    max-height: 90vh; /* Asegura que no sea demasiado alto en pantallas pequeñas */
+    width: 350px;
+    /* Ancho fijo para el contenedor completo, ajusta a tu gusto */
+    height: auto;
+    /* Altura fija para el contenedor completo, ajusta a tu gusto */
+    max-width: 90%;
+    /* Asegura que no sea demasiado ancho en pantallas pequeñas */
+    max-height: auto;
+    /* Asegura que no sea demasiado alto en pantallas pequeñas */
 
-    background-color: var(--color-white); /* Fondo blanco para todo el contenedor */
-    border-radius: 12px; /* Bordes redondeados para el contenedor principal */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-    overflow: hidden; /* Importante para que los bordes redondeados y el contenido se vean bien */
+    background-color: var(--color-white);
+    /* Fondo blanco para todo el contenedor */
+    border-radius: 12px;
+    /* Bordes redondeados para el contenedor principal */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    /* Sombra más pronunciada */
+    overflow: hidden;
+    /* Importante para que los bordes redondeados y el contenido se vean bien */
 
     /* Centrado absoluto en la pantalla (si este es el único contenido en el body) */
-    position: absolute; /* O 'fixed' si es una modal que flota */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centrado perfecto */
+    position: relative;
+    /* O 'fixed' si es una modal que flota */
+    margin: 40px auto;
+    /* Centrado perfecto */
 }
 
 /* --- Panel Superior (Verde) --- */
-.login-left-panel { /* Aunque se llama "left-panel", ahora es el panel superior */
-    flex-shrink: 0; /* No se encogerá */
-    width: 100%; /* Ocupa todo el ancho del login-container */
-    height: 23%; /* Ocupa el 35% de la altura del login-container */
-    background-color: var(--color-green-dark); /* Color verde oscuro */
+.login-left-panel {
+    /* Aunque se llama "left-panel", ahora es el panel superior */
+    flex-shrink: 0;
+    /* No se encogerá */
+    width: 100%;
+    /* Ocupa todo el ancho del login-container */
+    height: 23%;
+    /* Ocupa el 35% de la altura del login-container */
+    background-color: var(--color-green-dark);
+    /* Color verde oscuro */
     border-radius: 8px;
     display: flex;
-    justify-content: center; /* Centrar ROSS MILLE horizontalmente */
-    align-items: center; /* Centrar ROSS MILLE verticalmente */
-    padding: 20px; /* Espacio interno, ajusta si es necesario */
+    justify-content: center;
+    /* Centrar ROSS MILLE horizontalmente */
+    align-items: center;
+    /* Centrar ROSS MILLE verticalmente */
+    padding: 20px;
+    /* Espacio interno, ajusta si es necesario */
     box-sizing: border-box;
     /* No es necesario border-radius aquí si overflow:hidden está en login-container */
 }
 
 .login-brand-name {
-    color: var(--color-white); /* Color blanco para el texto */
-    font-size: 2.2rem; /* Tamaño grande para la marca */
+    color: var(--color-white);
+    /* Color blanco para el texto */
+    font-size: 2.2rem;
+    /* Tamaño grande para la marca */
     font-weight: bold;
     text-align: center;
-    margin: 0; /* Elimina márgenes por defecto */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;/* Tu fuente personalizada */
-    letter-spacing: 2px; /* Un poco de espacio entre letras para la marca */
+    margin: 0;
+    /* Elimina márgenes por defecto */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Tu fuente personalizada */
+    letter-spacing: 2px;
+    /* Un poco de espacio entre letras para la marca */
 }
 
 /* --- Panel Inferior (Blanco con Formulario) --- */
-.login-right-panel { /* Aunque se llama "right-panel", ahora es el panel inferior */
-    flex-grow: 1; /* Ocupa todo el espacio restante (el 65% de la altura) */
-    width: 100%; /* Ocupa todo el ancho del login-container */
-    background-color: var(--color-white); /* Fondo blanco */
-    
+.login-right-panel {
+    /* Aunque se llama "right-panel", ahora es el panel inferior */
+    flex-grow: 1;
+    /* Ocupa todo el espacio restante (el 65% de la altura) */
+    width: 100%;
+    /* Ocupa todo el ancho del login-container */
+    background-color: var(--color-white);
+    /* Fondo blanco */
+
     display: flex;
-    flex-direction: column; /* Apila el título, formulario y enlace de registro */
-    justify-content: center; /* Centrar contenido verticalmente */
-    align-items: center; /* Centrar contenido horizontalmente */
-    padding: 30px; /* Espacio interno generoso */
+    flex-direction: column;
+    /* Apila el título, formulario y enlace de registro */
+    justify-content: center;
+    /* Centrar contenido verticalmente */
+    align-items: center;
+    /* Centrar contenido horizontalmente */
+    padding: 30px;
+    /* Espacio interno generoso */
     box-sizing: border-box;
-    text-align: center; /* Para centrar el texto como el título y el enlace de registro */
+    text-align: center;
+    /* Para centrar el texto como el título y el enlace de registro */
 }
 
 .login-form-title {
     font-size: 1.8rem;
-    color: var(--color-green-dark); /* Color oscuro para el título */
+    color: var(--color-green-dark);
+    /* Color oscuro para el título */
     margin-bottom: 25px;
 }
 
 .login-form {
     width: 100%;
-    max-width: 280px; /* Ancho máximo para el formulario dentro de la columna */
+    max-width: 280px;
+    /* Ancho máximo para el formulario dentro de la columna */
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Espacio entre los campos del formulario */
+    gap: 20px;
+    /* Espacio entre los campos del formulario */
 }
 
 .login-form .form-group {
-    text-align: left; /* Alinea etiquetas a la izquierda */
+    text-align: left;
+    /* Alinea etiquetas a la izquierda */
 }
 
 .login-form label {
@@ -120,7 +154,8 @@ html, body {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid var(--color-input-border);
-    border-radius: 8px; /* Bordes más redondeados para los inputs */
+    border-radius: 8px;
+    /* Bordes más redondeados para los inputs */
     font-size: 1rem;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -129,16 +164,20 @@ html, body {
 .login-form input[type="text"]:focus,
 .login-form input[type="password"]:focus {
     outline: none;
-    border-color: var(--color-green-dark); /* Borde verde al enfocar */
-    box-shadow: 0 0 0 3px rgba(65, 99, 76, 0.2); /* Sombra suave con tu verde */
+    border-color: var(--color-green-dark);
+    /* Borde verde al enfocar */
+    box-shadow: 0 0 0 3px rgba(65, 99, 76, 0.2);
+    /* Sombra suave con tu verde */
 }
 
 .login-button {
-    background-color: var(--color-green-dark); /* Botón con el mismo verde oscuro */
+    background-color: var(--color-green-dark);
+    /* Botón con el mismo verde oscuro */
     color: white;
     padding: 14px 25px;
     border: none;
-    border-radius: 8px; /* Bordes más redondeados para el botón */
+    border-radius: 8px;
+    /* Bordes más redondeados para el botón */
     font-size: 1.05rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.1s ease;
@@ -147,7 +186,8 @@ html, body {
 }
 
 .login-button:hover {
-    background-color: var(--color-button-hover); /* Tono más oscuro al pasar el mouse */
+    background-color: var(--color-button-hover);
+    /* Tono más oscuro al pasar el mouse */
     transform: translateY(-1px);
 }
 
@@ -158,14 +198,16 @@ html, body {
 }
 
 .register-link {
-    color: var(--color-green-dark); /* Enlace con el verde oscuro */
+    color: var(--color-green-dark);
+    /* Enlace con el verde oscuro */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
 .register-link:hover {
-    color: var(--color-link-hover); /* Color azul al pasar el mouse */
+    color: var(--color-link-hover);
+    /* Color azul al pasar el mouse */
     text-decoration: underline;
 }
 
@@ -175,14 +217,19 @@ html, body {
 /* Para pantallas de tabletas y móviles más grandes */
 @media (max-width: 768px) {
     .login-container {
-        margin-top: 65px; /* Espacio superior para que no esté pegado al borde */
-        width: 90%; /* Ocupa más ancho en pantallas pequeñas */
-        height: auto; /* La altura se ajusta al contenido */
-        padding-bottom: 20px; /* Añade un poco de padding inferior si el contenido es denso */
+        margin-top: 65px;
+        /* Espacio superior para que no esté pegado al borde */
+        width: 90%;
+        /* Ocupa más ancho en pantallas pequeñas */
+        height: auto;
+        /* La altura se ajusta al contenido */
+        padding-bottom: 20px;
+        /* Añade un poco de padding inferior si el contenido es denso */
     }
 
     .login-left-panel {
-        height: 120px; /* Reduce la altura del panel superior en móviles/tabletas */
+        height: 120px;
+        /* Reduce la altura del panel superior en móviles/tabletas */
     }
 
     .login-brand-name {
@@ -190,11 +237,13 @@ html, body {
     }
 
     .login-right-panel {
-        padding: 25px; /* Reduce el padding del panel inferior */
+        padding: 25px;
+        /* Reduce el padding del panel inferior */
     }
 
     .login-form {
-        max-width: 250px; /* Ajusta el ancho máximo del formulario */
+        max-width: 250px;
+        /* Ajusta el ancho máximo del formulario */
     }
 
     .login-form-title {
@@ -211,11 +260,13 @@ html, body {
 @media (max-width: 480px) {
     .login-container {
         margin-top: 65px;
-        width: 95%; /* Aún más estrecho en pantallas muy pequeñas */
+        width: 95%;
+        /* Aún más estrecho en pantallas muy pequeñas */
     }
 
     .login-left-panel {
-        height: 100px; /* Más pequeña la barra verde */
+        height: 100px;
+        /* Más pequeña la barra verde */
     }
 
     .login-brand-name {
@@ -223,7 +274,8 @@ html, body {
     }
 
     .login-right-panel {
-        padding: 15px; /* Menor padding */
+        padding: 15px;
+        /* Menor padding */
     }
 
     .login-form input[type="text"],
@@ -233,7 +285,8 @@ html, body {
         font-size: 0.9rem;
     }
 
-    .register-text, .register-link {
+    .register-text,
+    .register-link {
         font-size: 0.8rem;
     }
 }

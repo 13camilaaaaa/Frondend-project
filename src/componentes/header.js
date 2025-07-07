@@ -1,3 +1,7 @@
+import Swal from "sweetalert2";
+import { modificarBotonSesion } from "./modificarBotonSesion.js";
+
+
 const app = document.querySelector('#app');
 const header = document.querySelector('#header');
 header.classList.add('container', 'header');
@@ -39,6 +43,7 @@ menuRight.classList.add('menu__right');
 
 const login = document.createElement('a');
 login.setAttribute("href", '#login');
+login.setAttribute("id", "authSection");
 login.classList.add('menu__link');
 const loginIcon = document.createElement('i');
 loginIcon.classList.add('fas', 'fa-user');
@@ -49,11 +54,12 @@ login.append(loginIcon, loginText);
 menuRight.append(login);
 
 const carrito = document.createElement('a');
-carrito.setAttribute("href", '#carrito');
 carrito.classList.add('menu__link');
+carrito.setAttribute("href", '#carrito');
+carrito.setAttribute("id", "cartIcon");
 const carritoIcon = document.createElement('i');
-carritoIcon.classList.add('fas', 'fa-shopping-cart');
-const carritoText = document.createElement('span');
+carritoIcon.classList.add('fas', 'fa-shopping-bag');
+const carritoText = document.createElement('a');
 carritoText.textContent = 'Carrito';
 carritoText.classList.add('menu__link-text');
 carrito.append(carritoIcon, carritoText);
@@ -89,25 +95,25 @@ categoriesGroup.classList.add('categories-menu__group');
 const mujerLink = document.createElement('a');
 mujerLink.textContent = 'Mujer';
 mujerLink.classList.add('category__link');
-mujerLink.setAttribute("href", '#productos/Mujer');
+mujerLink.setAttribute("href", '#generos/Mujer');
 categoriesGroup.append(mujerLink);
 
 const hombreLink = document.createElement('a');
 hombreLink.textContent = 'Hombre';
 hombreLink.classList.add('category__link');
-hombreLink.setAttribute("href", '#productos/Hombre');
+hombreLink.setAttribute("href", '#generos/Hombre');
 categoriesGroup.append(hombreLink);
 
 const bebesLink = document.createElement('a');
 bebesLink.textContent = 'Bebés';
 bebesLink.classList.add('category__link');
-bebesLink.setAttribute("href", '#productos/Bebe');
+bebesLink.setAttribute("href", '#generos/Bebe');
 categoriesGroup.append(bebesLink);
 
 const ninosLink = document.createElement('a');
 ninosLink.textContent = 'Niños';
 ninosLink.classList.add('category__link');
-ninosLink.setAttribute("href", '#productos/Nino');
+ninosLink.setAttribute("href", '#generos/Nino');
 categoriesGroup.append(ninosLink);
 
 categoriesMenu.append(categoriesGroup);
@@ -130,18 +136,25 @@ categoriesBar.append(categoriesMenu); // Adjuntar categoriesMenu a categoriesBar
 
 // --- MENÚ MÓVIL/TABLET (EL CONTENEDOR DESPLEGABLE DE LA HAMBURGUESA) ---
 const mobileNav = document.createElement('nav');
-mobileNav.classList.add('mobile-nav');
+mobileNav.classList.add('mobile-nav'); // Clase para estilos CSS del panel
+mobileNav.setAttribute('aria-hidden', 'true'); // Inicialmente oculto para accesibilidad
+
 const mobileMenuUl = document.createElement('ul');
 mobileMenuUl.classList.add('mobile-menu__list');
 mobileNav.append(mobileMenuUl);
 
-// Contenido del Menú Móvil
+// Overlay para el fondo oscuro y clic fuera
+const mobileNavOverlay = document.createElement('div');
+mobileNavOverlay.classList.add('mobile-nav-overlay'); // Clase para estilos CSS del overlay
+mobileNavOverlay.setAttribute('aria-hidden', 'true'); // Inicialmente oculto para accesibilidad
+
+// --- 2. Contenido del Menú Móvil ---
 const mobileLinksData = [
-    { text: 'Servicio al cliente', href: '/contacto', icon: null },
-    { text: 'Mujer', href: '#productos/Mujer', icon: null },
-    { text: 'Hombre', href: '#productos/Hombre', icon: null },
-    { text: 'Bebés', href: '#productos/Bebe', icon: null },
-    { text: 'Niños', href: '#productos/Niño', icon: null }
+    { text: 'Servicio al cliente', href: '#contacto', icon: null },
+    { text: 'Mujer', href: '#generos/Mujer', icon: null },
+    { text: 'Hombre', href: '#generos/Hombre', icon: null },
+    { text: 'Bebés', href: '#generos/Bebe', icon: null },
+    { text: 'Niños', href: '#generos/Nino', icon: null } // Corregido a 'Nino' si esa es tu ruta
 ];
 
 mobileLinksData.forEach(link => {
@@ -157,29 +170,68 @@ mobileLinksData.forEach(link => {
     }
     li.append(a);
     mobileMenuUl.append(li);
+
+    // **MEJORA 1: Cierre al hacer clic en un enlace del menú**
+    a.addEventListener('click', () => {
+        // Solo cierra si el menú está abierto
+        if (mobileNav.classList.contains('is-open')) {
+            mobileNav.classList.remove('is-open');
+            hamburgerMenuIcon.classList.remove('is-active');
+            mobileNavOverlay.classList.remove('active');
+            mobileNav.setAttribute('aria-hidden', 'true');
+            mobileNavOverlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Restaura el scroll del body
+        }
+    });
 });
 
-// Ensamblaje Final en el DOM
-// CAMBIO CLAVE AQUÍ: categoriesBar se adjunta al header
-header.append(hamburgerMenuIcon, menuDiv, categoriesBar, mobileNav);
-// Quita app.append(categoriesBar); si estaba aquí, ya no es necesario
-// app.append( categoriesBar); // ESTO SE ELIMINA
+if (hamburgerMenuIcon) { // Asegúrate de que el icono exista
+    hamburgerMenuIcon.addEventListener('click', () => {
+        mobileNav.classList.toggle('is-open');
+        hamburgerMenuIcon.classList.toggle('is-active');
+        mobileNavOverlay.classList.toggle('active');
 
+        // Para accesibilidad y control de scroll del body
+        if (mobileNav.classList.contains('is-open')) {
+            mobileNav.setAttribute('aria-hidden', 'false');
+            mobileNavOverlay.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; // Evita el scroll del body
+        } else {
+            mobileNav.setAttribute('aria-hidden', 'true');
+            mobileNavOverlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Restaura el scroll del body
+        }
+    });
+}
 
-// Lógica para el Toggle del Menú de Hamburguesa
-hamburgerMenuIcon.addEventListener('click', () => {
-    mobileNav.classList.toggle('is-open');
-    hamburgerMenuIcon.classList.toggle('is-active');
-});
+// **MEJORA 2: Cierre al hacer clic fuera del panel (usando el overlay)**
+if (mobileNavOverlay) { // Asegúrate de que el overlay exista
+    mobileNavOverlay.addEventListener('click', () => {
+        if (mobileNav.classList.contains('is-open')) {
+            mobileNav.classList.remove('is-open');
+            hamburgerMenuIcon.classList.remove('is-active');
+            mobileNavOverlay.classList.remove('active');
+            mobileNav.setAttribute('aria-hidden', 'true');
+            mobileNavOverlay.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; // Restaura el scroll del body
+        }
+    });
+}
 
-header.addEventListener('click', (event) => {
-    // Asegúrate de que el clic dentro del categoriesBar no cierre el menú móvil si está abierto
-    if (!mobileNav.contains(event.target) && !hamburgerMenuIcon.contains(event.target) && mobileNav.classList.contains('is-open')) {
+// **OPCIONAL: Cierre al redimensionar la ventana (para tablets/desktop)**
+window.addEventListener('resize', () => {
+    // Si la ventana es más ancha que un breakpoint de móvil y el menú está abierto
+    if (window.innerWidth > 768 && mobileNav.classList.contains('is-open')) { // Ajusta 768px a tu breakpoint
         mobileNav.classList.remove('is-open');
         hamburgerMenuIcon.classList.remove('is-active');
+        mobileNavOverlay.classList.remove('active');
+        mobileNav.setAttribute('aria-hidden', 'true');
+        mobileNavOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
     }
 });
 
+header.append(hamburgerMenuIcon, menuDiv, categoriesBar, mobileNav, mobileNavOverlay);
 // NUEVA FUNCIÓN Y LISTENER PARA EL CAMBIO DE ROSS MILLE / RM
 function updateRossMilleBrand() {
     const screenWidth = window.innerWidth;
@@ -187,7 +239,7 @@ function updateRossMilleBrand() {
 
     if (rossMilleElement) { // Asegúrate de que el elemento exista
         if (screenWidth < 550) {
-            rossMilleElement.textContent = 'R'; // O lo que desees para móvil
+            rossMilleElement.textContent = 'RM'; // O lo que desees para móvil
         } else {
             rossMilleElement.textContent = 'ROSS MILLE';
         }
@@ -294,12 +346,14 @@ function activarBuscador(inputId) {
 activarBuscador("productSearchDesktopInput");
 activarBuscador("productSearchHeaderInput");
 
-
-
-
 // Llamar a la función al cargar la página
 updateRossMilleBrand();
 
 // Llamar a la función cada vez que se redimensiona la ventana
 window.addEventListener('resize', updateRossMilleBrand);
+
+// escucha el evento personalizado desde cualquier parte
+window.addEventListener("modificarBotonSesion", modificarBotonSesion);
+
+modificarBotonSesion(); // Llamar a la función para inicializar el botón de sesión
 

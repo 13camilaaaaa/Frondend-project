@@ -61,5 +61,9 @@ const mostrarResultados = (productos, contenedor) => {
         divinfo.append(nombre, descripcion, precio); 
         card.append(divimg, divinfo);
         contenedor.append(card);
+
+        card.addEventListener("click", () => {
+                window.location.hash = `#productos/${producto.id}`;
+            });
     });
 };

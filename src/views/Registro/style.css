@@ -1,14 +1,6 @@
 /* --- Estilos Globales Esenciales (en src/main.css o un reset.css) --- */
 /* Aseguran que el body ocupe toda la altura de la ventana para un centrado efectivo */
-html, body {
-    height: auto; /* */
-    margin: 0; /* */
-    padding: 0; /* */
-    min-height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
-    box-sizing: border-box; /* */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow-y: auto; /* Permite el scroll si el contenido es más alto que la ventana */
-}
+
 
 /* --- Variables de Color (Puedes colocarlas en :root en src/main.css si quieres) --- */
 :root {

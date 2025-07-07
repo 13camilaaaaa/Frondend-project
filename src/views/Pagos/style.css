@@ -1,0 +1,147 @@
+:root {
+    --color-green: #41634C;
+    --color-beige: #FFEBB6;
+    --color-blue: #6366f1;
+    --color-otros: #9ca3af;
+    --color-fondo: #ffffff;
+    --color-sombras: rgb(58, 101, 82);
+}
+
+/* Contenedor principal para la página de Pagos */
+.payments-container { /* Puedes usar .shipping-container si quieres un estilo más genérico */
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.intro-text {
+    font-style: italic;
+    margin-bottom: 30px;
+    color: #555;
+    font-size: 1.1em;
+}
+
+.accordion {
+    border-top: 1px solid #ddd; /* Borde superior para todo el acordeón */
+}
+
+.accordion-item {
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #f5f5f5;
+}
+
+.accordion-header .question {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000; /* Color predeterminado de la pregunta */
+    transition: color 0.3s ease;
+}
+
+.accordion-header i {
+    font-size: 1.2em;
+    color: var(--color-green); /* Color predeterminado del icono */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Estilos cuando el elemento del acordeón está activo (abierto) */
+.accordion-item.active .accordion-header .question {
+    color: #e00; /* Color rojo para la pregunta activa */
+}
+
+.accordion-item.active .accordion-header i {
+    transform: rotate(180deg); /* Gira el icono cuando está activo */
+    color: #e00; /* Color rojo para el icono activo */
+}
+
+.accordion-content {
+    padding: 0 20px;
+    max-height: 0; /* Inicialmente oculto */
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Efecto de deslizamiento suave */
+    background-color: #fff;
+}
+
+.accordion-item.active .accordion-content {
+    padding: 20px;
+}
+
+.accordion-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.accordion-content p:last-child {
+    margin-bottom: 0; /* Sin margen inferior para el último párrafo */
+}
+
+.accordion-content a {
+    color: #007bff; /* Color del enlace */
+    text-decoration: none;
+}
+
+.accordion-content a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .accordion-header {
+        padding: 15px;
+    }
+
+    .accordion-header .question {
+        font-size: 1em;
+    }
+
+    .accordion-header i {
+        font-size: 1em;
+    }
+
+    .accordion-content {
+        padding: 0 15px;
+    }
+    .accordion-item.active .accordion-content {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .accordion-header {
+        padding: 10px;
+    }
+
+    .accordion-header .question {
+        font-size: 0.9em;
+    }
+}

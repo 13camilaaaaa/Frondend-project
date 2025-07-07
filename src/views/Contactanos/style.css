@@ -1,0 +1,176 @@
+/* ... (Mantén todo el CSS anterior para body, h1, los acordeones, etc.) ... */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.intro-text {
+    font-style: italic;
+    margin-bottom: 30px;
+    color: #555;
+    font-size: 1.1em;
+}
+
+.accordion {
+    border-top: 1px solid #ddd; /* Borde superior para todo el acordeón */
+}
+
+.accordion-item {
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    margin-bottom: 0;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #f5f5f5;
+}
+
+.accordion-header .question {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000; /* Color predeterminado de la pregunta */
+    transition: color 0.3s ease;
+}
+
+.accordion-header i {
+    font-size: 1.2em;
+    color: var(--color-green); /* Color predeterminado del icono */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Estilos cuando el elemento del acordeón está activo (abierto) */
+.accordion-item.active .acordion-header .question {
+    color: #e00; /* Color rojo para la pregunta activa */
+}
+
+.accordion-item.active .acordion-header i {
+    transform: rotate(180deg); /* Gira el icono cuando está activo */
+    color: #e00; /* Color rojo para el icono activo */
+}
+
+.accordion-content {
+    padding: 0 20px;
+    /* max-height: 0;  */
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Efecto de deslizamiento suave */
+    background-color: #fff;
+}
+
+.accordion-item.active .acordion-content {
+    padding: 20px;
+}
+
+.accordion-content p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.accordion-content p:last-child {
+    margin-bottom: 0; /* Sin margen inferior para el último párrafo */
+}
+
+.accordion-content a {
+    color: #007bff; /* Color del enlace */
+    text-decoration: none;
+}
+
+.accordion-content a:hover {
+    text-decoration: underline;
+}
+
+/* Contenedor principal para la página de Contacto */
+.contact-container {
+    max-width: 900px; /* Ajusta según tus necesidades */
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilo para los títulos de sección (PARA COMPRAS ONLINE, POR MEDIO DE LAS REDES SOCIALES, etc.) */
+.contact-section .section-heading {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 30px; /* Espacio superior para separar secciones */
+    margin-bottom: 15px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Estilo para los párrafos de cada sección */
+.contact-section .section-paragraph {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.contact-section .section-paragraph a {
+    color: #007bff; /* Color del enlace, puedes ajustarlo */
+    text-decoration: none;
+}
+
+.contact-section .section-paragraph a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para el texto de descargo de responsabilidad al final */
+.disclaimer-text {
+    margin-top: 40px; /* Más espacio superior para destacarlo */
+    font-size: 0.9em;
+    color: #777;
+    line-height: 1.5;
+}
+
+.disclaimer-text a {
+    color: #007bff; /* Color del enlace */
+    text-decoration: none;
+}
+
+.disclaimer-text a:hover {
+    text-decoration: underline;
+}
+
+/* ... (El resto de tus media queries al final de style.css) ... */
+
+@media (max-width: 768px) {
+    /* ... (Media queries existentes para h1 y otros elementos) ... */
+
+    .contact-section .section-heading {
+        font-size: 1em;
+        margin-top: 25px;
+        margin-bottom: 10px;
+    }
+
+    .contact-section .section-paragraph {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
+
+    .disclaimer-text {
+        margin-top: 30px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    /* ... (Media queries existentes para h1 y otros elementos) ... */
+
+    .contact-container {
+        padding: 15px;
+    }
+
+    .contact-section .section-heading {
+        margin-top: 20px;
+    }
+}

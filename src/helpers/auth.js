@@ -1,72 +1,50 @@
+
+import {jwtDecode} from "jwt-decode"; // Asegúrate de tener esta librería instalada
+import { fetchConToken } from "../helpers/fetchConToken.js";
+
 export const estaAutenticado = () => {
-    if (localStorage.accessToken === undefined) {
-        // alert("Usuario no autenticado");
-        return false
-    } else {
-        // alert("Usuario autenticado");
-        return true;
-    }
-}
+    const token = localStorage.getItem("token");
+    const refreshToken = localStorage.getItem("refresh_token");
 
-import Swal from "sweetalert2";
+    if (!token) return false;
 
-const API_URL = "http://localhost:3000";
+    try {
+        const { exp } = jwtDecode(token);
+        const ahora = Date.now() / 1000;
 
-export const fetchConToken = async (url, options = {}) => {
-    let token = localStorage.getItem("token");
-
-    // Agrega el token si existe
-    options.headers = {
-        ...options.headers,
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
-    };
-
-    let response = await fetch(`${API_URL}${url}`, options);
-
-    // Si el token expiró, intenta renovar
-    if (response.status === 401) {
-        const refreshToken = localStorage.getItem("refresh_token");
-
-        if (refreshToken) {
-            const refreshResp = await fetch(`${API_URL}/api/auth/refresh`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ refresh_token: refreshToken })
-            });
-
-            const refreshData = await refreshResp.json();
-
-            if (refreshData.success && refreshData.data?.token) {
-                // actualizar token
-                localStorage.setItem("token", refreshData.data.token);
-
-                // reintentar petición original con nuevo token
-                options.headers.Authorization = `Bearer ${refreshData.data.token}`;
-                response = await fetch(`${API_URL}${url}`, options);
-            } else {
-                // si falla la renovación, cerrar sesión
-                mostrarAlertaSesionExpirada();
-                return null;
-            }
-        } else {
-            mostrarAlertaSesionExpirada();
-            return null;
+        if (exp < ahora) {
+            // token expirado, intenta renovar
+            return renovarToken(refreshToken);
         }
-    }
 
-    return response;
+        return true;
+    } catch (error) {
+        return false;
+    }
 };
 
-function mostrarAlertaSesionExpirada() {
-    Swal.fire({
-        title: "Sesión expirada",
-        text: "Debes iniciar sesión nuevamente.",
-        icon: "warning",
-        confirmButtonText: "Aceptar"
-    }).then(() => {
+const renovarToken = async (refreshToken) => {
+    if (!refreshToken) return false;
+
+    try {
+        const response = await fetch("http://localhost:3000/api/auth/refresh", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refresh_token: refreshToken })
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.data?.token) {
+            localStorage.setItem("token", data.data.token);
+            return true;
+        }
+
         localStorage.clear();
-        location.hash = "#login";
-        window.dispatchEvent(new CustomEvent("modificandoHeader"));
-    });
-}
+        return false;
+
+    } catch (err) {
+        localStorage.clear();
+        return false;
+    }
+};

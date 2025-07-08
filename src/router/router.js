@@ -7,14 +7,21 @@ import { pagosController } from "../views/Pagos/pagosController.js";
 import { devolucionesController } from "../views/Devoluciones/devolucionesController.js";
 import { tiendaController } from "../views/Tienda/tiendaController.js";
 import { productoController } from "../views/Producto/productoController.js";
+import { perfilController } from "../views/perfil/perfilController.js";
+import { calleController } from "../views/Calle/calleController.js";
+import { autenticacionController } from "../views/Autenticacion/autenticacionController.js";
+import { editarPerfilController } from "../casos de uso/editarPerfilController.js"; // Asegúrate de que este controlador exista
 
 // Controladores para Autenticación (separados)
 import { loginController } from "../views/Login/loginController.js";
 import { registroController } from "../views/Registro/registroController.js";
+import { pedidosController } from "../views/Pedidos/pedidosController.js"; // Asegúrate de que este controlador exista
 
 
 import { loadView } from "../helpers/loadView.js";
 import { estaAutenticado } from "../helpers/auth.js";
+const rutasInternasPerfil = ["perfil", "calle", "pedidos", "autenticacion"];
+
 
 const routes = {
     "/": {// lo que se visualiza al ingresar a la aplicación
@@ -61,6 +68,31 @@ const routes = {
         controlador: tiendaController,
         private: false
     },
+    perfil: {
+        template: "Perfil/index.html",
+        controlador: perfilController,
+        private: true
+    },
+    'perfil/edit': {
+        template: "Perfil/editar.html",
+        controlador: editarPerfilController,
+        private: true,
+    },
+    calle: {
+        template: "Calle/index.html",
+        controlador: calleController,
+        private: true
+    },
+    pedidos: {
+        template: "Pedidos/index.html",
+        controlador: pedidosController,
+        private: true
+    },
+    autenticacion: {
+        template: "Autenticacion/index.html",
+        controlador: autenticacionController,
+        private: true
+    },
     'productos/:id': {
         template: "Producto/index.html",
         controlador: productoController,
@@ -81,7 +113,7 @@ const routes = {
 export const router = async (app) => {
     const fullHash = location.hash.slice(1);
     const basePath = fullHash.split('?')[0];
-    const [rutas, params] = matchRoute(basePath); 
+    const [rutas, params] = matchRoute(basePath);
 
     if (!rutas) {
         await loadView(app, 'Inicio/index.html');
@@ -103,31 +135,31 @@ export const router = async (app) => {
     });
 };
 
-const matchRoute = (basePath) => { 
-    const arreglo = basePath.split("/"); 
+const matchRoute = (basePath) => {
+    const arreglo = basePath.split("/");
 
     for (const route in routes) {
         const b = route.split("/");
-        if (b.length !== arreglo.length) continue; 
+        if (b.length !== arreglo.length) continue;
 
-        const params = {}; 
+        const params = {};
 
         const matched = b.every((parte, i) => {
             if (parte.startsWith(":")) {
                 const partName = parte.slice(1);
                 const value = arreglo[i];
                 params[partName] = value;
-                return true; 
+                return true;
             }
             if (parte === arreglo[i]) {
                 return true;
             }
-            return false; 
+            return false;
         });
 
         if (matched) {
             return [routes[route], params];
         }
     }
-    return [null, null]; 
+    return [null, null];
 };

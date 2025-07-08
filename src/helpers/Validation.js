@@ -30,7 +30,7 @@ export const Validation = {
     hasMaxLength: (value, max) => {
         return value.trim().length <= max;
     },
-    
+
     // valida longitud mínima (ej: para nombres)
     hasMinLength: (value, min) => {
         return value.trim().length >= min;
@@ -39,5 +39,11 @@ export const Validation = {
     // valida que sea una fecha válida (opcional)
     isValidDate: (value) => {
         return !isNaN(Date.parse(value));
-    }
+    },
+
+    // valida que sea una cédula válida (solo números y entre 6 a 10 dígitos)
+    isValidCedula: (value) => {
+        const clean = value.trim();
+        return /^[0-9]{6,10}$/.test(clean);
+    },
 };

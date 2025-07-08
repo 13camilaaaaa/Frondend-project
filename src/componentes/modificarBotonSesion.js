@@ -2,80 +2,55 @@
 import Swal from "sweetalert2";
 
 export function modificarBotonSesion() {
-    const authElement = document.querySelector("#authSection");
-    if (!authElement) return;
+    const authSection = document.querySelector("#authSection"); // enlace <a> con ID
+    const loginText = authSection.querySelector("span"); // span con el texto
+    const userContainer = document.querySelector("#user-info-container");
 
     const token = localStorage.getItem("token");
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-    authElement.innerHTML = "";
+    if (token && usuario) {
+        // limpiar lo anterior
+        userContainer.innerHTML = "";
 
-    if (token) {
-        const logoutIcon = document.createElement("i");
-        logoutIcon.classList.add("fas", "fa-sign-out-alt");
+        const userInfo = document.createElement("div");
+        userInfo.classList.add("user-info");
 
-        const logoutText = document.createElement("span");
-        logoutText.textContent = "Cerrar sesión";
-        logoutText.classList.add("menu__link-text");
+        userInfo.innerHTML = `
+            <i class="fas fa-user"></i>
+            <span>${usuario.nombre_usuario}</span>
+        `;
 
-        authElement.append(logoutIcon, logoutText);
+        userInfo.style.cursor = "pointer";
+        userInfo.onclick = () => {
+            location.hash = "#perfil";
+        };
 
-        authElement.removeAttribute("href");
+        userContainer.appendChild(userInfo);
+        authSection.innerHTML = "";
 
-        authElement.onclick = (e) => {
-            e.preventDefault();
-            Swal.fire({
-                title: "¿Cerrar sesión?",
-                text: "Tu sesión será cerrada.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Sí, cerrar sesión",
-                cancelButtonText: "Cancelar"
-            }).then(result => {
-                if (result.isConfirmed) {
-                    const usuario = JSON.parse(localStorage.getItem("usuario"));
-                    const id = usuario?.id;
+        const cerrarIcon = document.createElement("i");
+        cerrarIcon.classList.add("fas", "fa-sign-out-alt");
+        cerrarIcon.style.marginRight = "5px";
 
-                    if (id) {
-                        fetch("http://localhost:3000/api/auth/logout", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({ id })
-                        })
-                        .then(res => res.json())
-                        .then(res => {
-                            if (res.success) {
-                                localStorage.clear();
-                                location.hash = "#login";
-                                window.dispatchEvent(new CustomEvent("modificarBotonSesion"));
-                            } else {
-                                Swal.fire("Error", "No se pudo cerrar sesión correctamente.", "error");
-                            }
-                        })
-                        .catch(err => {
-                            console.error("Error al cerrar sesión:", err);
-                            Swal.fire("Error", "Fallo de conexión al cerrar sesión.", "error");
-                        });
-                    } else {
-                        localStorage.clear();
-                        location.hash = "#login";
-                        window.dispatchEvent(new CustomEvent("modificarBotonSesion"));
-                    }
-                }
-            });
+        const cerrarText = document.createElement("span");
+        cerrarText.classList.add("menu__link-text");
+        cerrarText.textContent = "Cerrar sesión";
+
+        authSection.append(cerrarIcon, cerrarText);
+
+        authSection.onclick = () => {
+            localStorage.clear();
+            location.hash = "#login";
+            window.dispatchEvent(new CustomEvent("modificarBotonSesion"));
         };
     } else {
-        authElement.setAttribute("href", "#login");
-        authElement.onclick = null;
+        userContainer.innerHTML = "";
 
-        const loginIcon = document.createElement("i");
-        loginIcon.classList.add("fas", "fa-user");
-
-        const loginText = document.createElement("span");
         loginText.textContent = "Iniciar sesión";
-        loginText.classList.add("menu__link-text");
-
-        authElement.append(loginIcon, loginText);
+        authSection.onclick = () => {
+            location.hash = "#login";
+        };
     }
 }
+

@@ -57,7 +57,7 @@ body {
 
 #app {
     grid-area: app;
-    
+
     flex-grow: 1;
 }
 
@@ -167,6 +167,25 @@ body {
     align-items: center;
     position: relative;
     /* Para posicionar el icono dentro del input si es necesario */
+}
+
+/* Estilos para el div de el perfil */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-letra);
+}
+
+.user-info:hover {
+    color: var(--color-green);
+    font-weight: bold;
+}
+
+.auth-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 
@@ -484,6 +503,366 @@ body {
     color: #333;
 }
 
+
+/* ------------------  perfil ---------------*/
+.contenedor_principal {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px; /* Ajustar según sea necesario */
+    margin: 20px auto;
+}
+
+.barra_lateral {
+    width: 250px;
+    padding: 30px 0;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info_usuario {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar_usuario {
+    width: 60px;
+    height: 60px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+.saludo_usuario {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.navegacion_principal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.navegacion_principal li {
+    width: 100%;
+}
+
+.navegacion_principal a {
+    display: block;
+    padding: 12px 30px;
+    text-decoration: none;
+    color: #555;
+    font-size: 1.1em;
+    position: relative;
+    transition: background-color 0.2s, color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.navegacion_principal a:hover {
+    background-color: #f0f0f0;
+}
+
+.navegacion_principal a.activo {
+    color: #333;
+    font-weight: bold;
+}
+
+.navegacion_principal a.activo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    width: 4px;
+    background-color: #333; /* O el color de tu marca */
+    border-radius: 2px;
+}
+
+.contenido_principal {
+    flex-grow: 1;
+    padding: 30px 40px;
+}
+
+.contenido_principal h1 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.tarjeta_perfil {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.campo_perfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo_perfil label {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.campo_perfil span {
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 500;
+}
+
+.campo_perfil.ancho_completo {
+    grid-column: span 2;
+}
+
+.boton_editar {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #555;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.boton_editar:hover {
+    background-color: #f0f0f0;
+    border-color: #aaa;
+    color: #333;
+}
+
+
+/* ----------------------- EDITAR PERFIL ----------------- */
+.contenedor_principal {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px; /* Ajustar según sea necesario */
+    margin: 20px auto;
+}
+
+/* Estilos de la barra lateral (los mismos que en la vista de perfil) */
+.barra_lateral {
+    width: 250px;
+    padding: 30px 0;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info_usuario {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar_usuario {
+    width: 60px;
+    height: 60px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+}
+
+.saludo_usuario {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+}
+
+.navegacion_principal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.navegacion_principal li {
+    width: 100%;
+}
+
+.navegacion_principal a {
+    display: block;
+    padding: 12px 30px;
+    text-decoration: none;
+    color: #555;
+    font-size: 1.1em;
+    position: relative;
+    transition: background-color 0.2s, color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.navegacion_principal a:hover {
+    background-color: #f0f0f0;
+}
+
+.navegacion_principal a.activo {
+    color: #333;
+    font-weight: bold;
+}
+
+.navegacion_principal a.activo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    width: 4px;
+    background-color: #333; /* O el color de tu marca */
+    border-radius: 2px;
+}
+
+/* Estilos del contenido principal para la edición */
+.contenido_principal {
+    flex-grow: 1;
+    padding: 30px 40px;
+}
+
+.encabezado_edicion {
+    margin-bottom: 30px;
+}
+
+.enlace_volver {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+}
+
+.enlace_volver:hover {
+    color: #555;
+}
+
+.enlace_volver img {
+    width: 18px; /* Tamaño del ícono de flecha */
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+/* Para usar SVG inline o de biblioteca, podrías usar: */
+.enlace_volver .icono_flecha {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    fill: #888; /* Color del ícono */
+}
+.enlace_volver:hover .icono_flecha {
+    fill: #555;
+}
+
+
+.contenido_principal h1 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 0; /* Eliminar margen superior del h1 */
+}
+
+.tarjeta_formulario {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+#formulario_editar_perfil {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas para los campos */
+    gap: 20px 40px; /* Espacio entre filas y columnas */
+}
+
+.campo_formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo_formulario label {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.campo_formulario input[type="text"],
+.campo_formulario input[type="tel"],
+.campo_formulario input[type="date"],
+.campo_formulario select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    box-sizing: border-box; /* Asegura que padding y border estén dentro del width */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo_formulario input:focus,
+.campo_formulario select:focus {
+    outline: none;
+    border-color: #888; /* Color de borde al enfocar */
+    box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
+}
+
+/* Ajuste para el campo "Fecha de nacimiento" si necesitas que sea full width a veces */
+/* Esto no es necesario con grid de 2 columnas si cada campo es de 1fr */
+/* Si deseas que un campo específico ocupe toda la fila: */
+/* .campo_formulario.ancho_completo {
+    grid-column: span 2;
+} */
+
+
+.boton_guardar {
+    grid-column: span 2; /* Para que el botón ocupe ambas columnas */
+    justify-self: end; /* Alinea el botón a la derecha */
+    margin-top: 20px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #555;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.boton_guardar:hover {
+    background-color: #f0f0f0;
+    border-color: #aaa;
+    color: #333;
+}
+
+
 /* Media Queries para responsividad */
 
 /* Tablets y pantallas pequeñas de escritorio */
@@ -635,6 +1014,58 @@ body {
     .search-desktop-container {
         display: none;
         /* Oculta la barra de categorías y el buscador de escritorio en móvil/tablet */
+    }
+
+    /* ----------------- Perfil -------------------*/
+
+    .contenedor_principal {
+        flex-direction: column;
+    }
+
+    .barra_lateral {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 20px;
+    }
+
+    .navegacion_principal ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .navegacion_principal li {
+        width: auto;
+    }
+
+    .navegacion_principal a {
+        padding: 8px 15px;
+        text-align: center;
+    }
+
+    .navegacion_principal a.activo::before {
+        display: none; /* Ocultar barra vertical en pantallas pequeñas */
+    }
+
+    .contenido_principal {
+        padding: 20px;
+    }
+
+    .tarjeta_perfil {
+        grid-template-columns: 1fr; /* Apilar campos en pantallas pequeñas */
+        padding: 20px;
+    }
+
+    .campo_perfil.ancho_completo {
+        grid-column: span 1;
+    }
+
+    .boton_editar {
+        position: static; /* Colocar botón normalmente */
+        margin-top: 20px;
+        width: 100%;
     }
 }
 

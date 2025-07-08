@@ -1,6 +1,5 @@
-import Swal from "sweetalert2";
-import { modificarBotonSesion } from "./modificarBotonSesion.js";
 
+import { modificarBotonSesion } from "./modificarBotonSesion.js";
 
 const app = document.querySelector('#app');
 const header = document.querySelector('#header');
@@ -45,6 +44,12 @@ const login = document.createElement('a');
 login.setAttribute("href", '#login');
 login.setAttribute("id", "authSection");
 login.classList.add('menu__link');
+
+const userContainer = document.createElement("div");
+userContainer.setAttribute("id", "user-info-container");
+userContainer.classList.add("user-info");
+menuRight.appendChild(userContainer);
+
 const loginIcon = document.createElement('i');
 loginIcon.classList.add('fas', 'fa-user');
 const loginText = document.createElement('span');
@@ -133,6 +138,7 @@ searchDesktopContainer.append(searchDesktopIcon, searchDesktopInput);
 categoriesMenu.append(searchDesktopContainer); // Se adjunta a categoriesMenu
 
 categoriesBar.append(categoriesMenu); // Adjuntar categoriesMenu a categoriesBar
+
 
 // --- MENÚ MÓVIL/TABLET (EL CONTENEDOR DESPLEGABLE DE LA HAMBURGUESA) ---
 const mobileNav = document.createElement('nav');
@@ -356,4 +362,3 @@ window.addEventListener('resize', updateRossMilleBrand);
 window.addEventListener("modificarBotonSesion", modificarBotonSesion);
 
 modificarBotonSesion(); // Llamar a la función para inicializar el botón de sesión
-

@@ -130,7 +130,10 @@ export const editarContController = () => {
             const result = await resp.json();
 
             if (resp.ok) {
-                Swal.fire("¡Éxito!", "Tu contraseña ha sido actualizada correctamente.", "success");
+                Swal.fire("¡Éxito!", "Tu contraseña ha sido actualizada correctamente.", "success").then(() => {
+                    // redirigir después del OK
+                    window.location.hash = "#autenticacion";
+                });
                 passwordInput.value = "";
                 codigoInput.value = "";
                 saveBtn.disabled = true;

@@ -67,10 +67,11 @@ export const productoController = async () => {
                     imagen: producto.imagen,
                     cantidad: cantidad,
                     precio: parseFloat(producto.precio),
-                    talla: producto.talla_nombre,  
-                    color: producto.color_nombre  
+                    talla: producto.talla_nombre,
+                    color: producto.color_nombre
                 };
 
+                console.log("Producto que se enviará:", productoPendiente);
                 if (!usuario || !token) {
                     // Guardar producto pendiente en localStorage
                     3// **Usuario NO logueado:** Guardar en localStorage como carrito temporal
@@ -112,6 +113,15 @@ export const productoController = async () => {
                     });
                 }
 
+                const productoAEnviar = {
+                    id_producto: productoPendiente.id_producto,
+                    cantidad: productoPendiente.cantidad,
+                    precio_unitario_al_momento: productoPendiente.precio,
+                    talla_nombre_al_momento: productoPendiente.talla,
+                    color_nombre_al_momento: productoPendiente.color
+                };
+
+
                 try {
                     const res = await fetch("http://localhost:3000/api/carrito/agregar", {
                         method: "POST",
@@ -119,7 +129,7 @@ export const productoController = async () => {
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${token}`
                         },
-                        body: JSON.stringify(productoPendiente)
+                        body: JSON.stringify(productoAEnviar)
                     });
 
                     const data = await res.json();

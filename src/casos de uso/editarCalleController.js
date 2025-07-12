@@ -187,20 +187,27 @@ export const editarCalleController = async () => {
             const result = await resp.json();
 
             if (resp.ok && result.success) {
-                Swal.fire("¡Éxito!", "La dirección fue actualizada correctamente.", "success");
-
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Éxito!",
+                    text: "La dirección fue actualizada correctamente.",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    // redirigir a #calle después de confirmar
+                    window.location.hash = "#calle";
+                });
                 // actualizar localStorage con todos los datos retornados (id + nombres)
                 const direccionActualizada = result.data;
                 localStorage.setItem("usuario", JSON.stringify({
                     ...usuario,
-                    direccion_pais: direccionActualizada.direccion_pais,
-                    nombre_pais: direccionActualizada.nombre_pais,
-                    direccion_departamento: direccionActualizada.direccion_departamento,
-                    nombre_departamento: direccionActualizada.nombre_departamento,
-                    direccion_ciudad: direccionActualizada.direccion_ciudad,
-                    nombre_ciudad: direccionActualizada.nombre_ciudad,
-                    direccion_tipo_via: direccionActualizada.direccion_tipo_via,
-                    nombre_tipo_via: direccionActualizada.nombre_tipo_via,
+                    direccion_pais: direccionActualizada.nombre_pais,
+                    direccion_pais_id: direccionActualizada.direccion_pais,
+                    direccion_departamento: direccionActualizada.nombre_departamento,
+                    direccion_departamento_id: direccionActualizada.direccion_departamento,
+                    direccion_ciudad: direccionActualizada.nombre_ciudad,
+                    direccion_ciudad_id: direccionActualizada.direccion_ciudad,
+                    direccion_tipo_via: direccionActualizada.nombre_tipo_via,
+                    direccion_tipo_via_id: direccionActualizada.direccion_tipo_via,
                     direccion_numero_via: direccionActualizada.direccion_numero_via,
                     direccion_complemento: direccionActualizada.direccion_complemento,
                     direccion_barrio: direccionActualizada.direccion_barrio

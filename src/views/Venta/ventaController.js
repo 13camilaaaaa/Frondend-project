@@ -383,7 +383,7 @@ const handlePlaceOrder = async () => {
                 text: 'Tu pedido ha sido procesado exitosamente. Recibirás un correo de confirmación.',
                 confirmButtonText: 'Ir a Mis Pedidos'
             }).then(() => {
-                location.hash = '#pedidos';
+                location.hash = '#pedido';
             });
         }
     });

@@ -43,7 +43,7 @@ export const generosController = async (params) => {
             // agregar imagen y contenido a la tarjeta
             const img = document.createElement('img');
             // img.setAttribute('src', `/src/uploads/${producto.img}`); // ruta de la imagen por db
-            img.setAttribute('src', `/src/uploads/fashion-1.jpg`); // ruta de la imagen por defecto
+            img.setAttribute('src', `/src/uploads/${producto.imagen}`); // ruta de la imagen por defecto
             img.setAttribute('alt', producto.nombre);
             img.classList.add('card-img');
             divimg.append(img);

@@ -1,16 +1,15 @@
+<div id="cartSidebar" class=" hidden">
+    <div class="cart-header">
+        <h2>Tu carrito 🛍️</h2>
+        <button id="closeCartBtn">✖</button>
+    </div>
 
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-<div class="sidebar" id="shoppingBagSidebar">
-    <div class="sidebar-header">
-        <h2>Shopping Bag</h2>
-        <button class="close-btn" id="closeSidebarBtn">
-            <i class="fas fa-times"></i>
-        </button>
+    <div id="cartItems" class="cart-items">
+        <p class="empty-cart-msg">Tu carrito está vacío</p>
     </div>
-    <div class="sidebar-content empty-cart">
-        <i class="fas fa-shopping-bag cart-empty-icon"></i>
-        <p class="empty-cart-message">Tu carrito está vacío</p>
-        <button class="continue-shopping-btn" id="continueShoppingBtn">Seguir comprando</button>
-        <p class="login-prompt">¿Tienes una cuenta? <a href="#login" class="login-link">Inicia sesión</a> para finalizar tus compras con mayor rapidez.</p>
+
+    <div class="cart-footer">
+        <p>Subtotal: <strong id="cartSubtotal">$0</strong></p>
+        <button id="checkoutBtn">CONTINUAR A CHECKOUT</button>
     </div>
-    </div>
+</div>

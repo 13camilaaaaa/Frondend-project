@@ -1,159 +1,457 @@
-/* Estilos para el Panel Lateral del Carrito */
-
-/* Overlay oscuro cuando el panel está abierto */
+/* --- Sidebar Overlay --- */
 .sidebar-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Color oscuro semitransparente */
-    z-index: 999; /* Asegura que esté por encima de la mayoría del contenido */
-    display: none; /* Oculto por defecto */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
     transition: opacity 0.3s ease;
-    opacity: 0; /* Para una transición suave */
+    pointer-events: none;
+    /* evita clics si está invisible */
 }
 
-/* Panel lateral principal */
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- Shopping Bag Sidebar --- */
 .sidebar {
     position: fixed;
     top: 0;
-    right: 0; /* Desliza desde la derecha */
-    width: 0; /* Ancho 0 por defecto, para que esté oculto */
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    /* Ajusta según sea necesario */
     height: 100%;
-    background-color: #fff;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
-    z-index: 1000; /* Por encima del overlay */
-    overflow-x: hidden; /* Oculta el scroll horizontal si el contenido es demasiado ancho */
-    transition: width 0.3s ease; /* Transición suave para el ancho */
-    display: flex; /* Para layout interno (header y content) */
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-out;
+    display: flex;
     flex-direction: column;
 }
 
-/* Estado abierto del panel */
 .sidebar.open {
-    width: 380px; /* Ancho deseado cuando está abierto */
-    /* Ajusta este ancho para pantallas más pequeñas en media queries */
+    transform: translateX(0);
 }
 
-/* Cuando el overlay está activo */
-.sidebar-overlay.active {
-    display: block;
-    opacity: 1;
-}
-
-/* Encabezado del panel */
+/* --- Sidebar Header --- */
 .sidebar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 5px 25px;
     border-bottom: 1px solid #eee;
-    background-color: #f8f8f8;
+    background-color: #fdfdfd;
+    position: sticky;
+    /* Para que el header se quede arriba */
+    top: 0;
+    z-index: 10;
 }
 
 .sidebar-header h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.6em;
     color: #333;
+    font-weight: 700;
+    flex-grow: 1;
+    /* Para que el título ocupe espacio y el botón se alinee a la derecha */
+    text-align: center;
+    /* Centrar "Shopping Bag" */
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 1.8em;
+    font-size: 1.5em;
+    color: #888;
     cursor: pointer;
-    color: #555;
+    padding: 5px;
     transition: color 0.2s ease;
+    order: -1;
+    /* Mueve el botón de cerrar a la izquierda */
 }
 
 .close-btn:hover {
-    color: #000;
+    color: #333;
 }
 
-/* Contenido del panel (específico para el carrito vacío) */
+/* --- Sidebar Content (para cuando está vacío) --- */
 .sidebar-content {
-    flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centra verticalmente los elementos */
-    align-items: center; /* Centra horizontalmente los elementos */
-    padding: 20px;
+    /* justify-content y align-items se ajustan en JS */
+    align-items: center;
     text-align: center;
-}
-
-.empty-cart-message {
-    font-size: 1.5em; /* Texto "Tu carrito está vacío" */
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
+    padding: 5px;
+    overflow-y: auto;
+    /* Permite scroll para el contenido vacío si es necesario (ej. en móviles muy pequeños) */
+    position: relative;
+    /* Para el posicionamiento del contenido */
 }
 
 .cart-empty-icon {
-    font-size: 3em;
+    font-size: 5em;
     color: #ccc;
     margin-bottom: 20px;
 }
 
+.empty-cart-message {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
 .continue-shopping-btn {
-    background-color: #000;
+    background-color: #007bff;
+    /* Color azul, puedes cambiarlo */
     color: #fff;
     border: none;
+    border-radius: 5px;
     padding: 12px 25px;
-    font-size: 1em;
+    font-size: 1.1em;
+    font-weight: 600;
     cursor: pointer;
     text-transform: uppercase;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-    margin-bottom: 15px;
-    width: 100%; /* Ocupa todo el ancho disponible en el padding */
-    max-width: 250px; /* Ancho máximo para el botón */
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
 }
 
 .continue-shopping-btn:hover {
-    background-color: #333;
+    background-color: #0056b3;
 }
 
 .login-prompt {
-    font-size: 0.9em;
-    color: #666;
+    font-size: 0.95em;
+    color: #777;
+    line-height: 1.5;
+    margin-top: 0;
 }
 
 .login-link {
-    color: #007bff; /* Color del enlace */
+    color: #007bff;
     text-decoration: none;
-    font-weight: bold;
-    transition: text-decoration 0.2s ease;
+    font-weight: 600;
+    transition: color 0.2s ease;
 }
 
 .login-link:hover {
+    color: #0056b3;
     text-decoration: underline;
 }
 
-/* Media Queries para responsividad */
-@media (max-width: 768px) {
-    .sidebar.open {
-        width: 300px; /* Ancho más pequeño en tablets */
-    }
-    .sidebar-header h2 {
-        font-size: 1.3em;
-    }
-    .close-btn {
-        font-size: 1.5em;
-    }
-    .empty-cart-message {
-        font-size: 1.3em;
-    }
+/* --- Carrito con productos --- */
+.cart-items-list {
+    width: 100%;
+    height: 100%;
+    padding: 10px 25px;
+    /* Ajusta el padding para la lista de productos */
+    box-sizing: border-box;
+    /* max-height y overflow-y se setean en JS */
 }
 
+.cart-item {
+    display: flex;
+    align-items: flex-start;
+    /* Alinea los items en la parte superior */
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    gap: 15px;
+    /* Espacio entre imagen y detalles */
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+    /* Elimina el borde del último ítem */
+}
+
+.cart-item-img {
+    width: 80px;
+    /* Tamaño de la imagen como en el ejemplo */
+    height: 80px;
+    object-fit: contain;
+    /* Para que la imagen se ajuste sin recortarse */
+    border: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Para separar precio/cantidad del título/variante */
+}
+
+.cart-item-title {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 600;
+}
+
+.cart-item-variant {
+    margin: 0;
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.cart-item-quantity-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+    /* Asegura que ocupe todo el ancho disponible */
+}
+
+.cart-item-price {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #333;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    /* Esto es clave para que los bordes redondeados se vean bien */
+    width: 100px;
+    /* Ajusta este ancho según tu diseño, para que quepa todo */
+    max-width: 100%;
+    /* Asegura que no se desborde del padre */
+}
+
+.quantity-btn {
+    background-color: #f8f8f8;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1em;
+    cursor: pointer;
+    color: #555;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    /* Evita que el botón se encoja */
+}
+
+.quantity-btn:hover {
+    background-color: #eee;
+}
+
+.quantity-display-cart {
+    border: none;
+    text-align: center;
+    width: 40px;
+    font-size: 1em;
+    padding: 8px 0;
+    outline: none;
+    color: #333;
+    flex-grow: 1;
+    /* Permite que ocupe el espacio restante */
+}
+
+/* Ocultar flechas en input type="number" para Chrome, Safari, Edge, Opera */
+.quantity-display-cart::-webkit-outer-spin-button,
+.quantity-display-cart::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.remove-item-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
+    align-self: center;
+    /* Alinea el icono de basura al centro vertical */
+}
+
+.remove-item-btn:hover {
+    color: #e74c3c;
+    /* Rojo al pasar el mouse */
+}
+
+
+/* --- Sidebar Footer --- */
+.sidebar-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #eee;
+    background-color: #fdfdfd;
+    position: sticky;
+    /* Para que el footer se quede abajo */
+    bottom: 0;
+    z-index: 10;
+}
+
+.cart-summary {
+    margin-bottom: 15px;
+}
+
+.cart-summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.cart-summary p span {
+    font-weight: 700;
+}
+
+.shipping-info {
+    font-size: 0.9em;
+    color: #777;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.checkout-btn {
+    width: 100%;
+    background-color: #000;
+    /* Negro como en la imagen */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #333;
+}
+
+.whatsapp-btn-container {
+    text-align: center;
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    /* Tamaño del botón */
+    height: 50px;
+    background-color: #25d366;
+    /* Color de WhatsApp */
+    color: #fff;
+    border-radius: 50%;
+    /* Botón redondo */
+    font-size: 2em;
+    /* Tamaño del ícono */
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+/* --- Media Queries --- */
 @media (max-width: 480px) {
-    .sidebar.open {
-        width: 100%; /* Ocupa todo el ancho en móviles */
+    .sidebar {
+        width: 100%;
+        max-width: none;
     }
+
     .sidebar-header {
-        padding: 15px;
+        padding: 15px 20px;
     }
+
+    .sidebar-header h2 {
+        font-size: 1.4em;
+    }
+
+    .close-btn {
+        font-size: 1.3em;
+    }
+
     .sidebar-content {
-        padding: 15px;
+        padding: 20px;
+    }
+
+    .cart-empty-icon {
+        font-size: 4em;
+    }
+
+    .empty-cart-message {
+        font-size: 1.1em;
+    }
+
+    .continue-shopping-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .login-prompt {
+        font-size: 0.9em;
+    }
+
+    .cart-items-list {
+        padding: 15px 20px;
+    }
+
+    .cart-item-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .cart-item-title {
+        font-size: 1em;
+    }
+
+    .cart-item-variant {
+        font-size: 0.85em;
+    }
+
+    .cart-item-price {
+        font-size: 1em;
+    }
+
+    .quantity-btn {
+        padding: 3px 8px;
+    }
+
+    .quantity-display-cart {
+        width: 35px;
+    }
+
+    .remove-item-btn {
+        font-size: 1em;
+    }
+
+    .sidebar-footer {
+        padding: 15px 20px;
+    }
+
+    .checkout-btn {
+        padding: 12px 15px;
+        font-size: 1.1em;
+    }
+
+    .whatsapp-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.8em;
     }
 }

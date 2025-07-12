@@ -15,12 +15,13 @@ Variables CSS Globales
     --color-fondo: #ffffff;
     --color-sombras: rgb(58, 101, 82);
     --color-letra: #000000;
+    --color-gris-claro: #f0f0f0; /* Nuevo: para hover de botones secundarios */
+    --color-borde-gris: #ccc; /* Nuevo: para bordes de botones secundarios */
+    --color-borde-input: #ddd; /* Nuevo: para bordes de inputs */
 }
 
 html {
     height: 100%;
-    /* Asegura que html ocupe el 100% del viewport */
-    /* Elimina el scroll del html */
 }
 
 body {
@@ -39,25 +40,19 @@ body {
         "footer";
     height: 100vh;
     gap: 10px;
-    padding: 10px;
-    /* display: flex;
-    flex-direction: column; */
     box-sizing: border-box;
 }
 
 /* Asigna los elementos a sus áreas de la cuadrícula */
 #header {
     grid-area: header;
-    /* Tu padding y estilos de header deben ir aquí o en su propio archivo CSS */
     padding: 15px 0px;
-    /* Ejemplo de padding para el header */
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 #app {
     grid-area: app;
-
     flex-grow: 1;
 }
 
@@ -72,29 +67,15 @@ body {
     box-sizing: border-box;
 }
 
-#app {
-    flex-grow: 1;
-}
-
-/* --- HEADER --- */
-/* src/main.css o styles/header.css */
-
-/* El header general */
 #header.header {
-    /* Usa #header.header para más especificidad */
     display: flex;
     flex-direction: column;
-    /* Esto es CLAVE: apila sus hijos verticalmente */
     width: 100%;
-    /* Puedes añadir un poco de sombra o borde inferior si quieres un separador visual */
     box-shadow: 0 4px 15px rgba(3, 3, 3, 0.1);
     background-color: white;
-    /* Si el header tiene un fondo */
     position: sticky;
-    /* O fixed, si quieres que se quede pegado al top */
     top: 0;
     z-index: 999;
-    /* Asegura que esté por encima de otros elementos */
 }
 
 /* El menú superior (Servicio al cliente, ROSS MILLE, Login, Carrito) */
@@ -103,14 +84,9 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    /* Ajusta el padding según necesites */
     width: 100%;
-    /* Ocupa todo el ancho del header */
     box-sizing: border-box;
-    /* Incluye padding en el ancho */
-    /* Puedes añadir un borde inferior aquí si quieres una línea de separación */
     border-bottom: 1px solid #eee;
-    /* Línea de separación entre la barra superior y categorías */
 }
 
 /* Los grupos de menú (izquierdo, central, derecho) */
@@ -119,14 +95,11 @@ body {
 .menu__right {
     display: flex;
     align-items: center;
-    /* Ajusta el gap si necesitas espacio entre elementos */
     gap: 20px;
-    /* Ejemplo */
 }
 
 .menu__link {
     color: var(--color-letra);
-    /* Tu color verde oscuro */
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -143,33 +116,23 @@ body {
     font-weight: bold;
     letter-spacing: 1.5px;
     color: #41634C;
-    /* Verde oscuro para el lema */
 }
 
-/* Iconos en el menú derecho */
 .menu__right .fas {
     margin-right: 5px;
-    /* Espacio entre icono y texto */
     color: #41634C;
-    /* Color del icono */
 }
 
-/* Estilos para el texto 'Iniciar sesión' y 'Carrito' en escritorio */
 .menu__link-text {
     display: inline;
-    /* Visible por defecto en escritorio */
 }
 
-/* Contenedor de búsqueda para el header (móvil) */
 .search-header-container {
     display: none;
-    /* Oculto por defecto en escritorio */
     align-items: center;
     position: relative;
-    /* Para posicionar el icono dentro del input si es necesario */
 }
 
-/* Estilos para el div de el perfil */
 .user-info {
     display: flex;
     align-items: center;
@@ -188,7 +151,6 @@ body {
     gap: 1rem;
 }
 
-
 .search-header-container .fas {
     color: #888;
     position: absolute;
@@ -197,33 +159,25 @@ body {
 
 .search-header-input {
     padding-left: 35px;
-    /* Espacio para el icono de búsqueda */
     border-radius: 20px;
-    /* Bordes redondeados */
     border: 1px solid #ccc;
     height: 38px;
     width: 150px;
-    /* Ajusta ancho para móvil */
 }
 
 
 /* --- BARRA DE CATEGORÍAS (NUEVA POSICIÓN DENTRO DEL HEADER) --- */
 .categories-bar {
     width: 100%;
-    /* Ocupa todo el ancho del header */
     padding: 10px 20px;
-    /* Padding interno */
     background-color: #f8f8f8;
-    /* Un fondo ligeramente diferente para la barra de categorías */
     box-sizing: border-box;
-    /* Puedes añadir un borde superior si quieres doble línea de separación o un color de fondo diferente */
     border-top: 1px solid #eee;
 }
 
 .categories-menu {
     display: flex;
     justify-content: space-between;
-    /* Espacia las categorías y el buscador */
     align-items: center;
     width: 100%;
 }
@@ -231,7 +185,6 @@ body {
 .categories-menu__group {
     display: flex;
     gap: 25px;
-    /* Espacio entre los enlaces de categoría */
 }
 
 .category__link {
@@ -246,10 +199,8 @@ body {
     transition: 0.1s ease;
 }
 
-/* Contenedor de búsqueda para el escritorio */
 .search-desktop-container {
     display: flex;
-    /* Visible por defecto en escritorio */
     align-items: center;
     position: relative;
 }
@@ -262,61 +213,48 @@ body {
 
 .search-desktop-input {
     padding-left: 35px;
-    /* Espacio para el icono de búsqueda */
     border-radius: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-gris-claro);
     height: 38px;
     width: 250px;
-    /* Ancho para el buscador de escritorio */
 }
 
 .search-desktop-input:focus,
 .search-header-input:focus {
     outline: none;
-    border-color: #41634C;
-    /* Verde al enfocar */
+    border-color: var(--color-green);
     box-shadow: 0 0 0 2px rgba(65, 99, 76, 0.2);
 }
 
 
 /* --- MENÚ MÓVIL/TABLET (RESPONSIVIDAD) --- */
-
 .hamburger-menu-icon {
     display: none;
-    /* Oculto en escritorio */
     cursor: pointer;
     font-size: 1.8rem;
     color: #41634C;
     padding: 10px;
     z-index: 1001;
-    /* Asegura que esté por encima del menú móvil */
 }
 
 .mobile-nav {
     display: none;
-    /* Oculto por defecto */
     position: fixed;
     top: 0;
     left: -100%;
-    /* Fuera de la pantalla */
     width: 40%;
-    /* Ancho del menú desplegable */
     height: 100vh;
-    /* Altura completa de la ventana */
     background-color: white;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     transition: left 0.3s ease-in-out;
     z-index: 1000;
     padding-top: 60px;
-    /* Espacio para que el header no lo cubra */
 }
 
 .mobile-nav.is-open {
     left: 0;
-    /* Desliza hacia la vista */
     display: block;
     transition: 2s ease-in-out;
-    /* Muestra el menú */
 }
 
 .mobile-menu__list {
@@ -341,7 +279,7 @@ body {
 
 .mobile-menu__link:hover {
     background-color: #f0f0f0;
-    color: #41634C;
+    color: var(--color-green);
 }
 
 
@@ -350,24 +288,18 @@ body {
 /* --- FOOTER STYLES --- */
 #footer {
     background-color: #f5f5f5;
-    /* Un gris muy claro como en la imagen */
     padding: 40px 20px;
-    /* Padding general */
     font-family: Arial, sans-serif;
-    /* O la fuente que uses en tu proyecto */
     color: #333;
     border-top: 1px solid #e0e0e0;
-    /* Línea superior sutil */
 }
 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    /* Por defecto para móvil, una columna por sección */
     grid-template-columns: 1fr;
     gap: 30px;
-    /* Espacio entre secciones */
 }
 
 /* Estilos para las secciones principales (Colecciones, Ayuda) */
@@ -415,9 +347,8 @@ body {
 .newsletter-input-group input[type="email"] {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-borde-gris);
     border-radius: 0;
-    /* Sin bordes redondeados */
     font-size: 0.9em;
 }
 
@@ -457,13 +388,9 @@ body {
     display: flex;
     gap: 15px;
     margin-top: 20px;
-    /* Espacio con las secciones de arriba */
     padding-top: 20px;
-    /* Separador visual si quieres */
     border-top: 1px solid #eee;
-    /* Línea de separación */
     justify-content: center;
-    /* Centra los iconos en móvil */
 }
 
 .footer-social a {
@@ -482,7 +409,6 @@ body {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #eee;
-    /* Línea de separación */
 }
 
 .footer-bottom p {
@@ -493,7 +419,6 @@ body {
 
 .footer-logos img {
     height: 40px;
-    /* Ajusta el tamaño del logo de H&M */
     margin-bottom: 10px;
 }
 
@@ -504,14 +429,14 @@ body {
 }
 
 
-/* ------------------  perfil ---------------*/
+/* --- COMPONENTES DE LAYOUT DE PÁGINAS INTERNAS (Perfil, Calle, Editar) --- */
 .contenedor_principal {
     display: flex;
-    background-color: #fff;
+    background-color: var(--color-fondo);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1200px; /* Ajustar según sea necesario */
+    max-width: 1200px;
     margin: 20px auto;
 }
 
@@ -568,7 +493,7 @@ body {
 }
 
 .navegacion_principal a:hover {
-    background-color: #f0f0f0;
+    background-color: var(--color-gris-claro);
 }
 
 .navegacion_principal a.activo {
@@ -584,171 +509,280 @@ body {
     transform: translateY(-50%);
     height: 60%;
     width: 4px;
-    background-color: #333; /* O el color de tu marca */
+    background-color: #333;
     border-radius: 2px;
 }
 
 .contenido_principal {
     flex-grow: 1;
     padding: 30px 40px;
+    position: relative;
 }
 
+/* Estilo base para todos los h1 de contenido principal */
 .contenido_principal h1 {
     font-size: 1.8em;
     color: #333;
     margin-bottom: 30px;
 }
 
-.tarjeta_perfil {
+.info-importante-seccion {
+    position: absolute; /* Posicionamiento absoluto respecto a .contenido_principal */
+    top: 30px; /* Alineado con el padding superior del .contenido_principal */
+    right: 40px; /* Alineado con el padding derecho del .contenido_principal */
+    display: flex; /* Para que el párrafo y el botón estén en línea */
+    align-items: center; /* Centra verticalmente el párrafo y el botón */
+    gap: 10px; /* Espacio entre el texto y el botón */
+    z-index: 10; /* Asegura que esté por encima de otros contenidos si hay superposición */
+}
+
+/* Estilos para el párrafo dentro del contenedor */
+.info-importante-seccion p { /* Afecta al p dentro del nuevo contenedor */
+    margin: 0; /* Elimina los márgenes predeterminados del párrafo */
+    font-size: 0.9em; /* Tamaño de fuente un poco más pequeño */
+    color: #555;
+    white-space: nowrap; /* Evita que el texto "Información Importante" se rompa en varias líneas */
+}
+
+/* Estilos para el botón de información (se mantiene igual) */
+.informacion-calle {
+    background-color: var(--color-green); /* Un color azul para el botón */
+    color: white; /* Color del icono */
+    border: none;
+    border-radius: 50%; /* Para que sea un botón circular */
+    width: 35px; /* Ancho del círculo */
+    height: 35px; /* Alto del círculo */
+    display: flex; /* Para centrar el icono dentro del círculo */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    cursor: pointer;
+    font-size: 1.2em; /* Tamaño base para el icono */
+    padding: 0; /* Elimina cualquier padding interno que el navegador pueda aplicar por defecto */
+    flex-shrink: 0; /* Evita que el botón se encoja si no hay espacio */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil para darle profundidad */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.informacion-calle:hover {
+    background-color: var(--color-blue); /* Color más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Ligeramente más grande al pasar el mouse */
+}
+
+/* --- Icono de "Importante" (se mantiene igual, asumiendo Font Awesome) --- */
+.informacion-calle::before {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    content: '\f05a'; /* Código Unicode para el icono 'info-circle' */
+}
+
+
+
+/* Style for the address card (now named .mensaje_sin_direcciones based on your HTML) */
+.mensaje_sin_direcciones {
+    background-color: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 25px 30px; /* Internal spacing */
+    position: relative; /* Needed for positioning the edit button if it were absolutely positioned */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: flex-start; /* Align text to the left */
+    gap: 8px; /* Space between paragraphs */
+}
+
+.mensaje_sin_direcciones p {
+    margin: 0; /* Remove default paragraph margins */
+    font-size: 1.1em; /* Slightly larger text for address details */
+    color: #555; /* Medium grey text color */
+    line-height: 1.4; /* Spacing between lines */
+}
+
+/* --- COMPONENTES REUTILIZABLES (Tarjetas, Campos, Botones) --- */
+
+/* Clase base para tarjetas */
+.tarjeta {
     border: 1px solid #eee;
     border-radius: 8px;
+    background-color: var(--color-fondo);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Tarjeta Perfil (extiende de .tarjeta y añade específicos) */
+.tarjeta_perfil {
     padding: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px 40px;
-    position: relative;
-    background-color: #fff;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    position: relative; /* Para el posicionamiento absoluto del botón editar */
 }
 
-.campo_perfil {
+/* Tarjeta Formulario (extiende de .tarjeta y añade específicos) */
+.tarjeta_formulario {
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto; /* Centra el formulario */
+}
+
+/* Tarjeta Dirección (extiende de .tarjeta y añade específicos) */
+.tarjeta_direccion {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.tarjeta_direccion p {
+    margin: 0 0 8px 0;
+    color: #333;
+}
+.tarjeta_direccion .nombre_direccion {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.tarjeta_direccion .detalle_direccion,
+.tarjeta_direccion .ciudad_direccion {
+    font-size: 0.95em;
+    color: #555;
+}
+
+
+/* Clase base para campos de formulario/perfil */
+.campo {
     display: flex;
     flex-direction: column;
+    margin-bottom: 15px;
 }
 
-.campo_perfil label {
+/* Estilos de etiqueta para campos */
+.campo label {
     font-size: 0.9em;
     color: #888;
     margin-bottom: 5px;
 }
 
+/* Estilos para el texto estático de campos de perfil */
 .campo_perfil span {
     font-size: 1.1em;
     color: #333;
     font-weight: 500;
 }
 
-.campo_perfil.ancho_completo {
+/* Campo que ocupa todo el ancho en grid (perfil y formularios) */
+.campo_perfil.ancho_completo,
+.campo_formulario.ancho_completo { /* Asumo que también puedes tener esto en formularios */
     grid-column: span 2;
 }
 
-.boton_editar {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    background-color: transparent;
-    border: 1px solid #ccc;
-    padding: 10px 20px;
+/* Estilos comunes para inputs y selects en formularios */
+.campo input[type="text"],
+.campo input[type="tel"],
+.campo input[type="date"],
+.campo input[type="email"], /* Añadido si usas email inputs en formularios */
+.campo select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-borde-input);
     border-radius: 5px;
+    font-size: 1em;
+    color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo select { /* Estilos adicionales para selects */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+/* Foco para todos los inputs/selects en campos */
+.campo input:focus,
+.campo select:focus {
+    outline: none;
+    border-color: #888;
+    box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
+}
+
+/* --- BOTONES REUTILIZABLES --- */
+
+/* Clase base para todos los botones */
+.btn-base {
     cursor: pointer;
     font-size: 0.9em;
     font-weight: bold;
-    color: #555;
+    border-radius: 5px; /* Unificado */
+    padding: 10px 20px; /* Un padding base que puede ser sobrescrito */
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    text-transform: uppercase;
+    text-align: center;
 }
 
-.boton_editar:hover {
-    background-color: #f0f0f0;
+/* Botón Primario (ej. AÑADIR CALLE principal) */
+.btn-primary {
+    background-color: #f0ecec; /* Color de fondo actual que tenías en calle.css */
+    color: var(--color-letra);
+    border: 1px solid #333;
+}
+.btn-primary:hover {
+    background-color: #555;
+    border-color: #555;
+    color: #fff; /* Asegura que el texto se vea en hover oscuro */
+}
+
+/* Botón Secundario (ej. Editar, Guardar, Devolución/Reembolso) */
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--color-borde-gris);
+    color: #555;
+}
+.btn-secondary:hover {
+    background-color: var(--color-gris-claro);
     border-color: #aaa;
     color: #333;
 }
 
+/* Uso de las clases base en tus selectores existentes (HTML se actualizaría con estas clases) */
 
-/* ----------------------- EDITAR PERFIL ----------------- */
-.contenedor_principal {
-    display: flex;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 1200px; /* Ajustar según sea necesario */
-    margin: 20px auto;
-}
-
-/* Estilos de la barra lateral (los mismos que en la vista de perfil) */
-.barra_lateral {
-    width: 250px;
-    padding: 30px 0;
-    border-right: 1px solid #eee;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.info_usuario {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.avatar_usuario {
-    width: 60px;
-    height: 60px;
-    background-color: #ddd;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-}
-
-.saludo_usuario {
-    font-size: 1.2em;
-    color: #333;
-    font-weight: bold;
-}
-
-.navegacion_principal ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-.navegacion_principal li {
-    width: 100%;
-}
-
-.navegacion_principal a {
-    display: block;
-    padding: 12px 30px;
-    text-decoration: none;
-    color: #555;
-    font-size: 1.1em;
-    position: relative;
-    transition: background-color 0.2s, color 0.2s;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: left;
-}
-
-.navegacion_principal a:hover {
-    background-color: #f0f0f0;
-}
-
-.navegacion_principal a.activo {
-    color: #333;
-    font-weight: bold;
-}
-
-.navegacion_principal a.activo::before {
-    content: '';
+/* Botón Editar de Perfil */
+.boton_editar {
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 60%;
-    width: 4px;
-    background-color: #333; /* O el color de tu marca */
-    border-radius: 2px;
+    bottom: 30px;
+    right: 30px;
+    /* No necesita padding si ya viene de btn-base o lo quieres igual */
 }
 
-/* Estilos del contenido principal para la edición */
-.contenido_principal {
-    flex-grow: 1;
-    padding: 30px 40px;
+/* Botón Guardar Cambios de Editar Perfil */
+.boton_guardar {
+    grid-column: span 2;
+    justify-self: end;
+    margin-top: 20px;
+    padding: 10px 30px; /* Sobrescribe padding base para ser más ancho */
 }
 
+/* Botón "Devolución/Reembolso" */
+.boton_secundario { /* Esta clase puede seguir llamándose así en HTML */
+    min-width: 120px; /* Estilo específico de este botón */
+}
+
+/* Botones de Editar/Eliminar Dirección */
+.acciones_direccion {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+.boton_editar_direccion,
+.boton_eliminar_direccion {
+    border-radius: 4px; /* Un poco menos redondeado que btn-base */
+    padding: 8px 15px; /* Menor padding */
+    font-size: 0.85em; /* Menor tamaño de fuente */
+}
+/* Sus hover ya vienen de .btn-secondary:hover */
+
+
+/* --- ESTILOS ESPECÍFICOS DE PÁGINA (Calle, Editar Perfil) --- */
+
+/* Estilos específicos de la página de "Editar Perfil" */
 .encabezado_edicion {
     margin-bottom: 30px;
 }
-
 .enlace_volver {
     display: inline-flex;
     align-items: center;
@@ -758,356 +792,485 @@ body {
     margin-bottom: 10px;
     transition: color 0.2s;
 }
-
 .enlace_volver:hover {
     color: #555;
 }
-
 .enlace_volver img {
-    width: 18px; /* Tamaño del ícono de flecha */
+    width: 18px;
     height: 18px;
     margin-right: 8px;
     vertical-align: middle;
 }
-/* Para usar SVG inline o de biblioteca, podrías usar: */
 .enlace_volver .icono_flecha {
     width: 18px;
     height: 18px;
     margin-right: 8px;
-    fill: #888; /* Color del ícono */
+    fill: #888;
 }
 .enlace_volver:hover .icono_flecha {
     fill: #555;
 }
-
-
-.contenido_principal h1 {
-    font-size: 1.8em;
-    color: #333;
-    margin: 0; /* Eliminar margen superior del h1 */
-}
-
-.tarjeta_formulario {
-    border: 1px solid #eee;
-    border-radius: 8px;
-    padding: 30px;
-    background-color: #fff;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
-}
-
 #formulario_editar_perfil {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Dos columnas para los campos */
-    gap: 20px 40px; /* Espacio entre filas y columnas */
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
 }
 
-.campo_formulario {
+
+/* Estilos específicos de la página de "Calle" */
+.encabezado_calle {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+.acciones_calle {
     display: flex;
     flex-direction: column;
+    gap: 10px;
+}
+.mensaje_sin_direcciones {
+    text-align: center;
+    color: #777;
+    font-size: 1.1em;
+    padding: 50px 20px;
+    background-color: #fcfcfc;
+    border: 1px dashed #eee;
+    border-radius: 8px;
+    margin-top: 50px;
 }
 
-.campo_formulario label {
-    font-size: 0.9em;
-    color: #888;
-    margin-bottom: 5px;
+
+.card {
+    background-color: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 25px 30px; /* Internal spacing */
+    margin-bottom: 20px; /* Space between cards */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the left */
 }
 
-.campo_formulario input[type="text"],
-.campo_formulario input[type="tel"],
-.campo_formulario input[type="date"],
-.campo_formulario select {
+.card:last-child {
+    margin-bottom: 0; /* No margin for the last card */
+}
+
+.card h2 {
+    font-size: 1.4em; /* Size for section titles like "Contraseña" */
+    color: var(--color-letra);
+    margin-top: 0; /* Remove default top margin */
+    margin-bottom: 10px; /* Space below title */
+    font-weight: 600; /* Semi-bold */
+}
+
+.card p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 20px; /* Space below paragraph */
+    line-height: 1.5;
+}
+
+/* Styles for the action buttons within the cards (e.g., DEFINIR CONTRASEÑA, VER SESIONES) */
+.btn-action {
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    color: #333; /* Blue text color, common for interactive elements */
+    font-size: 0.8em;
+    font-weight: 600; /* Semi-bold */
+    cursor: pointer;
+    text-transform: uppercase; /* Uppercase text */
+    padding: 8px 0; /* Vertical padding, no horizontal for text-like button */
+    transition: color 0.3s ease;
+}
+
+.btn-action:hover {
+    color: var(--color-blue); /* Darker blue on hover */
+    text-decoration: none; /* Underline on hover for emphasis */
+}
+
+
+/* ------------ auntenticacion ---------------- */
+.card_aut {
+    background-color: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 25px 30px; /* Internal spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the left */
+}
+/* Notification text for code sent */
+.notification-text {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 25px; /* Space below this text */
+    line-height: 1.5;
+}
+
+/* Form group for labels and inputs */
+.form-group {
     width: 100%;
-    padding: 10px 12px;
+    margin-bottom: 25px; /* Space between form groups */
+    position: relative; /* For button positioning */
+}
+
+.form-group label {
+    display: block; /* Make label take full width */
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 8px; /* Space between label and input */
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.input-field {
+    width: calc(100% - 24px); /* Full width minus padding */
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1em;
     color: #333;
-    box-sizing: border-box; /* Asegura que padding y border estén dentro del width */
-    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box; /* Include padding in width */
 }
 
-.campo_formulario input:focus,
-.campo_formulario select:focus {
+.input-field:focus {
     outline: none;
-    border-color: #888; /* Color de borde al enfocar */
-    box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
+    border-color: #007bff; /* Highlight on focus */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-/* Ajuste para el campo "Fecha de nacimiento" si necesitas que sea full width a veces */
-/* Esto no es necesario con grid de 2 columnas si cada campo es de 1fr */
-/* Si deseas que un campo específico ocupe toda la fila: */
-/* .campo_formulario.ancho_completo {
-    grid-column: span 2;
-} */
-
-
-.boton_guardar {
-    grid-column: span 2; /* Para que el botón ocupe ambas columnas */
-    justify-self: end; /* Alinea el botón a la derecha */
-    margin-top: 20px;
+/* Reenviar Código button */
+.btn-resend {
     background-color: transparent;
-    border: 1px solid #ccc;
-    padding: 10px 30px;
-    border-radius: 5px;
-    cursor: pointer;
+    border: none;
+    color: #007bff; /* Blue text color */
     font-size: 0.9em;
-    font-weight: bold;
-    color: #555;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 8px 0;
+    margin-top: 10px; /* Space above button */
+    align-self: flex-start; /* Align to the left within its context (flex column) */
+    transition: color 0.3s ease;
 }
 
-.boton_guardar:hover {
-    background-color: #f0f0f0;
-    border-color: #aaa;
+.btn-resend:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Password input with toggle button */
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-wrapper .input-field {
+    padding-right: 40px; /* Make space for the eye icon */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 1.1em;
+    padding: 30px; /* Increase click area */
+}
+
+.toggle-password:hover {
     color: #333;
 }
 
-
-/* Media Queries para responsividad */
-
-/* Tablets y pantallas pequeñas de escritorio */
-@media (min-width: 768px) {
-    .footer-container {
-        /* Dos columnas: Colecciones + Ayuda, y Newsletter + Social */
-        grid-template-columns: repeat(2, 1fr);
-        /* Esto es un ejemplo, puedes ajustar el diseño */
-    }
-
-    /* Ajustar el orden si es necesario */
-    .footer-newsletter {
-        grid-column: span 1;
-        /* Para que ocupe una columna */
-    }
-
-    .footer-social {
-        grid-column: span 1;
-        /* Para que ocupe otra columna */
-        justify-content: flex-start;
-        /* Alinea a la izquierda en lugar de centrar */
-        padding-top: 0;
-        /* Elimina el padding top si está al lado de newsletter */
-        border-top: none;
-        /* Elimina la línea si está al lado de newsletter */
-    }
-
-    .footer-bottom {
-        grid-column: 1 / -1;
-        /* Ocupa todo el ancho */
-        display: flex;
-        flex-direction: column;
-        /* Apila los elementos */
-        align-items: center;
-        /* Centra horizontalmente */
-    }
+/* Password Requirements Section */
+.password-requirements {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 30px; /* Space before save button */
 }
 
-/* Escritorio */
-@media (min-width: 992px) {
-    .footer-container {
-        /* Tres columnas: Colecciones, Ayuda, Newsletter/Social */
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .footer-newsletter {
-        grid-column: span 1;
-    }
-
-    .footer-social {
-        grid-column: span 1;
-        /* Puedes moverlo a su propia línea o debajo del newsletter */
-        /* Si quieres que los social y newsletter estén en una misma columna */
-        /* puedes anidarlos en un div extra en el HTML */
-    }
-
-    /* Si quieres el social debajo del newsletter en la misma columna */
-    .footer-newsletter {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .footer-newsletter .newsletter-input-group {
-        margin-bottom: 20px;
-    }
-
-    .footer-newsletter .conoce-mas {
-        margin-top: 0;
-        /* Ajusta si es necesario */
-    }
-
-    .footer-social {
-        margin-top: 0;
-        /* Elimina el margen superior */
-        padding-top: 0;
-        border-top: none;
-    }
-
-    .footer-bottom {
-        flex-direction: row;
-        /* Vuelve a poner en fila */
-        justify-content: space-between;
-        /* Espacio entre elementos */
-        align-items: center;
-        text-align: left;
-        /* Alinea el texto a la izquierda */
-    }
-
-    .footer-bottom p {
-        margin-bottom: 0;
-    }
+.password-requirements p {
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 15px;
+    margin-top: 0; /* Remove default top margin */
 }
 
-/* Media Queries */
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 10px 20px; /* Vertical and horizontal gap */
+}
+
+.requirement {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #777; /* Default grey for requirements */
+}
+
+.requirement i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+/* Styles for invalid requirements (red cross) */
+.requirement.invalid {
+    color: #dc3545; /* Bootstrap red color */
+}
+
+.requirement.invalid i {
+    color: #dc3545;
+}
+
+/* Styles for valid requirements (green check - not in current image, but good to have) */
+.requirement.valid {
+    color: #28a745; /* Bootstrap green color */
+}
+
+.requirement.valid i {
+    color: #28a745;
+}
+
+/* Save Password Button */
+.btn-save-password {
+    background-color: #f0f0f0; /* Greyed out as disabled in the image */
+    color: #aaa; /* Lighter text for disabled */
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: not-allowed; /* Indicates it's disabled */
+    text-transform: uppercase;
+    width: auto; /* Allow button to size to content */
+    align-self: flex-start; /* Align to the left */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Styles for when the save button becomes active (e.g., via JavaScript) */
+.btn-save-password:not([disabled]) {
+    background-color: #007bff; /* Blue when active */
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-save-password:not([disabled]):hover {
+    background-color: #0056b3; /* Darker blue on hover when active */
+}
+
+/* --- MEDIA QUERIES --- */
+
+/* Tablets y pantallas pequeñas de escritorio (768px y abajo) */
 @media (max-width: 768px) {
+    /* Header (Consolidado) */
     .menu {
         padding: 10px 15px;
-        /* Menor padding para la barra superior */
+        flex-wrap: wrap;
     }
-
     .menu__left,
     .menu__right {
         gap: 15px;
     }
-
     .menu__link-text {
         display: none;
-        /* Oculta el texto para Iniciar Sesión y Carrito en móvil */
     }
-
     .hamburger-menu-icon {
         display: block;
-        max-width: 10%;
-        /* Muestra el icono de hamburguesa */
+        order: -2; /* Mueve a la izquierda */
+        margin-right: 15px;
     }
-
     .menu__link--contacto {
         display: none;
     }
-
-    .menu {
-        justify-content: space-between;
-        /* Espacia elementos */
-        padding: 10px 20px;
-    }
-
     .menu__center {
         order: -1;
-        /* Mueve el logo ROSS MILLE a la izquierda para estar cerca de la hamburguesa */
+        flex-grow: 1;
+        text-align: left;
     }
-
     .menu__right {
-        order: 1;
-        /* Mantiene login/carrito a la derecha */
+        order: 0;
+        margin-left: auto;
     }
-
     .search-header-container {
         display: flex;
-        /* Muestra el buscador móvil en el header */
-        flex-grow: 1;
-        /* Permite que crezca */
-        max-width: 200px;
-        /* Limita su tamaño */
-        margin-left: 10px;
-        /* Espacio */
+        order: 2; /* Va después de los elementos principales */
+        width: 100%;
+        margin-top: 10px;
+        justify-content: center;
+        max-width: unset; /* Eliminar max-width para móvil */
     }
-
     .categories-bar,
     .search-desktop-container {
         display: none;
-        /* Oculta la barra de categorías y el buscador de escritorio en móvil/tablet */
     }
 
-    /* ----------------- Perfil -------------------*/
-
+    /* Perfil y Páginas Internas */
     .contenedor_principal {
         flex-direction: column;
+        margin: 10px; /* Un poco menos de margen en móviles */
     }
-
     .barra_lateral {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #eee;
         padding: 20px;
     }
-
     .navegacion_principal ul {
-        display: flex;
+        flex-direction: row; /* Pone los links horizontalmente */
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
     }
-
     .navegacion_principal li {
         width: auto;
     }
-
     .navegacion_principal a {
         padding: 8px 15px;
         text-align: center;
+        font-size: 1em; /* Ligeramente más pequeño */
     }
-
     .navegacion_principal a.activo::before {
-        display: none; /* Ocultar barra vertical en pantallas pequeñas */
+        display: none; /* Ocultar barra vertical */
     }
-
     .contenido_principal {
         padding: 20px;
     }
-
-    .tarjeta_perfil {
-        grid-template-columns: 1fr; /* Apilar campos en pantallas pequeñas */
-        padding: 20px;
+    .contenido_principal h1 {
+        margin-bottom: 20px; /* Ajuste el margen inferior del h1 en móvil */
     }
 
+    /* Perfil Específico */
+    .tarjeta_perfil {
+        grid-template-columns: 1fr; /* Apilar campos */
+        padding: 20px;
+    }
     .campo_perfil.ancho_completo {
         grid-column: span 1;
     }
-
     .boton_editar {
-        position: static; /* Colocar botón normalmente */
+        position: static; /* Colocar botón en flujo normal */
         margin-top: 20px;
         width: 100%;
     }
+
+    /* Editar Perfil Específico */
+    #formulario_editar_perfil {
+        grid-template-columns: 1fr; /* Apilar campos */
+        gap: 15px;
+    }
+    .campo_formulario.ancho_completo {
+        grid-column: span 1;
+    }
+    .boton_guardar {
+        grid-column: span 1; /* Ocupa una sola columna */
+        justify-self: stretch; /* Estira el botón */
+    }
+
+    /* Calle Específica */
+    .encabezado_calle {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 20px;
+    }
+    .acciones_calle {
+        flex-direction: row; /* Botones se ponen uno al lado del otro */
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+    }
+    .btn-primary,
+    .btn-secondary { /* Aplica a todas las instancias de estos botones */
+        flex-grow: 1;
+        min-width: unset; /* Elimina ancho mínimo */
+    }
+    .mensaje_sin_direcciones {
+        padding: 30px 15px;
+        margin-top: 30px;
+    }
+
+    /* Footer Responsive (si ya está en tu código, puede ir aquí) */
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr); /* Ejemplo, 2 columnas */
+    }
+    .footer-social {
+        justify-content: flex-start;
+        padding-top: 0;
+        border-top: none;
+    }
+    .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
-/* Si quieres que el menú de hamburguesa esté SIEMPRE a la izquierda del logo en móvil: */
-@media (max-width: 768px) {
+/* Móviles pequeños (480px y abajo) */
+@media (max-width: 480px) {
     .menu {
-        flex-wrap: wrap;
-        /* Permite que los elementos se envuelvan si no caben */
+        padding: 8px 10px;
+    }
+    .menu__brand {
+        font-size: 1.6rem;
+    }
+    .mobile-nav {
+        width: 70%; /* Más ancho en móviles muy pequeños */
+    }
+    .contenido_principal h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+    .tarjeta_perfil,
+    .tarjeta_formulario,
+    .tarjeta_direccion {
+        padding: 15px;
+    }
+    .campo label {
+        font-size: 0.85em;
+    }
+    .campo input, .campo select {
+        padding: 8px 10px;
+        font-size: 0.9em;
     }
 
-    .hamburger-menu-icon {
-        order: -2;
-        /* Posición más a la izquierda */
-        margin-right: 15px;
-        /* Espacio con el logo */
+    .footer-container {
+        grid-template-columns: 1fr; /* Una columna en pantallas muy pequeñas */
     }
-
-    .menu__center {
-        order: -1;
-        /* El logo ROSS MILLE va después de la hamburguesa */
-        flex-grow: 1;
-        /* Permite que el logo ocupe el espacio */
-        text-align: left;
-        /* Alinea el texto a la izquierda en el espacio ganado */
-    }
-
-    .menu__right {
-        order: 0;
-        /* Login y Carrito */
-        margin-left: auto;
-        /* Empuja a la derecha */
-    }
-
-    /* Si el buscador de header es para móvil, asegúrate de que tenga espacio o esté bien ubicado */
-    .search-header-container {
-        order: 2;
-        /* Después de todo lo demás, en una nueva línea si hay flex-wrap */
-        width: 100%;
-        /* Ocupa todo el ancho disponible */
-        margin-top: 10px;
-        /* Espacio con los elementos de arriba */
+    .footer-social {
         justify-content: center;
-        /* Centra el input de búsqueda */
+    }
+}
+
+/* Escritorio grande (992px y arriba) - Ajustes para footer si es necesario */
+@media (min-width: 992px) {
+    .footer-container {
+        grid-template-columns: repeat(3, 1fr); /* Tres columnas para el footer */
+    }
+    .footer-newsletter {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-newsletter .newsletter-input-group {
+        margin-bottom: 20px;
+    }
+    .footer-social {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+    }
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+    .footer-bottom p {
+        margin-bottom: 0;
     }
 }

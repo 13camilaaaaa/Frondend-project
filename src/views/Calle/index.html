@@ -1,20 +1,30 @@
-<!-- views/Calle/index.html -->
-<div class="perfil-container">
-    <!-- LADO IZQUIERDO: MENU -->
-    <aside class="perfil-sidebar">
-        <h2>Hola, Camila!</h2>
-        <nav>
-            <a href="#perfil" class="perfil-link">Perfil</a>
-            <a href="#calle" class="perfil-link">Calle</a>
-            <a href="#pedidos" class="perfil-link">Pedidos</a>
-            <a href="#autenticacion" class="perfil-link">Cerrar sesión</a>
+<div class="contenedor_principal">
+    <aside class="barra_lateral">
+        <div class="info_usuario">
+            <div class="avatar_usuario"></div>
+            <p class="saludo_usuario">Hola!</p>
+        </div>
+        <nav class="navegacion_principal">
+            <ul>
+                <li><a href="#perfil">Perfil</a></li>
+                <li><a href="#calle" class="activo">Dirección</a></li>
+                <li><a href="#pedido">Pedidos</a></li>
+                <li><a href="#autenticacion">Autenticación</a></li>
+            </ul>
         </nav>
     </aside>
-
     <!-- LADO DERECHO: CONTENIDO -->
-    <main class="perfil-content">
-        <h3>Direcciones guardadas</h3>
-        <p><strong>Casa:</strong> Calle 123 #45-67</p>
-        <p><strong>Oficina:</strong> Av. Principal #89-10</p>
+    <main class="contenido_principal">
+        <div class="encabezado_calle">
+            <h1>Dirección</h1>
+            <div class="acciones_calle">
+                <button class="btn-base btn-primary boton_anadir_calle" id="btn_anadir_calle">VALIDAR DIRECCIÓN</button>
+            </div>
+        </div>
+
+        <div id="contenedor_direcciones">
+            <div class="mensaje_sin_direcciones" id="mensaje_sin_direcciones">
+            </div>
+        </div>
     </main>
 </div>

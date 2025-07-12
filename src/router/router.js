@@ -10,17 +10,20 @@ import { productoController } from "../views/Producto/productoController.js";
 import { perfilController } from "../views/perfil/perfilController.js";
 import { calleController } from "../views/Calle/calleController.js";
 import { autenticacionController } from "../views/Autenticacion/autenticacionController.js";
-import { editarPerfilController } from "../casos de uso/editarPerfilController.js"; // Asegúrate de que este controlador exista
+import { editarPerfilController } from "../casos de uso/editarPerfilController.js";
+import { editarCalleController } from "../casos de uso/editarCalleController.js";
+import { editarcorrController } from "../casos de uso/editarcorrControlle.js";
+import { editarContController } from "../casos de uso/editarContControlle.js";
 
 // Controladores para Autenticación (separados)
 import { loginController } from "../views/Login/loginController.js";
 import { registroController } from "../views/Registro/registroController.js";
-import { pedidosController } from "../views/Pedidos/pedidosController.js"; // Asegúrate de que este controlador exista
+import { pedidosController } from "../views/Pedidos/pedidosController.js";
+import { ventaController }  from "../views/Venta/ventaController.js"
 
 
 import { loadView } from "../helpers/loadView.js";
 import { estaAutenticado } from "../helpers/auth.js";
-const rutasInternasPerfil = ["perfil", "calle", "pedidos", "autenticacion"];
 
 
 const routes = {
@@ -83,7 +86,12 @@ const routes = {
         controlador: calleController,
         private: true
     },
-    pedidos: {
+    'calle/edit': {
+        template: "Calle/editar.html",
+        controlador: editarCalleController,
+        private: true
+    },
+    pedido: {
         template: "Pedidos/index.html",
         controlador: pedidosController,
         private: true
@@ -91,6 +99,21 @@ const routes = {
     autenticacion: {
         template: "Autenticacion/index.html",
         controlador: autenticacionController,
+        private: true
+    },
+    venta: {
+        template: "Venta/index.html",
+        controlador: ventaController,
+        private: true
+    },
+    'autenticacion/corr': {
+        template: "Autenticacion/corre.html",
+        controlador: editarcorrController,
+        private: true
+    },
+    'autenticacion/cont': {
+        template: "Autenticacion/cont.html",
+        controlador: editarContController,
         private: true
     },
     'productos/:id': {

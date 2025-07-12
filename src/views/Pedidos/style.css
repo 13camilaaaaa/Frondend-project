@@ -1,0 +1,91 @@
+
+.container-pedidos {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-align: left; /* Alinea el título a la izquierda como en tu imagen */
+}
+
+.order-details-box {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    text-align: left; /* Alinea el contenido dentro de la caja a la izquierda */
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.label {
+    font-weight: bold;
+    color: #555;
+    flex: 1; /* Permite que el label ocupe espacio */
+}
+
+.value {
+    color: #333;
+    flex: 2; /* Permite que el valor ocupe más espacio */
+    text-align: right; /* Alinea el valor a la derecha */
+}
+
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 2; /* Para que la lista ocupe más espacio */
+    text-align: right; /* Alinea los ítems de la lista a la derecha */
+}
+
+.product-list li {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.cancel-button {
+    background-color: #dc3545; /* Rojo para cancelar */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: auto; /* Ajusta el ancho al contenido */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.cancel-button:hover {
+    background-color: #c82333;
+}
+
+.pedidos-wrapper {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}

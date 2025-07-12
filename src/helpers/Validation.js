@@ -25,7 +25,6 @@ export const Validation = {
         return /^(?=.*[A-Z])(?=.*\d).{6,}$/.test(value);
     },
 
-
     // valida longitud máxima
     hasMaxLength: (value, max) => {
         return value.trim().length <= max;
@@ -45,5 +44,10 @@ export const Validation = {
     isValidCedula: (value) => {
         const clean = value.trim();
         return /^[0-9]{6,10}$/.test(clean);
+    },
+    
+    // valida que un select tenga una opción seleccionada (no vacía)
+    isSelectValid: (value) => {
+        return value !== "" && value !== null && value !== undefined;
     },
 };

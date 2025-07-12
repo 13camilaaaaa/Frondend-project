@@ -25,7 +25,7 @@ export const inicioController = async () => {
         divimg.classList.add('card-img-container');
 
         const img = document.createElement('img');
-        img.setAttribute('src', `/src/uploads/fashion-1.jpg`); // ruta de la imagen por defecto
+        img.setAttribute('src', `/src/uploads/${producto.imagen}`); // ruta de la imagen por defecto
         img.setAttribute('alt', producto.nombre);
         img.classList.add('card-img');
         divimg.append(img);

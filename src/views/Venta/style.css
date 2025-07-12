@@ -1,0 +1,328 @@
+.container-venta {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    /* Permite que los bloques se envuelvan en pantallas pequeñas */
+}
+
+.checkout-section {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.checkout-main-content {
+    flex: 2;
+    /* Ocupa más espacio */
+    min-width: 300px;
+    /* Ancho mínimo para que no se colapse */
+}
+
+.checkout-summary {
+    flex: 1;
+    /* Ocupa menos espacio */
+    min-width: 280px;
+    /* Ancho mínimo */
+    max-height: fit-content;
+    /* Ajusta la altura al contenido */
+    position: sticky;
+    /* Se mantiene visible al hacer scroll */
+    top: 40px;
+    /* Distancia desde la parte superior */
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Sección de productos */
+.product-list {
+    max-height: 400px;
+    /* Altura máxima para scroll */
+    overflow-y: auto;
+    padding-right: 15px;
+    /* Espacio para el scrollbar */
+    margin-bottom: 20px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 15px;
+}
+
+.product-item:last-child {
+    border-bottom: none;
+}
+
+.product-item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.product-details {
+    flex-grow: 1;
+}
+
+.product-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    color: #333;
+    font-weight: 600;
+}
+
+.product-details p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.product-price-qty {
+    font-size: 1em;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* Sección de información del usuario */
+.user-info-block {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+}
+
+.user-info-block p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+.user-info-block strong {
+    color: #333;
+}
+
+.user-info-block .edit-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.user-info-block .edit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Sección de dirección */
+.address-options {
+    margin-bottom: 20px;
+}
+
+.address-item {
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.address-item.selected {
+    border-color: #007bff;
+    background-color: #e6f2ff;
+    box-shadow: 0 0 0 2px #007bff;
+}
+
+.address-item:hover {
+    background-color: #f0f0f0;
+}
+
+.address-item input[type="radio"] {
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.address-details {
+    flex-grow: 1;
+}
+
+.address-details p {
+    margin: 0;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.4;
+}
+
+.add-new-address-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.add-new-address-btn:hover {
+    background-color: #218838;
+}
+
+/* Sección de método de pago */
+.payment-method-options {
+    margin-bottom: 20px;
+}
+
+.payment-method-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    /* Para una transición suave al cambiar de estado */
+    background-color: #f9f9f9;
+    /* Fondo ligero para las no seleccionadas */
+}
+
+.payment-method-item.selected {
+    border-color: #007bff; /* Borde azul para el seleccionado, como en tu imagen de ejemplo */
+    background-color: #e6f2ff; /* Un fondo más claro para el seleccionado */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Sombra sutil para destacar */
+}
+
+.payment-method-item:hover {
+    background-color: #f0f0f0;
+}
+
+.payment-method-item input[type="radio"] {
+    flex-shrink: 0;
+}
+
+.payment-method-item label {
+    flex-grow: 1;
+    font-size: 1em;
+    font-weight: 500;
+    color: #333;
+    /* cursor: pointer; */
+}
+
+/* Resumen del pedido */
+.order-summary-details p {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.order-summary-details p strong {
+    color: #222;
+}
+
+.order-summary-details .total-price {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #000;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.place-order-btn {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 25px;
+}
+
+.place-order-btn:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+.place-order-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    .checkout-main-content,
+    .checkout-summary {
+        flex: none;
+        width: 100%;
+        position: static;
+        /* Desactiva sticky en móviles */
+        top: auto;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .checkout-section {
+        padding: 20px;
+    }
+
+    .product-list {
+        max-height: 300px;
+    }
+}

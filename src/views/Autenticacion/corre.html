@@ -1,0 +1,42 @@
+<div class="contenedor_principal">
+    <aside class="barra_lateral">
+        <div class="info_usuario">
+            <div class="avatar_usuario"></div>
+            <p class="saludo_usuario">Hola,</p>
+        </div>
+        <nav class="navegacion_principal">
+            <ul>
+                <li><a href="#perfil">Perfil</a></li>
+                <li><a href="#calle">Dirección</a></li>
+                <li><a href="#pedido">Pedidos</a></li>
+                <li><a href="#autenticacion" class="activo">Autenticación</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="contenido_principal">
+        <div class="encabezado_calle">
+            <h1>Autenticacion</h1>
+        </div> 
+        <div class="info-importante-seccion">
+            <p>Informacion Importante</p>
+            <button type="button" class="informacion-calle" id="info_importante"></button>
+        </div>
+        <div class="card_aut">
+            <p class="notification-text texto-correo-envio"></p>
+
+            <div class="form-group">
+                <label for="codigo">Código</label>
+                <input type="text" id="codigo" class="input-field" placeholder="">
+                <button class="btn-resend btn-reenviar-correo" type="button">REENVIAR CÓDIGO</button>
+            </div>
+
+            <div class="form-group">
+                <label for="nueva-contrasena">Nuevo Correo</label>
+                <div class="password-input-wrapper">
+                    <input type="email" id="nuevo-correo" class="input-field" placeholder="">
+                </div>
+            </div>
+            <button class="btn-save-password" disabled>GUARDAR CORREO</button>
+        </div>
+    </main>
+</div>

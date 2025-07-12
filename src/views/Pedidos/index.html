@@ -1,0 +1,44 @@
+<div class="contenedor_principal">
+    <aside class="barra_lateral">
+        <div class="info_usuario">
+            <div class="avatar_usuario"></div>
+            <p class="saludo_usuario">Hola,</p>
+        </div>
+        <nav class="navegacion_principal">
+            <ul>
+                <li><a href="#perfil">Perfil</a></li>
+                <li><a href="#calle">Dirección</a></li>
+                <li><a href="#pedido" class="activo">Pedidos</a></li>
+                <li><a href="#autenticacion">Autenticación</a></li>
+            </ul>
+        </nav>
+    </aside>
+<main class="contenido_principal">
+<div class="container-pedidos">
+    <h1>Información del Pedido</h1>
+    <div class="order-details-box">
+        <div class="detail-row">
+            <span class="label">Fecha del Pedido:</span>
+            <span class="value">${fechaFormateada}</span>
+        </div>
+        <div class="detail-row">
+            <span class="label">Productos:</span>
+            <ul class="product-list">
+                <li>Producto A (Cantidad: 2) - $25.00</li>
+                <li>Producto B (Cantidad: 1) - $15.50</li>
+                <li>Producto C (Cantidad: 3) - $10.00</li>
+            </ul>
+        </div>
+        <div class="detail-row">
+            <span class="label">Total:</span>
+            <span class="value">$95.50</span>
+        </div>
+        <div class="detail-row">
+            <span class="label">Estado:</span>
+            <span class="value">Procesando</span>
+        </div>
+    </div>
+    <button class="cancel-button">CANCELAR PEDIDO</button>
+</div>
+</main>
+</div>

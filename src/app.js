@@ -13,6 +13,8 @@ import './views/Contactanos/style.css';
 import './views/Tienda/style.css';
 import './views/Carrito/style.css';
 import './views/Producto/style.css';
+import './views/Venta/style.css';
+import './views/Pedidos/style.css'
 
 // Componentes globales
 import './componentes/header.js';

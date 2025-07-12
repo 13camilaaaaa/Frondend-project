@@ -16,7 +16,7 @@ export function perfilController() {
     document.getElementById("cedula_cuenta").textContent = usuario.numero_identificacion || "N/A";
     document.getElementById("telefono_cuenta").textContent = usuario.telefono_usuario || "";
 
-    // también puedes actualizar el saludo si lo deseas
+    // actualizar el saludo
     const saludo = document.querySelector(".saludo_usuario");
     if (saludo) {
         saludo.textContent = `Hola, ${usuario.nombre_usuario}!`;

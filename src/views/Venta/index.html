@@ -1,0 +1,49 @@
+<h1>Finalizar Venta</h1>
+    <div class="container-venta">
+        <div class="checkout-main-content">
+            <div class="checkout-section user-profile-section">
+                <h2>Tu Información Personal</h2>
+                <div id="userInfoDisplay" class="user-info-block">
+                    <p><strong>Nombre:</strong> <span id="userName">Cargando...</span></p>
+                    <p><strong>Identificación:</strong> <span id="userIdentification">Cargando...</span></p>
+                    <p><strong>Correo:</strong> <span id="userEmail">Cargando...</span></p>
+                    <button class="edit-btn" onclick="window.location.hash = '#perfil'">Editar Perfil</button>
+                </div>
+            </div>
+
+            <div class="checkout-section shipping-address-section">
+                <h2>Dirección de Envío</h2>
+                <div id="addressOptions" class="address-options">
+                    <p>Cargando direcciones...</p>
+                </div>
+                <button class="add-new-address-btn" onclick="window.location.hash = '#calle'">Añadir Nueva Dirección</button>
+            </div>
+
+            <div class="checkout-section payment-method-section">
+                <h2>Método de Pago</h2>
+                <div id="paymentMethodOptions" class="payment-method-options">
+                    <div class="payment-method-item selected">
+                        <input type="radio" id="cashOnDelivery" name="paymentMethod" value="Contra Entrega Efectivo" checked>
+                        <label for="cashOnDelivery">Contra Entrega (Efectivo)</label>
+                    </div>
+                    <div class="payment-method-item">
+                        <input type="radio" id="cardOnDelivery" name="paymentMethod" value="Contra Entrega Tarjeta">
+                        <label for="cardOnDelivery">Contra Entrega (Tarjeta)</label>
+                    </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="checkout-summary checkout-section">
+            <h2>Resumen del Pedido</h2>
+            <div id="checkoutProductList" class="product-list">
+                <p>Cargando productos del carrito...</p>
+            </div>
+            <div class="order-summary-details">
+                <p>Subtotal <span id="summarySubtotal">$0.00</span></p>
+                <p>Envío <span>A calcular</span></p>
+                <p class="total-price">Total <span id="summaryTotal">$0.00</span></p>
+            </div>
+            <button class="place-order-btn" id="placeOrderBtn">Realizar Pedido</button>
+        </div>
+    </div>

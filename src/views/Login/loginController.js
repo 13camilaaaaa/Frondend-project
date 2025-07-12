@@ -11,7 +11,12 @@ export const loginController = async () => {
     const email = document.querySelector("#login-username");
     const password = document.querySelector("#login-password");
 
-
+// Prevenir la re-ejecución del listener del formulario si el controlador se carga múltiples veces
+    // Es buena práctica asegurarse de que un listener solo se adjunte una vez.
+    if (form.dataset.listenerAttached) {
+        return;
+    }
+    form.dataset.listenerAttached = 'true';
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -67,6 +72,8 @@ export const loginController = async () => {
                 localStorage.setItem("token", token);
                 localStorage.setItem("refresh_token", token_refresco); // opcional
                 localStorage.setItem("usuario", JSON.stringify(usuario));
+                
+                window.dispatchEvent(new Event('loginSuccess'));
 
                 // mostrar mensaje de bienvenida
                 Swal.fire({

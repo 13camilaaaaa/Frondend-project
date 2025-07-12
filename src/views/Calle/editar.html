@@ -1,0 +1,72 @@
+<div class="contenedor_principal">
+    <aside class="barra_lateral">
+        <div class="info_usuario">
+            <div class="avatar_usuario"></div>
+            <p class="saludo_usuario">Hola!</p>
+        </div>
+        <nav class="navegacion_principal">
+            <ul>
+                <li><a href="#perfil">Perfil</a></li>
+                <li><a href="#calle" class="activo">Dirección</a></li>
+                <li><a href="#pedido">Pedidos</a></li>
+                <li><a href="#autenticacion">Autenticación</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="contenido_principal">
+        <h1>Añadir Dirección</h1>
+        <div class="info-importante-seccion">
+            <p>Informacion Importante</p>
+            <button type="button" class="informacion-calle" id="info_importante"></button>
+        </div>
+
+        <div class="tarjeta tarjeta_formulario">
+            <form id="formulario_anadir_calle" novalidate>
+                <div class="campo campo_formulario">
+                    <label for="pais_select">País</label>
+                    <select id="pais_select" name="pais">
+                        <option value="">Seleccione País</option>
+                    </select>
+                </div>
+
+                <div class="campo campo_formulario">
+                    <label for="departamento_select">Departamento</label>
+                    <select id="departamento_select" name="departamento">
+                        <option value="">Seleccione Departamento</option>
+                    </select>
+                </div>
+
+                <div class="campo campo_formulario">
+                    <label for="municipio_select">Municipio</label>
+                    <select id="municipio_select" name="municipio">
+                        <option value="">Seleccione Municipio</option>
+                    </select>
+                </div>
+
+                <div class="campo campo_formulario">
+                    <label for="tipo_via_select">Tipo de Vía</label>
+                    <select id="tipo_via_select" name="id_tipo_via">
+                        <option value="">Seleccione Tipo</option>
+                    </select>
+                </div>
+
+                <div class="campo campo_formulario">
+                    <label for="numero_via_input">Número Principal</label>
+                    <input type="text" id="numero_via_input" name="numero_via" placeholder="Ej: 16 # 09">
+                </div>
+
+                <div class="campo campo_formulario">
+                    <label for="complemento_input">Complemento (Opcional)</label>
+                    <input type="text" id="complemento_input" name="complemento" placeholder="Ej: Apto 301, Interior 2">
+                </div>
+
+                <div class="campo campo_formulario">
+                    <label for="barrio_input">Barrio</label>
+                    <input type="text" id="barrio_input" name="barrio" placeholder="Nombre del barrio">
+                </div>
+
+                <button type="submit" class="btn-base btn-primary boton_anadir_calle">AÑADIR CALLE</button>
+            </form>
+        </div>
+    </main>
+</div>

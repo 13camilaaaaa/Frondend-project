@@ -14,6 +14,12 @@ export function editarPerfilController() {
     document.getElementById("cedula_input").value = usuario.numero_identificacion || "";
     document.getElementById("telefono_input").value = usuario.telefono_usuario || "";
 
+    // actualizar el saludo
+    const saludo = document.querySelector(".saludo_usuario");
+    if (saludo) {
+        saludo.textContent = `Hola, ${usuario.nombre_usuario}!`;
+    }
+
     // cargar tipos de identificación desde la API
     async function cargarTiposIdentificacion() {
         try {
@@ -28,7 +34,7 @@ export function editarPerfilController() {
                 option.value = tipo.id;
                 option.textContent = tipo.nombre_tipo;
 
-                if (usuario.id_tipo_identificacion && tipo.id === usuario.id_tipo_identificacion) {
+                if (String(tipo.id) === String(usuario.id_tipo_identificacion)) {
                     option.selected = true;
                 }
 
@@ -42,18 +48,19 @@ export function editarPerfilController() {
 
     cargarTiposIdentificacion();
 
+
     // manejar envío del formulario
     const form = document.getElementById("formulario_editar_perfil");
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-       // obtener valores
+        // obtener valores
         const nombre = document.getElementById("nombre_input").value.trim();
         const apellido = document.getElementById("apellido_input").value.trim();
         const cedula = document.getElementById("cedula_input").value.trim();
         const telefono = document.getElementById("telefono_input").value.trim();
-        const idTipoIdentificacion = parseInt(document.getElementById("tipo_identificacion_input").value);
 
+        const idTipoIdentificacion = parseInt(document.getElementById("tipo_identificacion_input").value);
 
         // validaciones básicas
         if (!Validation.isNotEmpty(nombre) || !Validation.isNotEmpty(apellido) || !Validation.isNotEmpty(cedula) || !Validation.isNotEmpty(telefono)) {
@@ -64,7 +71,7 @@ export function editarPerfilController() {
             });
             return;
         }
-        
+
         // Validación del nombre y apellido
         if (!Validation.isTextOnly(nombre) || !Validation.isTextOnly(apellido)) {
             Swal.fire("Error", "El nombre y apellido solo deben contener letras", "error");
@@ -101,21 +108,18 @@ export function editarPerfilController() {
             return;
         }
         if (!Validation.isValidCedula(cedula)) {
-            Swal.fire("Error","La cédula debe contener entre 6 y 10 números.", "error");
+            Swal.fire("Error", "La cédula debe contener entre 6 y 10 números.", "error");
             return;
         }
-
 
         if (!idTipoIdentificacion || isNaN(idTipoIdentificacion)) {
             Swal.fire("Error", "Selecciona un tipo de identificación válido.", "error");
             return;
         }
 
-
-
         // construir payload
         const data = {
-            id: usuario.id,
+            id: usuario.id, // Esto no es estrictamente necesario en el body si ya lo envías en la URL
             nombre_usuario: nombre,
             apellido_usuario: apellido,
             numero_identificacion: cedula,
@@ -124,49 +128,54 @@ export function editarPerfilController() {
         };
 
         try {
-    const response = await fetch(`http://localhost:3000/api/usuarios/${usuario.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-    });
+            const response = await fetch(`http://localhost:3000/api/usuarios/${usuario.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    // Asegúrate de enviar el token si tu ruta de actualización lo requiere
+                    // "Authorization": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify(data),
+            });
 
-    const result = await response.json();
+            const result = await response.json();
 
-    if (response.ok) {
-        // actualizar localStorage
-        const usuarioActualizado = { ...usuario, ...data };
-        localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
+            if (response.ok) {
+                // actualizar localStorage
+                // Es mejor usar los datos que vienen del backend si la respuesta incluye el usuario actualizado completo
+                // De lo contrario, tu forma actual (spread operator) es válida.
+                const usuarioActualizado = { ...usuario, ...data };
+                localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
 
-        // mensaje SweetAlert bonito
-        Swal.fire({
-            icon: "success",
-            title: "¡Perfil actualizado!",
-            text: "Tus datos se han guardado correctamente.",
-            confirmButtonText: "Volver al perfil",
-            confirmButtonColor: "#3085d6"
-        }).then(() => {
-            location.hash = "#perfil";
-        });
+                // mensaje SweetAlert bonito
+                Swal.fire({
+                    icon: "success",
+                    title: "¡Perfil actualizado!",
+                    text: "Tus datos se han guardado correctamente.",
+                    confirmButtonText: "Volver al perfil",
+                    confirmButtonColor: "#3085d6"
+                }).then(() => {
+                    location.hash = "#perfil";
+                });
 
-    } else {
-        // error controlado por el servidor (por ejemplo, cédula duplicada)
-        Swal.fire({
-            icon: "error",
-            title: "Error al guardar",
-            text: result.message || "Verifica los datos ingresados.",
-        });
-    }
+            } else {
+                // Aquí es donde manejas las respuestas de error del servidor
+                // El backend debería enviar un mensaje específico para la cédula duplicada.
+                Swal.fire({
+                    icon: "error",
+                    title: "Error al guardar",
+                    // Asume que el backend envía result.message
+                    text: result.message || "Verifica los datos ingresados.",
+                });
+            }
 
-} catch (err) {
-    console.error(err);
-    Swal.fire({
-        icon: "error",
-        title: "Error del servidor",
-        text: "Ocurrió un problema al guardar los cambios. Intenta más tarde.",
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: "error",
+                title: "Error del servidor",
+                text: "Ocurrió un problema al guardar los cambios. Intenta más tarde.",
+            });
+        }
     });
 }
-})
-}
-

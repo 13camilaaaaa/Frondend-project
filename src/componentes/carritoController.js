@@ -1,5 +1,5 @@
 // src/componentes/carritoController.js
-import { updateVentaView } from '../views/Venta/ventaController.js'; // Ajusta la ruta si es necesario
+import { updateVentaView } from '../views/Venta/ventaController.js';
 import Swal from "sweetalert2";
 
 // === Declaraciones de variables para elementos del DOM (inicializadas en carritoController) ===
@@ -26,7 +26,7 @@ export const openSidebar = () => {
     if (shoppingBagSidebar && sidebarOverlay) {
         shoppingBagSidebar.classList.add('open');
         sidebarOverlay.classList.add('active');
-        document.body.classList.add('no-scroll'); // Añade la clase para evitar el movimiento del header
+        document.body.classList.add('no-scroll'); 
 
         // Cargar productos cada vez que se abre el carrito
         cargarContenidoDelCarrito();
@@ -44,7 +44,7 @@ export const closeSidebar = () => {
     if (shoppingBagSidebar && sidebarOverlay) {
         shoppingBagSidebar.classList.remove('open');
         sidebarOverlay.classList.remove('active');
-        document.body.classList.remove('no-scroll'); // Elimina la clase al cerrar
+        document.body.classList.remove('no-scroll'); 
 
         // SOLO si el usuario está en la página de #venta, actualiza la vista.
         if (location.hash === '#venta') {
@@ -76,7 +76,6 @@ const cargarContenidoDelCarrito = async () => {
 
     // Paso 1: Determinar qué carrito mostrar (BD o LocalStorage)
     if (usuario && token) {
-        // Usuario logueado: Obtener del backend
         try {
             const res = await fetch("http://localhost:3000/api/carrito", {
                 headers: {
@@ -103,20 +102,21 @@ const cargarContenidoDelCarrito = async () => {
                     );
                     if (index > -1) {
                         ultimoProducto = carritoItems[index];
-                        carritoItems.splice(index, 1); // Quitarlo de su posición original
-                        carritoItems.unshift(ultimoProducto); // Ponerlo al inicio
+                        carritoItems.splice(index, 1);
+                        carritoItems.unshift(ultimoProducto);
                     }
-                    localStorage.removeItem("ultimoProductoAnadido"); // Limpiar después de usar
+                    localStorage.removeItem("ultimoProductoAnadido");
                 }
+
 
             } else {
                 console.warn("Backend response for cart was not successful or items were missing:", data);
-                carritoItems = []; // Carrito de BD vacío o error en la respuesta
+                carritoItems = [];
             }
         } catch (error) {
             console.error("Error al cargar carrito de la DB:", error);
             Swal.fire("Error", "No se pudo cargar tu carrito de compras. Intenta de nuevo más tarde.", "error");
-            carritoItems = []; // En caso de error de red, asegúrate de que sea un array vacío
+            carritoItems = [];
         }
     } else {
         // Usuario NO logueado: Obtener del LocalStorage (carrito temporal)
@@ -134,8 +134,6 @@ const cargarContenidoDelCarrito = async () => {
             <button class="continue-shopping-btn" id="continueShoppingBtnEmpty">Seguir comprando</button>
             ${!usuario ? `<p class="login-prompt">¿Tienes una cuenta? <a href="#login" class="login-link">Inicia sesión</a> para guardar tus productos.</p>` : ''}
         `;
-        // Listener para el botón "Seguir comprando" cuando el carrito está vacío
-        // Usar removeEventListener antes de addEventListener para evitar duplicados si se recarga el carrito
         const continueShoppingBtnEmpty = document.getElementById("continueShoppingBtnEmpty");
         if (continueShoppingBtnEmpty) {
             continueShoppingBtnEmpty.removeEventListener("click", handleContinueShopping);
@@ -152,7 +150,7 @@ const cargarContenidoDelCarrito = async () => {
     } else {
         // Generar HTML para los items del carrito
         const itemsHtml = carritoItems.map(item => `
-            <div class="cart-item" data-id-item-carrito="${item.id}" data-id-producto="${item.id_producto}" data-talla="${item.talla}" data-color="${item.color}">
+            <div class="cart-item" data-id-item-carrito="${item.id}" data-id-producto="${item.id_producto}" data-talla="${item.talla}" data-color="${item.color}" data-stock="${item.stock}">
                 <img src="/src/uploads/${item.imagen}" alt="${item.nombre_producto}" class="cart-item-img">
                 <div class="cart-item-details">
                     <h4 class="cart-item-title">${item.nombre_producto}</h4>
@@ -161,7 +159,7 @@ const cargarContenidoDelCarrito = async () => {
                         <span class="cart-item-price">$${parseFloat(item.precio || 0).toLocaleString('es-CO')}</span>
                         <div class="quantity-selector">
                             <button class="quantity-btn decrease-quantity" data-id-item-carrito="${item.id}" data-id-producto="${item.id_producto}" data-talla="${item.talla}" data-color="${item.color}">-</button>
-                            <input type="text" value="${item.cantidad}" class="quantity-display-cart" readonly>
+                            <input type="text" value="${Math.min(item.cantidad, item.stock)}" class="quantity-display-cart" readonly>
                             <button class="quantity-btn increase-quantity" data-id-item-carrito="${item.id}" data-id-producto="${item.id_producto}" data-talla="${item.talla}" data-color="${item.color}">+</button>
                         </div>
                     </div>
@@ -188,13 +186,11 @@ const cargarContenidoDelCarrito = async () => {
         // Añadir scroll si el contenido excede la altura
         const cartItemsList = sidebarCartContent.querySelector(".cart-items-list");
         if (cartItemsList) {
-            cartItemsList.style.maxHeight = "calc(100vh - 200px)"; // Ajustar según el tamaño de tu header/footer
+            cartItemsList.style.maxHeight = "calc(100vh - 200px)";
             cartItemsList.style.overflowY = "auto";
-            cartItemsList.style.paddingRight = "5px"; // Espacio para el scrollbar (si no lo ocultas con CSS)
+            cartItemsList.style.paddingRight = "5px";
         }
 
-        // Añadir eventos a los botones de cantidad y eliminar
-        // Eliminar listeners previos para evitar duplicados
         sidebarCartContent.querySelectorAll(".increase-quantity").forEach(button => {
             button.removeEventListener("click", handleIncreaseQuantity);
             button.addEventListener("click", handleIncreaseQuantity);
@@ -217,13 +213,12 @@ const cargarContenidoDelCarrito = async () => {
             continueCheckoutBtn.addEventListener("click", handleContinueCheckout);
         }
     }
-    updateCartIconQuantity(); // Actualiza el número en el icono del carrito
+    updateCartIconQuantity();
 };
 
-// --- Manejadores de Eventos (para reutilizar y evitar duplicados) ---
 const handleContinueShopping = () => {
     closeSidebar();
-    window.location.hash = ""; // Redirigir a la página principal
+    window.location.hash = "";
 };
 
 const handleLoginLinkClick = () => {
@@ -237,10 +232,19 @@ const handleIncreaseQuantity = (event) => {
     const color = event.currentTarget.dataset.color;
     const currentQuantityEl = event.currentTarget.previousElementSibling;
     let currentQuantity = parseInt(currentQuantityEl.value);
+
+    const cartItemElement = event.currentTarget.closest(".cart-item");
+    const stock = parseInt(cartItemElement.dataset.stock);
+
+    if (currentQuantity >= stock) {
+        Swal.fire("¡Lo sentimos!", "No contamos con más unidades disponibles de este producto.", "warning");
+        return;
+    }
+
     currentQuantity++;
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     const token = localStorage.getItem("token");
-    actualizarCantidadProducto(idItemCarrito, idProducto, talla, color, currentQuantity, usuario, token);
+    actualizarCantidadProducto(idItemCarrito, idProducto, talla, color, currentQuantity, usuario, token, stock);
 };
 
 const handleDecreaseQuantity = (event) => {
@@ -301,14 +305,9 @@ const handleRemoveItem = (event) => {
 
 const handleContinueCheckout = () => {
     closeSidebar();
-    window.location.hash = "#venta"; // Redirigir a la página de checkout
+    window.location.hash = "#venta";
 };
 
-
-/**
- * Función para migrar el carrito de LocalStorage a la BD después del login.
- * Se llama cuando se dispara el evento 'loginSuccess'.
- */
 const migrarCarritoTemporalABaseDeDatos = async () => {
     const carritoTemporal = JSON.parse(localStorage.getItem("carritoTemporal") || "[]");
     const token = localStorage.getItem("token");
@@ -325,7 +324,6 @@ const migrarCarritoTemporalABaseDeDatos = async () => {
                     body: JSON.stringify({
                         id_producto: item.id_producto,
                         cantidad: item.cantidad,
-                        // Asegúrate de que estos nombres de propiedades coincidan con los de tu backend
                         precio_unitario_al_momento: item.precio || 0,
                         talla_nombre_al_momento: item.talla || 'N/A',
                         color_nombre_al_momento: item.color || 'N/A'
@@ -335,7 +333,7 @@ const migrarCarritoTemporalABaseDeDatos = async () => {
                     console.error(`Error al migrar producto ${item.nombre_producto || item.id_producto}:`, await res.json());
                 }
             }
-            localStorage.removeItem("carritoTemporal"); // Limpiar el carrito temporal una vez migrado
+            localStorage.removeItem("carritoTemporal");
             Swal.fire({
                 icon: "info",
                 title: "¡Productos guardados!",
@@ -360,9 +358,12 @@ const migrarCarritoTemporalABaseDeDatos = async () => {
  * @param {object} usuario - Objeto de usuario logueado (puede ser null).
  * @param {string} token - Token de autenticación (puede ser null).
  */
-const actualizarCantidadProducto = async (idItemCarrito, idProducto, talla, color, nuevaCantidad, usuario, token) => {
+const actualizarCantidadProducto = async (idItemCarrito, idProducto, talla, color, nuevaCantidad, usuario, token, stock) => {
+    if (nuevaCantidad > stock) {
+        Swal.fire("¡Error!", "La cantidad no puede ser mayor al stock disponible.", "warning");
+        return;
+    }
     if (usuario && token) {
-        // Usuario logueado: Actualizar en la base de datos
         try {
             const res = await fetch("http://localhost:3000/api/carrito/actualizar-cantidad", {
                 method: "PUT",
@@ -376,7 +377,7 @@ const actualizarCantidadProducto = async (idItemCarrito, idProducto, talla, colo
                 const errorData = await res.json();
                 Swal.fire("Error", errorData.message || "No se pudo actualizar la cantidad.", "error");
             }
-            cargarContenidoDelCarrito(); // Recargar el carrito para reflejar los cambios
+            cargarContenidoDelCarrito();
         } catch (error) {
             console.error("Error al actualizar cantidad en DB:", error);
             Swal.fire("Error", "Error al actualizar la cantidad del producto.", "error");
@@ -384,7 +385,6 @@ const actualizarCantidadProducto = async (idItemCarrito, idProducto, talla, colo
     } else {
         // Usuario NO logueado: Actualizar en LocalStorage
         let carritoLocal = JSON.parse(localStorage.getItem("carritoTemporal") || "[]");
-        // Para LocalStorage, usamos id_producto, talla y color como identificadores compuestos
         const itemIndex = carritoLocal.findIndex(item =>
             item.id_producto == idProducto && item.talla == talla && item.color == color
         );
@@ -392,13 +392,13 @@ const actualizarCantidadProducto = async (idItemCarrito, idProducto, talla, colo
         if (itemIndex > -1) {
             carritoLocal[itemIndex].cantidad = nuevaCantidad;
             if (carritoLocal[itemIndex].cantidad <= 0) {
-                carritoLocal.splice(itemIndex, 1); // Eliminar si la cantidad llega a 0 o menos
+                carritoLocal.splice(itemIndex, 1);
             }
             localStorage.setItem("carritoTemporal", JSON.stringify(carritoLocal));
-            cargarContenidoDelCarrito(); // Recargar el carrito para reflejar los cambios
+            cargarContenidoDelCarrito();
         }
     }
-    updateCartIconQuantity(); // Actualiza el icono del carrito después de cualquier cambio
+    updateCartIconQuantity();
 };
 
 /**
@@ -412,7 +412,6 @@ const actualizarCantidadProducto = async (idItemCarrito, idProducto, talla, colo
  */
 const eliminarProductoDelCarrito = async (idItemCarrito, idProducto, talla, color, usuario, token) => {
     if (usuario && token) {
-        // Usuario logueado: Eliminar de la base de datos
         try {
             const res = await fetch("http://localhost:3000/api/carrito/eliminar", {
                 method: "DELETE",
@@ -420,13 +419,13 @@ const eliminarProductoDelCarrito = async (idItemCarrito, idProducto, talla, colo
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify({ id_item_carrito: idItemCarrito }) // <-- Envía id_item_carrito al backend
+                body: JSON.stringify({ id_item_carrito: idItemCarrito }) 
             });
             if (!res.ok) {
                 const errorData = await res.json();
                 Swal.fire("Error", errorData.message || "No se pudo eliminar el producto.", "error");
             }
-            cargarContenidoDelCarrito(); // Recargar el carrito
+            cargarContenidoDelCarrito();
         } catch (error) {
             console.error("Error al eliminar de DB:", error);
             Swal.fire("Error", "Error al eliminar el producto del carrito.", "error");
@@ -441,17 +440,17 @@ const eliminarProductoDelCarrito = async (idItemCarrito, idProducto, talla, colo
         localStorage.setItem("carritoTemporal", JSON.stringify(carritoLocal));
         cargarContenidoDelCarrito(); // Recargar el carrito
     }
-    updateCartIconQuantity(); // Actualiza el icono del carrito después de cualquier eliminación
+    updateCartIconQuantity();
 };
 
 /**
  * Función para actualizar el número en el icono del carrito en el header.
  */
 const updateCartIconQuantity = async () => {
-    const cartQuantitySpan = document.getElementById('cartQuantity'); // Asume que tienes un span con este ID en tu ícono del carrito
+    const cartQuantitySpan = document.getElementById('cartQuantity');
 
     if (!cartQuantitySpan) {
-        // console.warn("Elemento 'cartQuantity' no encontrado. No se puede actualizar el conteo del carrito.");
+        console.warn("Elemento 'cartQuantity' no encontrado. No se puede actualizar el conteo del carrito.");
         return;
     }
 
@@ -480,12 +479,8 @@ const updateCartIconQuantity = async () => {
     cartQuantitySpan.style.display = totalItems > 0 ? 'inline-block' : 'none';
 };
 
-// Exporta la función para agregar al carrito, si es llamada desde otros módulos (ej. productController)
-export const agregarProductoAlCarrito = async (producto, cantidad, usuario, token) => {
-    // Esto es un placeholder. Asegúrate de que esta función maneje correctamente
-    // si el producto ya existe en el carrito (sumar cantidad) o si es nuevo (añadir).
-    // Y que los parámetros `producto` contengan `id_producto`, `precio`, `talla`, `color`, `imagen`, `nombre_producto`.
 
+export const agregarProductoAlCarrito = async (producto, cantidad, usuario, token) => {
     // Si el usuario está logueado, agrega a la BD
     if (usuario && token) {
         try {
@@ -552,9 +547,7 @@ export const agregarProductoAlCarrito = async (producto, cantidad, usuario, toke
             timer: 1500
         });
     }
-    updateCartIconQuantity(); // Actualiza el icono del carrito
-    // No llamamos a cargarContenidoDelCarrito aquí, ya que el sidebar no necesariamente está abierto.
-    // Solo se llamará cuando el sidebar se abra.
+    updateCartIconQuantity();
 };
 
 
@@ -562,15 +555,7 @@ export const agregarProductoAlCarrito = async (producto, cantidad, usuario, toke
 // === Función de inicialización del controlador del carrito ===
 // =========================================================
 
-/**
- * Inicializa el controlador del carrito:
- * - Inserta el HTML del sidebar si no existe.
- * - Adjunta los listeners de eventos a los botones de abrir/cerrar.
- * - Escucha el evento 'loginSuccess' para la migración del carrito.
- * - Realiza una carga inicial para mostrar el estado del carrito.
- */
 export const carritoController = () => {
-    // Si el sidebar no ha sido insertado en el DOM, lo hacemos
     if (!document.getElementById('shoppingBagSidebar')) {
         const body = document.body;
         body.insertAdjacentHTML('beforeend', `
@@ -590,11 +575,10 @@ export const carritoController = () => {
         `);
     }
 
-    // Obtener referencias a los elementos del DOM una vez que sabemos que existen
-    cartIcon = document.getElementById('cartIcon'); // Asume que tienes un elemento con id="cartIcon" para abrir el carrito
+    cartIcon = document.getElementById('cartIcon');
     closeSidebarBtn = document.getElementById('closeSidebarBtn');
     sidebarOverlay = document.getElementById('sidebarOverlay');
-    shoppingBagSidebar = document.getElementById('shoppingBagSidebar'); // Inicializar aquí también
+    shoppingBagSidebar = document.getElementById('shoppingBagSidebar');
     sidebarCartContent = document.getElementById('sidebarCartContent');
     sidebarCartFooter = document.getElementById('sidebarCartFooter');
 
@@ -617,17 +601,14 @@ export const carritoController = () => {
         sidebarOverlay.dataset.listenerAdded = 'true';
     }
 
-    // Listener para el evento de login exitoso
-    window.removeEventListener('loginSuccess', handleLoginSuccess); // Asegurarse de no añadir duplicados
+    window.removeEventListener('loginSuccess', handleLoginSuccess);
     window.addEventListener('loginSuccess', handleLoginSuccess);
 
-    // Carga inicial del contador del carrito en el ícono.
     updateCartIconQuantity();
 
     console.log("Cart Panel Manager Initialized.");
 };
 
-// Manejador del evento loginSuccess
 const handleLoginSuccess = async () => {
     console.log("loginSuccess event detected in carritoController.");
 
@@ -642,6 +623,6 @@ const handleLoginSuccess = async () => {
         console.log("Opening sidebar after migration...");
         openSidebar();
     } else {
-        cargarContenidoDelCarrito(); // Recarga el carrito solo para actualizar su estado interno y el ícono
+        cargarContenidoDelCarrito();
     }
 };

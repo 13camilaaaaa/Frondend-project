@@ -119,7 +119,7 @@ export function editarPerfilController() {
 
         // construir payload
         const data = {
-            id: usuario.id, // Esto no es estrictamente necesario en el body si ya lo envías en la URL
+            id: usuario.id,
             nombre_usuario: nombre,
             apellido_usuario: apellido,
             numero_identificacion: cedula,
@@ -132,8 +132,6 @@ export function editarPerfilController() {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    // Asegúrate de enviar el token si tu ruta de actualización lo requiere
-                    // "Authorization": `Bearer ${localStorage.getItem("token")}`
                 },
                 body: JSON.stringify(data),
             });
@@ -141,12 +139,8 @@ export function editarPerfilController() {
             const result = await response.json();
 
             if (response.ok) {
-                // actualizar localStorage
-                // Es mejor usar los datos que vienen del backend si la respuesta incluye el usuario actualizado completo
-                // De lo contrario, tu forma actual (spread operator) es válida.
                 const usuarioActualizado = { ...usuario, ...data };
                 localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
-
                 // mensaje SweetAlert bonito
                 Swal.fire({
                     icon: "success",
@@ -159,12 +153,9 @@ export function editarPerfilController() {
                 });
 
             } else {
-                // Aquí es donde manejas las respuestas de error del servidor
-                // El backend debería enviar un mensaje específico para la cédula duplicada.
                 Swal.fire({
                     icon: "error",
                     title: "Error al guardar",
-                    // Asume que el backend envía result.message
                     text: result.message || "Verifica los datos ingresados.",
                 });
             }

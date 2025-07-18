@@ -21,7 +21,7 @@ export const editarcorrController = () => {
     // mostrar el correo al que se enviará el código
     const textoCorreo = document.querySelector(".texto-correo-envio");
     if (textoCorreo) {
-        textoCorreo.innerHTML = `Verifica tu correo <strong>${usuario.correo_usuario}</strong> para ingresar el código.`;
+        textoCorreo.innerHTML = `Verifica tu correo <strong>${ocultarCorreo(usuario.correo_usuario)}</strong> para ingresar el código.`;
     }
 
     // botón reenviar código
@@ -48,7 +48,7 @@ export const editarcorrController = () => {
                 const data = await response.json();
 
                 if (data.success) {
-                    Swal.fire("¡Código enviado!", `Se ha enviado un código al correo: ${usuario.correo_usuario}`, "success");
+                    Swal.fire("¡Código enviado!", `Se ha enviado un código al correo: ${ocultarCorreo(usuario.correo_usuario)}`, "success");
                 } else {
                     Swal.fire("Error", data.message || "No se pudo enviar el código", "error");
                 }
@@ -91,6 +91,20 @@ export const editarcorrController = () => {
             Swal.fire("Error", "No se pudo verificar el código", "error");
         }
     });
+
+    function ocultarCorreo(correo) {
+        if (!correo || !correo.includes("@")) return "********";
+
+        const [nombre, dominioCompleto] = correo.split("@");
+        const dominioPartes = dominioCompleto.split(".");
+        const dominioNombre = dominioPartes[0]; // parte antes del .com
+
+        const visibleNombre = nombre[0];
+        const visibleDominio = dominioNombre[0];
+        const dominioRestante = dominioCompleto.slice(1); // incluye .com o .co
+
+        return `${visibleNombre}${"*".repeat(nombre.length - 1)}@${visibleDominio}${"*".repeat(dominioNombre.length - 1)}.${dominioPartes.slice(1).join(".")}`;
+    }
 
     saveBtn.addEventListener("click", async () => {
         const nuevoCorreo = document.getElementById("nuevo-correo").value.trim();

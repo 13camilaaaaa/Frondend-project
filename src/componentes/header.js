@@ -13,7 +13,7 @@ hamburgerMenuIcon.innerHTML = '<i class="fas fa-bars"></i>';
 
 // --- MENÚ PRINCIPAL (VERSIÓN ESCRITORIO) ---
 const menuDiv = document.createElement('div');
-menuDiv.classList.add('menu'); // Esta es la barra superior del header con ROSS MILLE, etc.
+menuDiv.classList.add('menu');
 
 // --- Grupo Izquierdo del Menú de Escritorio (Servicio al cliente) ---
 const menuLeft = document.createElement('div');
@@ -70,7 +70,7 @@ carritoText.classList.add('menu__link-text');
 carrito.append(carritoIcon, carritoText);
 menuRight.append(carrito);
 
-// BUSCADOR EN EL HEADER (PARA MÓVIL/TABLETA) - **Este se mantiene en menuRight para móvil**
+// BUSCADOR EN EL HEADER (PARA MÓVIL/TABLETA)
 const searchHeaderContainer = document.createElement('div');
 searchHeaderContainer.classList.add('search-header-container');
 const searchHeaderIcon = document.createElement('i');
@@ -82,17 +82,17 @@ searchHeaderInput.classList.add('category__link', 'search__input', 'search-heade
 searchHeaderInput.setAttribute("id", 'productSearchHeaderInput');
 searchHeaderInput.setAttribute("name", 'search_query_header');
 searchHeaderContainer.append(searchHeaderIcon, searchHeaderInput);
-menuRight.append(searchHeaderContainer); // Se adjunta a menuRight
+menuRight.append(searchHeaderContainer);
 
 // Adjuntar los grupos al menú principal
 menuDiv.append(menuLeft, menuCenter, menuRight);
 
 // --- BARRA DE CATEGORÍAS (AHORA DENTRO DEL HEADER) ---
 const categoriesBar = document.createElement('div');
-categoriesBar.classList.add('container', 'categories-bar'); // Mantén 'container' y 'categories-bar'
+categoriesBar.classList.add('container', 'categories-bar'); 
 
 const categoriesMenu = document.createElement('div');
-categoriesMenu.classList.add('categories-menu'); // Aquí puedes añadir 'flex' si tu CSS lo requiere
+categoriesMenu.classList.add('categories-menu');
 
 const categoriesGroup = document.createElement('div');
 categoriesGroup.classList.add('categories-menu__group');
@@ -123,7 +123,7 @@ categoriesGroup.append(ninosLink);
 
 categoriesMenu.append(categoriesGroup);
 
-// BUSCADOR EN EL HEADER (PARA ESCRITORIO) - **Ahora también estará dentro de categoriesMenu**
+// BUSCADOR EN EL HEADER (PARA ESCRITORIO)
 const searchDesktopContainer = document.createElement('div');
 searchDesktopContainer.classList.add('search-desktop-container');
 const searchDesktopIcon = document.createElement('i');
@@ -135,15 +135,15 @@ searchDesktopInput.classList.add('category__link', 'search__input', 'search-desk
 searchDesktopInput.setAttribute("id", 'productSearchDesktopInput');
 searchDesktopInput.setAttribute("name", 'search_query_desktop');
 searchDesktopContainer.append(searchDesktopIcon, searchDesktopInput);
-categoriesMenu.append(searchDesktopContainer); // Se adjunta a categoriesMenu
+categoriesMenu.append(searchDesktopContainer);
 
-categoriesBar.append(categoriesMenu); // Adjuntar categoriesMenu a categoriesBar
+categoriesBar.append(categoriesMenu);
 
 
 // --- MENÚ MÓVIL/TABLET (EL CONTENEDOR DESPLEGABLE DE LA HAMBURGUESA) ---
 const mobileNav = document.createElement('nav');
-mobileNav.classList.add('mobile-nav'); // Clase para estilos CSS del panel
-mobileNav.setAttribute('aria-hidden', 'true'); // Inicialmente oculto para accesibilidad
+mobileNav.classList.add('mobile-nav');
+mobileNav.setAttribute('aria-hidden', 'true');
 
 const mobileMenuUl = document.createElement('ul');
 mobileMenuUl.classList.add('mobile-menu__list');
@@ -151,8 +151,8 @@ mobileNav.append(mobileMenuUl);
 
 // Overlay para el fondo oscuro y clic fuera
 const mobileNavOverlay = document.createElement('div');
-mobileNavOverlay.classList.add('mobile-nav-overlay'); // Clase para estilos CSS del overlay
-mobileNavOverlay.setAttribute('aria-hidden', 'true'); // Inicialmente oculto para accesibilidad
+mobileNavOverlay.classList.add('mobile-nav-overlay');
+mobileNavOverlay.setAttribute('aria-hidden', 'true');
 
 // --- 2. Contenido del Menú Móvil ---
 const mobileLinksData = [
@@ -160,7 +160,7 @@ const mobileLinksData = [
     { text: 'Mujer', href: '#generos/Mujer', icon: null },
     { text: 'Hombre', href: '#generos/Hombre', icon: null },
     { text: 'Bebés', href: '#generos/Bebe', icon: null },
-    { text: 'Niños', href: '#generos/Nino', icon: null } // Corregido a 'Nino' si esa es tu ruta
+    { text: 'Niños', href: '#generos/Nino', icon: null }
 ];
 
 mobileLinksData.forEach(link => {
@@ -177,41 +177,39 @@ mobileLinksData.forEach(link => {
     li.append(a);
     mobileMenuUl.append(li);
 
-    // **MEJORA 1: Cierre al hacer clic en un enlace del menú**
+    //  Cierre al hacer clic en un enlace del menú**
     a.addEventListener('click', () => {
-        // Solo cierra si el menú está abierto
         if (mobileNav.classList.contains('is-open')) {
             mobileNav.classList.remove('is-open');
             hamburgerMenuIcon.classList.remove('is-active');
             mobileNavOverlay.classList.remove('active');
             mobileNav.setAttribute('aria-hidden', 'true');
             mobileNavOverlay.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; // Restaura el scroll del body
+            document.body.style.overflow = '';
         }
     });
 });
 
-if (hamburgerMenuIcon) { // Asegúrate de que el icono exista
+if (hamburgerMenuIcon) {
     hamburgerMenuIcon.addEventListener('click', () => {
         mobileNav.classList.toggle('is-open');
         hamburgerMenuIcon.classList.toggle('is-active');
         mobileNavOverlay.classList.toggle('active');
 
-        // Para accesibilidad y control de scroll del body
         if (mobileNav.classList.contains('is-open')) {
             mobileNav.setAttribute('aria-hidden', 'false');
             mobileNavOverlay.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden'; // Evita el scroll del body
+            document.body.style.overflow = 'hidden';
         } else {
             mobileNav.setAttribute('aria-hidden', 'true');
             mobileNavOverlay.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; // Restaura el scroll del body
+            document.body.style.overflow = '';
         }
     });
 }
 
-// **MEJORA 2: Cierre al hacer clic fuera del panel (usando el overlay)**
-if (mobileNavOverlay) { // Asegúrate de que el overlay exista
+// * Cierre al hacer clic fuera del panel (usando el overlay)**
+if (mobileNavOverlay) {
     mobileNavOverlay.addEventListener('click', () => {
         if (mobileNav.classList.contains('is-open')) {
             mobileNav.classList.remove('is-open');
@@ -219,7 +217,7 @@ if (mobileNavOverlay) { // Asegúrate de que el overlay exista
             mobileNavOverlay.classList.remove('active');
             mobileNav.setAttribute('aria-hidden', 'true');
             mobileNavOverlay.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = ''; // Restaura el scroll del body
+            document.body.style.overflow = '';
         }
     });
 }

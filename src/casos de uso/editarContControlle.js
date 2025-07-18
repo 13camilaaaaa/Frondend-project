@@ -19,7 +19,7 @@ export const editarContController = () => {
     // mostrar correo
     const notificationText = document.querySelector(".notification-text");
     if (notificationText && usuario.correo_usuario) {
-        notificationText.innerHTML = `Se ha enviado un código de verificación a <strong>${usuario.correo_usuario}</strong>.`;
+        notificationText.innerHTML = `Se ha enviado un código de verificación a <strong>${ocultarCorreo(usuario.correo_usuario)}</strong>.`;
     }
 
     // elementos clave
@@ -40,6 +40,21 @@ export const editarContController = () => {
             togglePassword.querySelector("i").classList.toggle("fa-eye-slash");
         });
     }
+
+
+    function ocultarCorreo(correo) {
+    if (!correo || !correo.includes("@")) return "********";
+
+    const [nombre, dominioCompleto] = correo.split("@");
+    const dominioPartes = dominioCompleto.split(".");
+    const dominioNombre = dominioPartes[0]; // parte antes del .com
+
+    const visibleNombre = nombre[0];
+    const visibleDominio = dominioNombre[0];
+    const dominioRestante = dominioCompleto.slice(1); // incluye .com o .co
+
+    return `${visibleNombre}${"*".repeat(nombre.length - 1)}@${visibleDominio}${"*".repeat(dominioNombre.length - 1)}.${dominioPartes.slice(1).join(".")}`;
+}
 
     // reenviar código
     resendBtn.addEventListener('click', async () => {

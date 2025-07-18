@@ -84,7 +84,14 @@ export const pedidosController = async () => {
             `;
 
             // Botón para cancelar si el estado no es "cancelado"
-            if (pedido.estado_pedido.toLowerCase() !== "cancelado") {
+            if (
+                pedido.estado_pedido.toLowerCase() !== "cancelado" &&
+                pedido.estado_pedido.toLowerCase() !== "confirmado" &&
+                pedido.estado_pedido.toLowerCase() !== "Enviado" &&
+                pedido.estado_pedido.toLowerCase() !== "Entregado" &&
+                pedido.estado_pedido.toLowerCase() !== "Pagado" &&
+                pedido.estado_pedido.toLowerCase() !== "Pagado"
+            ) {
                 const btnCancelar = document.createElement("button");
                 btnCancelar.classList.add("cancel-button");
                 btnCancelar.textContent = "CANCELAR PEDIDO";

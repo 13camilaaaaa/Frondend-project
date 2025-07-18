@@ -41,15 +41,21 @@ export const productoController = async () => {
 
         if (btnAumentar && inputCantidad) {
             btnAumentar.addEventListener('click', () => {
-                inputCantidad.value = parseInt(inputCantidad.value) + 1;
+                let nuevaCantidad = parseInt(inputCantidad.value) + 1;
+                if (nuevaCantidad <= producto.stock) {
+                    inputCantidad.value = nuevaCantidad;
+                }
+                actualizarEstadoBotonesCantidad();
             });
         }
 
         if (btnDisminuir && inputCantidad) {
             btnDisminuir.addEventListener('click', () => {
-                if (parseInt(inputCantidad.value) > 1) {
-                    inputCantidad.value = parseInt(inputCantidad.value) - 1;
+                let nuevaCantidad = parseInt(inputCantidad.value);
+                if (nuevaCantidad > 1) {
+                    inputCantidad.value = nuevaCantidad - 1;
                 }
+                actualizarEstadoBotonesCantidad();
             });
         }
 
@@ -60,6 +66,15 @@ export const productoController = async () => {
                 const usuario = JSON.parse(localStorage.getItem("usuario"));
                 const token = localStorage.getItem("token");
                 const cantidad = parseInt(document.querySelector(".quantity-display").value);
+
+                // validacion de stock antes de armar el producto
+                if (cantidad > producto.stock) {
+                    return Swal.fire({
+                        icon: "error",
+                        title: "Cantidad no válida",
+                        text: `Solo hay ${producto.stock} unidades disponibles.`,
+                    });
+                }
 
                 const productoPendiente = {
                     id_producto: producto.id,
@@ -158,6 +173,31 @@ export const productoController = async () => {
         console.error("Error en productoController:", err);
         Swal.fire("Error", "No se pudo mostrar el detalle del producto", "error");
     }
+
+    const actualizarEstadoBotonesCantidad = () => {
+        const cantidadActual = parseInt(inputCantidad.value);
+
+        // deshabilita el "+" si ya es igual al stock
+        if (cantidadActual >= producto.stock) {
+            btnAumentar.disabled = true;
+            Swal.fire({
+                icon: "warning",
+                title: "Stock insuficiente",
+                text: `Solo hay ${producto.stock} unidades disponibles.`,
+            });
+
+        } else {
+            btnAumentar.disabled = false;
+        }
+
+        // deshabilita el "-" si la cantidad es 1
+        if (cantidadActual <= 1) {
+            btnDisminuir.disabled = true;
+        } else {
+            btnDisminuir.disabled = false;
+        }
+    };
+
 };
 
 

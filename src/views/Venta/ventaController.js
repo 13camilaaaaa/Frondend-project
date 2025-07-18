@@ -146,6 +146,19 @@ const obtenerDireccionesDesdeUsuarioLocal = (usuario) => {
     return addresses;
 };
 
+function ocultarCorreo(correo) {
+    if (!correo || !correo.includes("@")) return "********";
+
+    const [nombre, dominioCompleto] = correo.split("@");
+    const dominioPartes = dominioCompleto.split(".");
+    const dominioNombre = dominioPartes[0]; // parte antes del .com
+
+    const visibleNombre = nombre[0];
+    const visibleDominio = dominioNombre[0];
+    const dominioRestante = dominioCompleto.slice(1); // incluye .com o .co
+
+    return `${visibleNombre}${"*".repeat(nombre.length - 1)}@${visibleDominio}${"*".repeat(dominioNombre.length - 1)}.${dominioPartes.slice(1).join(".")}`;
+}
 
 const renderUserInfo = () => {
     const userNameEl = document.getElementById('userName');
@@ -155,7 +168,7 @@ const renderUserInfo = () => {
     if (currentUser) {
         userNameEl.textContent = `${currentUser.nombre_usuario || ''} ${currentUser.apellido_usuario || ''}`;
         userIdentificationEl.textContent = currentUser.numero_identificacion ? `${currentUser.tipo_identificacion_nombre || ''}: ${currentUser.numero_identificacion}` : 'No proporcionado';
-        userEmailEl.textContent = currentUser.correo_usuario || 'No proporcionado';
+        userEmailEl.textContent = ocultarCorreo(currentUser.correo_usuario) || 'No proporcionado';
     } else {
         userNameEl.textContent = 'No disponible';
         userIdentificationEl.textContent = 'No disponible';
@@ -335,11 +348,11 @@ const handlePlaceOrder = async () => {
                 talla: item.talla || item.talla_nombre_al_momento || null,
                 color: item.color || item.color_nombre_al_momento || null
             }));
-            
+
             console.log("🟡 Productos enviados al backend:", productsToSend);
             if (productsToSend.length === 0) {
                 Swal.showValidationMessage('El carrito está vacío. No se puede realizar el pedido.');
-                
+
                 return false;
             }
             try {

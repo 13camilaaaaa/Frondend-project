@@ -1,12 +1,8 @@
-// src/components/footer.js
 
+    const footer = document.getElementById('footer');
 
-    const footer = document.getElementById('footer'); // Este es tu <footer id="footer">
-
-    // Una nueva clase para el <footer>
-
-    const footerContentWrapper = document.createElement('div'); // Este es tu nuevo div "footerElement"
-    footerContentWrapper.classList.add('footer-container-wrapper'); // Nueva clase para envolver el contenido
+    const footerContentWrapper = document.createElement('div');
+    footerContentWrapper.classList.add('footer-container-wrapper');
 
     footerContentWrapper.innerHTML = `
         <div class="footer-container">
@@ -42,5 +38,4 @@
         </div>
     `;
 
-    // Agrega el div que contiene todo el contenido del footer al footer nativo del HTML
     footer.append(footerContentWrapper);

@@ -8,7 +8,7 @@
 }
 
 /* Contenedor principal para la página de Pagos */
-.payments-container { /* Puedes usar .shipping-container si quieres un estilo más genérico */
+.payments-container {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
@@ -29,7 +29,7 @@ h1 {
 }
 
 .accordion {
-    border-top: 1px solid #ddd; /* Borde superior para todo el acordeón */
+    border-top: 1px solid #ddd;
 }
 
 .accordion-item {
@@ -55,31 +55,31 @@ h1 {
 .accordion-header .question {
     font-size: 1.1em;
     font-weight: bold;
-    color: #000; /* Color predeterminado de la pregunta */
+    color: #000;
     transition: color 0.3s ease;
 }
 
 .accordion-header i {
     font-size: 1.2em;
-    color: var(--color-green); /* Color predeterminado del icono */
+    color: var(--color-green);
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 /* Estilos cuando el elemento del acordeón está activo (abierto) */
 .accordion-item.active .accordion-header .question {
-    color: #e00; /* Color rojo para la pregunta activa */
+    color: #e00;
 }
 
 .accordion-item.active .accordion-header i {
-    transform: rotate(180deg); /* Gira el icono cuando está activo */
-    color: #e00; /* Color rojo para el icono activo */
+    transform: rotate(180deg);
+    color: #e00;
 }
 
 .accordion-content {
     padding: 0 20px;
-    max-height: 0; /* Inicialmente oculto */
+    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Efecto de deslizamiento suave */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
     background-color: #fff;
 }
 
@@ -94,11 +94,11 @@ h1 {
 }
 
 .accordion-content p:last-child {
-    margin-bottom: 0; /* Sin margen inferior para el último párrafo */
+    margin-bottom: 0;
 }
 
 .accordion-content a {
-    color: #007bff; /* Color del enlace */
+    color: #007bff;
     text-decoration: none;
 }
 

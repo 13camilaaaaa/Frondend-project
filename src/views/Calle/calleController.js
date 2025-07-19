@@ -1,4 +1,3 @@
-// views/Calle/calleController.js
 export const calleController = () => {
     // obtener el objeto del usuario desde localStorage
     const usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -7,20 +6,15 @@ export const calleController = () => {
         console.warn("No se encontró información del usuario.");
         return;
     }
-
     // actualizar el saludo
     const saludo = document.querySelector(".saludo_usuario");
     if (saludo) {
         saludo.textContent = `Hola, ${usuario.nombre_usuario}!`;
     }
-
-
     const contenedor = document.getElementById("contenedor_direcciones");
     const mensaje = document.getElementById("mensaje_sin_direcciones");
-
     // limpiar
     mensaje.innerHTML = "";
-
     // validamos si hay datos de dirección
     if (
         usuario.direccion_tipo_via &&
@@ -29,7 +23,6 @@ export const calleController = () => {
         usuario.direccion_departamento &&
         usuario.direccion_pais
     ) {
-
         // construir dirección visualmente
         const direccionHTML = `
         <p>${usuario.direccion_tipo_via} ${usuario.direccion_numero_via}${usuario.direccion_complemento} -${usuario.direccion_barrio}</p>
@@ -40,7 +33,6 @@ export const calleController = () => {
     } else {
         mensaje.innerHTML = "<p>Aún no tienes una dirección registrada.</p>";
     }
-
     document.getElementById("btn_anadir_calle").addEventListener("click", () => {
         location.hash = "#calle/edit";
     });

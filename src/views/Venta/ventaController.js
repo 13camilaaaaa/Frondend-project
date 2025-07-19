@@ -2,17 +2,17 @@ import Swal from "sweetalert2";
 
 let currentUser = null;
 let userAddresses = [];
-let cartItems = []; // Esto se cargará desde el backend con fetchVentaInfo
+let cartItems = [];
 let selectedAddressId = null;
-let selectedPaymentMethod = "Contra Entrega Efectivo"; // Valor por defecto
+let selectedPaymentMethod = "Contra Entrega Efectivo";
 
 // Nueva función para actualizar la vista completa de venta
 export const updateVentaView = async () => {
     console.log("Updating Venta View...");
-    const success = await fetchVentaInfo(); // Re-fetch all necessary data
+    const success = await fetchVentaInfo();
     if (success) {
         renderUserInfo();
-        renderAddressOptions(); // Las direcciones pueden cambiar si el usuario las edita en perfil
+        renderAddressOptions();
         renderProductList();
     } else {
         document.querySelector('.container').innerHTML = '<p>No se pudo cargar la información de venta. Por favor, intenta de nuevo o revisa tus datos de perfil.</p>';
@@ -23,13 +23,11 @@ export const ventaController = async () => { // Hacemos el controlador exportabl
     console.log("Venta Controller loaded.");
 
     await updateVentaView(); // Carga inicial de la vista
-
     const placeOrderBtn = document.getElementById('placeOrderBtn');
     if (placeOrderBtn) {
         placeOrderBtn.removeEventListener('click', handlePlaceOrder);
         placeOrderBtn.addEventListener('click', handlePlaceOrder);
     }
-
     document.querySelectorAll('.payment-method-item').forEach(item => {
         item.removeEventListener('click', handlePaymentMethodClick);
         item.addEventListener('click', handlePaymentMethodClick);
@@ -46,7 +44,7 @@ const handlePaymentMethodClick = (event) => {
 
 
 /**
- * Función para obtener la información del usuario (de localStorage), sus direcciones (del mismo objeto de usuario) y su carrito (del backend).
+ * Función para obtener la información del usuario 
  */
 const fetchVentaInfo = async () => {
     const token = localStorage.getItem("token");
@@ -76,8 +74,8 @@ const fetchVentaInfo = async () => {
             return false;
         }
 
-        // --- OBTENER DIRECCIONES DEL OBJETO currentUser (NO SE HACE FETCH ADICIONAL) ---
-        userAddresses = obtenerDireccionesDesdeUsuarioLocal(currentUser); // <-- Aquí se usa la función corregida
+        // --- OBTENER DIRECCIONES DEL OBJETO currentUser
+        userAddresses = obtenerDireccionesDesdeUsuarioLocal(currentUser);
 
         // --- FETCH DEL CARRITO ---
         const carritoResponse = await fetch("http://localhost:3000/api/carrito", {
@@ -93,13 +91,11 @@ const fetchVentaInfo = async () => {
             if (userAddresses.length > 0) {
                 // Si ya hay una seleccionada y está en la lista de direcciones, la mantenemos
                 if (selectedAddressId && userAddresses.some(addr => String(addr.id) === String(selectedAddressId))) {
-                    // selectedAddressId ya es válido, no hacemos nada
                 } else {
-                    // Si no hay seleccionada, o la seleccionada no es válida, seleccionamos la primera
                     selectedAddressId = userAddresses[0].id;
                 }
             } else {
-                selectedAddressId = null; // No hay direcciones disponibles
+                selectedAddressId = null;
             }
             return true;
         } else {
@@ -129,8 +125,6 @@ const fetchVentaInfo = async () => {
  */
 const obtenerDireccionesDesdeUsuarioLocal = (usuario) => {
     const addresses = [];
-    // Verificar si el objeto de usuario contiene los campos de dirección
-    // Usamos usuario.id como el ID de esta dirección única del usuario
     if (usuario.id_direccion && usuario.direccion_numero_via && usuario.direccion_ciudad && usuario.direccion_barrio) {
         addresses.push({
             id: usuario.id,
@@ -159,7 +153,6 @@ function ocultarCorreo(correo) {
 
     return `${visibleNombre}${"*".repeat(nombre.length - 1)}@${visibleDominio}${"*".repeat(dominioNombre.length - 1)}.${dominioPartes.slice(1).join(".")}`;
 }
-
 const renderUserInfo = () => {
     const userNameEl = document.getElementById('userName');
     const userIdentificationEl = document.getElementById('userIdentification');
@@ -209,12 +202,11 @@ const renderAddressOptions = () => {
             selectedAddressId = currentAddressId;
         });
 
-        // Adjuntar listener para el botón de editar dirección (si aplica)
+        // Adjuntar listener para el botón de editar dirección
         const editBtn = addressItem.querySelector('.edit-address-btn');
         if (editBtn) {
             editBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evitar que el clic en el botón seleccione la dirección
-                // Aquí podrías redirigir al perfil o abrir un modal para editar la dirección
+                e.stopPropagation(); 
                 location.hash = `#perfil?tab=direccion&edit=${currentAddressId}`;
             });
         }
@@ -235,7 +227,7 @@ const renderProductList = () => {
 
     let subtotal = 0;
     const itemsHtml = cartItems.map(item => {
-        const itemPrice = parseFloat(item.precio || 0); // Asegúrate de que item.precio es el precio unitario del producto
+        const itemPrice = parseFloat(item.precio || 0);
         const itemQuantity = parseInt(item.cantidad || 0);
         const itemTotalPrice = itemPrice * itemQuantity;
         subtotal += itemTotalPrice;
@@ -263,9 +255,8 @@ const renderProductList = () => {
  * Muestra alertas si falta información y le da opciones.
  */
 const validateUserInfoForOrder = () => {
-    // Si no hay currentUser, o falta identificación o dirección, mostrar alerta y dar opciones
     const missingIdentification = !currentUser || !currentUser.numero_identificacion || !currentUser.id_tipo_identificacion;
-    const missingAddress = userAddresses.length === 0 || !selectedAddressId; // Validar si hay direcciones cargadas o seleccionada
+    const missingAddress = userAddresses.length === 0 || !selectedAddressId;
     const cartEmpty = cartItems.length === 0;
 
     if (cartEmpty) {
@@ -311,7 +302,6 @@ const validateUserInfoForOrder = () => {
         });
         return false;
     }
-
     return true; // Si todo está bien, devuelve true
 };
 
@@ -319,16 +309,13 @@ const handlePlaceOrder = async () => {
     if (!validateUserInfoForOrder()) {
         return;
     }
-
     const selectedPaymentRadio = document.querySelector('input[name="paymentMethod"]:checked');
-
     if (selectedPaymentRadio) {
         selectedPaymentMethod = selectedPaymentRadio.value;
     } else {
         Swal.fire('Error', 'Por favor, selecciona un método de pago.', 'error');
         return;
     }
-
     Swal.fire({
         title: '¿Confirmar Pedido?',
         text: `Estás a punto de realizar tu pedido con un total de ${document.getElementById('summaryTotal').textContent}.`,
@@ -340,7 +327,6 @@ const handlePlaceOrder = async () => {
         preConfirm: async () => {
             const token = localStorage.getItem("token");
             const totalOrder = parseFloat(document.getElementById('summaryTotal').textContent.replace('$', '').replace(/\./g, '').replace(',', '.'));
-
             const productsToSend = cartItems.map(item => ({
                 id_producto: item.id_producto || item.id,
                 cantidad: item.cantidad,
@@ -348,11 +334,9 @@ const handlePlaceOrder = async () => {
                 talla: item.talla || item.talla_nombre_al_momento || null,
                 color: item.color || item.color_nombre_al_momento || null
             }));
-
             console.log("🟡 Productos enviados al backend:", productsToSend);
             if (productsToSend.length === 0) {
                 Swal.showValidationMessage('El carrito está vacío. No se puede realizar el pedido.');
-
                 return false;
             }
             try {
@@ -364,14 +348,12 @@ const handlePlaceOrder = async () => {
                     },
                     body: JSON.stringify({
                         id_usuario: currentUser.id,
-                        id_direccion_envio: selectedAddressId, // Este será el ID del usuario si la dirección es parte del objeto de usuario
+                        id_direccion_envio: selectedAddressId,
                         metodo_pago: selectedPaymentMethod,
                         total: totalOrder,
                         productos: productsToSend
                     })
-
                 });
-
                 const data = await response.json();
                 if (!response.ok) {
                     throw new Error(data.message || 'Error al realizar el pedido.');
@@ -389,7 +371,6 @@ const handlePlaceOrder = async () => {
             localStorage.removeItem('cart');
             localStorage.removeItem('cartItems');
             cartItems = [];
-
             Swal.fire({
                 icon: 'success',
                 title: '¡Pedido Realizado!',

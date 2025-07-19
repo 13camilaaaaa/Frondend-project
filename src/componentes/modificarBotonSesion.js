@@ -1,9 +1,6 @@
-// src/componentes/modificarBotonSesion.js
-import Swal from "sweetalert2";
-
 export function modificarBotonSesion() {
-    const authSection = document.querySelector("#authSection"); // enlace <a> con ID
-    const loginText = authSection.querySelector("span"); // span con el texto
+    const authSection = document.querySelector("#authSection");
+    const loginText = authSection.querySelector("span");
     const userContainer = document.querySelector("#user-info-container");
 
     const token = localStorage.getItem("token");
@@ -28,17 +25,13 @@ export function modificarBotonSesion() {
 
         userContainer.appendChild(userInfo);
         authSection.innerHTML = "";
-
         const cerrarIcon = document.createElement("i");
         cerrarIcon.classList.add("fas", "fa-sign-out-alt");
         cerrarIcon.style.marginRight = "5px";
-
         const cerrarText = document.createElement("span");
         cerrarText.classList.add("menu__link-text");
         cerrarText.textContent = "Cerrar sesión";
-
         authSection.append(cerrarIcon, cerrarText);
-
         authSection.onclick = () => {
             localStorage.clear();
             location.hash = "#login";
@@ -46,7 +39,6 @@ export function modificarBotonSesion() {
         };
     } else {
         userContainer.innerHTML = "";
-
         loginText.textContent = "Iniciar sesión";
         authSection.onclick = () => {
             location.hash = "#login";

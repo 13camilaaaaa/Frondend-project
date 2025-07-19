@@ -5,7 +5,6 @@
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
-    /* Permite que los bloques se envuelvan en pantallas pequeñas */
 }
 
 .checkout-section {
@@ -18,22 +17,15 @@
 
 .checkout-main-content {
     flex: 2;
-    /* Ocupa más espacio */
     min-width: 300px;
-    /* Ancho mínimo para que no se colapse */
 }
 
 .checkout-summary {
     flex: 1;
-    /* Ocupa menos espacio */
     min-width: 280px;
-    /* Ancho mínimo */
     max-height: fit-content;
-    /* Ajusta la altura al contenido */
     position: sticky;
-    /* Se mantiene visible al hacer scroll */
     top: 40px;
-    /* Distancia desde la parte superior */
 }
 
 h1 {
@@ -56,10 +48,8 @@ h2 {
 /* Sección de productos */
 .product-list {
     max-height: 400px;
-    /* Altura máxima para scroll */
     overflow-y: auto;
     padding-right: 15px;
-    /* Espacio para el scrollbar */
     margin-bottom: 20px;
 }
 
@@ -218,15 +208,13 @@ h2 {
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
-    /* Para una transición suave al cambiar de estado */
     background-color: #f9f9f9;
-    /* Fondo ligero para las no seleccionadas */
 }
 
 .payment-method-item.selected {
-    border-color: #007bff; /* Borde azul para el seleccionado, como en tu imagen de ejemplo */
-    background-color: #e6f2ff; /* Un fondo más claro para el seleccionado */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Sombra sutil para destacar */
+    border-color: #007bff;
+    background-color: #e6f2ff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
 .payment-method-item:hover {
@@ -242,7 +230,6 @@ h2 {
     font-size: 1em;
     font-weight: 500;
     color: #333;
-    /* cursor: pointer; */
 }
 
 /* Resumen del pedido */
@@ -304,7 +291,6 @@ h2 {
         flex: none;
         width: 100%;
         position: static;
-        /* Desactiva sticky en móviles */
         top: auto;
     }
 

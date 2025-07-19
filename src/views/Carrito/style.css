@@ -10,7 +10,6 @@
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
-    /* evita clics si está invisible */
 }
 
 .sidebar-overlay.active {
@@ -25,7 +24,6 @@
     right: 0;
     width: 100%;
     max-width: 400px;
-    /* Ajusta según sea necesario */
     height: 100%;
     background-color: #ffffff;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
@@ -49,7 +47,6 @@
     border-bottom: 1px solid #eee;
     background-color: #fdfdfd;
     position: sticky;
-    /* Para que el header se quede arriba */
     top: 0;
     z-index: 10;
 }
@@ -60,9 +57,7 @@
     color: #333;
     font-weight: 700;
     flex-grow: 1;
-    /* Para que el título ocupe espacio y el botón se alinee a la derecha */
     text-align: center;
-    /* Centrar "Shopping Bag" */
 }
 
 .close-btn {
@@ -74,7 +69,6 @@
     padding: 5px;
     transition: color 0.2s ease;
     order: -1;
-    /* Mueve el botón de cerrar a la izquierda */
 }
 
 .close-btn:hover {
@@ -86,14 +80,11 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    /* justify-content y align-items se ajustan en JS */
     align-items: center;
     text-align: center;
     padding: 5px;
     overflow-y: auto;
-    /* Permite scroll para el contenido vacío si es necesario (ej. en móviles muy pequeños) */
     position: relative;
-    /* Para el posicionamiento del contenido */
 }
 
 .cart-empty-icon {
@@ -111,7 +102,6 @@
 
 .continue-shopping-btn {
     background-color: #007bff;
-    /* Color azul, puedes cambiarlo */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -152,32 +142,25 @@
     width: 100%;
     height: 100%;
     padding: 10px 25px;
-    /* Ajusta el padding para la lista de productos */
     box-sizing: border-box;
-    /* max-height y overflow-y se setean en JS */
 }
 
 .cart-item {
     display: flex;
     align-items: flex-start;
-    /* Alinea los items en la parte superior */
     padding: 15px 0;
     border-bottom: 1px solid #eee;
     gap: 15px;
-    /* Espacio entre imagen y detalles */
 }
 
 .cart-item:last-child {
     border-bottom: none;
-    /* Elimina el borde del último ítem */
 }
 
 .cart-item-img {
     width: 80px;
-    /* Tamaño de la imagen como en el ejemplo */
     height: 80px;
     object-fit: contain;
-    /* Para que la imagen se ajuste sin recortarse */
     border: 1px solid #f0f0f0;
     flex-shrink: 0;
 }
@@ -187,7 +170,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Para separar precio/cantidad del título/variante */
 }
 
 .cart-item-title {
@@ -210,7 +192,6 @@
     align-items: center;
     width: 100%;
     margin-top: 5px;
-    /* Asegura que ocupe todo el ancho disponible */
 }
 
 .cart-item-price {
@@ -225,11 +206,8 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     overflow: hidden;
-    /* Esto es clave para que los bordes redondeados se vean bien */
     width: 100px;
-    /* Ajusta este ancho según tu diseño, para que quepa todo */
     max-width: 100%;
-    /* Asegura que no se desborde del padre */
 }
 
 .quantity-btn {
@@ -241,7 +219,6 @@
     color: #555;
     transition: background-color 0.2s ease;
     flex-shrink: 0;
-    /* Evita que el botón se encoja */
 }
 
 .quantity-btn:hover {
@@ -257,16 +234,13 @@
     outline: none;
     color: #333;
     flex-grow: 1;
-    /* Permite que ocupe el espacio restante */
 }
 
-/* Ocultar flechas en input type="number" para Chrome, Safari, Edge, Opera */
 .quantity-display-cart::-webkit-outer-spin-button,
 .quantity-display-cart::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
 
 .remove-item-btn {
     flex-shrink: 0;
@@ -278,12 +252,10 @@
     padding: 5px;
     transition: color 0.2s ease;
     align-self: center;
-    /* Alinea el icono de basura al centro vertical */
 }
 
 .remove-item-btn:hover {
     color: #e74c3c;
-    /* Rojo al pasar el mouse */
 }
 
 
@@ -293,7 +265,6 @@
     border-top: 1px solid #eee;
     background-color: #fdfdfd;
     position: sticky;
-    /* Para que el footer se quede abajo */
     bottom: 0;
     z-index: 10;
 }
@@ -324,7 +295,6 @@
 .checkout-btn {
     width: 100%;
     background-color: #000;
-    /* Negro como en la imagen */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -349,15 +319,11 @@
     align-items: center;
     justify-content: center;
     width: 50px;
-    /* Tamaño del botón */
     height: 50px;
     background-color: #25d366;
-    /* Color de WhatsApp */
     color: #fff;
     border-radius: 50%;
-    /* Botón redondo */
     font-size: 2em;
-    /* Tamaño del ícono */
     text-decoration: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;

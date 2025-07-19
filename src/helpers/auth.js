@@ -1,6 +1,5 @@
 
-import {jwtDecode} from "jwt-decode"; // Asegúrate de tener esta librería instalada
-import { fetchConToken } from "../helpers/fetchConToken.js";
+import { jwtDecode } from "jwt-decode";
 
 export const estaAutenticado = () => {
     const token = localStorage.getItem("token");
@@ -13,10 +12,8 @@ export const estaAutenticado = () => {
         const ahora = Date.now() / 1000;
 
         if (exp < ahora) {
-            // token expirado, intenta renovar
             return renovarToken(refreshToken);
         }
-
         return true;
     } catch (error) {
         return false;
@@ -25,7 +22,6 @@ export const estaAutenticado = () => {
 
 const renovarToken = async (refreshToken) => {
     if (!refreshToken) return false;
-
     try {
         const response = await fetch("http://localhost:3000/api/auth/refresh", {
             method: "POST",
@@ -34,15 +30,12 @@ const renovarToken = async (refreshToken) => {
         });
 
         const data = await response.json();
-
         if (data.success && data.data?.token) {
             localStorage.setItem("token", data.data.token);
             return true;
         }
-
         localStorage.clear();
         return false;
-
     } catch (err) {
         localStorage.clear();
         return false;

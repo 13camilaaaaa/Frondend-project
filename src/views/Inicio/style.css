@@ -11,7 +11,6 @@
 /* Estilos para el contenedor principal de productos (grid) */
 #contenedor-productos {
     display: grid;
-    /* Columna por defecto para móviles */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
@@ -28,19 +27,14 @@ h2 {
 .card {
     background-color: #fff;
     border: 1px solid #e0e0e0;
-    /* Borde sutil */
     border-radius: 0px;
-    /* Bordes rectos como en la imagen */
     overflow: hidden;
-    /* Asegura que la imagen no se salga */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    /* Sombra suave */
     display: flex;
     flex-direction: column;
     text-decoration: none;
     width: 100%;
     height: 100%;
-    /* Si la tarjeta es un enlace */
     color: inherit;
     transition: box-shadow 0.2s ease;
     cursor: pointer;
@@ -48,17 +42,13 @@ h2 {
 
 .card:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Sombra más pronunciada al pasar el mouse */
 }
 
 /* Contenedor de la imagen (para posicionar el corazón) */
 .card-img-container {
     position: relative;
-    /* Para que el ícono de corazón se posicione relativo a él */
     width: 100%;
-    /* Relación de aspecto 4:3 (o la que se ajuste a tus imágenes) */
     padding-bottom: 133%;
-    /* 4:3 -> 75%, H&M usa más alto para sus productos (ej. 300px/400px -> 133%) */
     overflow: hidden;
     background-color: white;
 }
@@ -81,26 +71,19 @@ h2 {
 .heart-icon {
     position: absolute;
     bottom: 10px;
-    /* Distancia desde abajo */
     right: 10px;
-    /* Distancia desde la derecha */
     background-color: rgba(255, 255, 255, 0.8);
-    /* Fondo blanco semitransparente */
     border: none;
     border-radius: 50%;
-    /* Redondo */
     width: 35px;
-    /* Tamaño del botón */
     height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* Sombra sutil */
     transition: background-color 0.2s ease, transform 0.2s ease;
     z-index: 10;
-    /* Asegura que esté por encima de la imagen */
 }
 
 .heart-icon:hover {
@@ -111,7 +94,6 @@ h2 {
 .heart-icon i {
     font-size: 1.2em;
     color: #333;
-    /* Color del corazón */
 }
 
 /* Estilos de la información del producto */
@@ -120,13 +102,11 @@ h2 {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    /* Permite que la información ocupe el espacio restante */
 }
 
 .card-info h3 {
     font-size: 1.1em;
     font-weight: normal;
-    /* No tan bold, más parecido a la imagen */
     margin: 0 0 5px 0;
     color: #333;
     line-height: 1.3;
@@ -143,7 +123,6 @@ h2 {
     font-weight: bold;
     color: #bb2525;
     margin-top: auto;
-    /* Empuja el precio y los colores hacia abajo */
     margin-bottom: 10px;
 }
 

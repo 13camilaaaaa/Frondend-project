@@ -1,9 +1,6 @@
-/* ... (Mantén todo el CSS anterior para body, h1, los acordeones, etc.) ... */
-
 /* Contenedor principal para la página de Tiendas */
 .stores-container {
     max-width: 1200px;
-    /* Un poco más ancho para el mapa */
     margin: 0 auto;
     padding: 20px;
 }
@@ -12,17 +9,13 @@
 .stores-content {
     display: flex;
     flex-wrap: wrap;
-    /* Permite que los elementos se envuelvan en pantallas pequeñas */
     gap: 20px;
-    /* Espacio entre la lista y el mapa */
 }
 
 /* Sección de la lista de tiendas */
 .stores-list {
     flex: 1;
-    /* Ocupa el espacio disponible */
     min-width: 300px;
-    /* Ancho mínimo para la lista */
     background-color: #fff;
     border: 1px solid #eee;
     border-radius: 5px;
@@ -40,12 +33,10 @@
 
 .store-item:last-child {
     border-bottom: none;
-    /* No hay borde en el último elemento */
 }
 
 .store-item:hover,
 .store-item.active {
-    /* 'active' si quisieras destacar la tienda seleccionada */
     background-color: #f5f5f5;
 }
 
@@ -68,65 +59,45 @@
     color: #777;
 }
 
-
-/* ... (Mantén todo el CSS anterior para body, h1, los acordeones, .stores-container, .stores-content, .stores-list, .store-item) ... */
-
 /* Sección de la imagen del local (antes stores-map) */
 .stores-image-container {
     flex: 2;
-    /* Ocupa el doble de espacio que la lista */
     min-width: 400px;
-    /* Ancho mínimo para la imagen */
     background-color: #fff;
-    /* Fondo blanco como las otras cajas */
     border: 1px solid #eee;
-    /* Borde suave */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     display: flex;
-    /* Para centrar la imagen si es más pequeña */
     justify-content: center;
     align-items: center;
     min-height: 400px;
-    /* Altura mínima para el contenedor de la imagen */
     overflow: hidden;
-    /* Asegura que la imagen no se desborde */
 }
 
 .store-photo {
     max-width: 100%;
-    /* Asegura que la imagen se ajuste al contenedor */
     height: auto;
-    /* Mantiene la proporción de la imagen */
     display: block;
-    /* Elimina espacio extra debajo de la imagen */
     object-fit: cover;
-    /* Recorta la imagen para llenar el contenedor manteniendo su relación de aspecto */
     width: 100%;
-    /* Asegura que la imagen ocupe todo el ancho disponible */
     height: 100%;
-    /* Asegura que la imagen ocupe toda la altura disponible */
 }
 
-/* Media Queries (no necesitan cambios significativos, pero asegúrate de que el .stores-image-container se comporte bien) */
+/* Media Queries */
 @media (max-width: 768px) {
 
     .stores-content {
         flex-direction: column;
-        /* Apila la lista y el mapa en pantallas pequeñas */
     }
 
     .stores-list,
     .stores-map {
         min-width: unset;
-        /* Reinicia el ancho mínimo */
         width: 100%;
-        /* Ocupa todo el ancho */
     }
 
     .stores-map {
         min-height: 300px;
-        /* Ajusta la altura del mapa para pantallas más pequeñas */
     }
 
     h1 {
@@ -139,13 +110,11 @@
 
     .stores-list,
     .stores-image-container {
-        /* Cambiado de .stores-map a .stores-image-container */
         min-width: unset;
         width: 100%;
     }
 
     .stores-image-container {
-        /* Cambiado de .stores-map a .stores-image-container */
         min-height: 300px;
     }
 }

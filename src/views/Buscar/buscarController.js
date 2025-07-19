@@ -1,4 +1,3 @@
-// src/views/Buscar/buscarController.js
 import { listar_productos } from "../../casos de uso/listarProductos.js";
 
 /**
@@ -7,39 +6,30 @@ import { listar_productos } from "../../casos de uso/listarProductos.js";
  */
 export const buscarController = async (params) => {
     const contenedor = document.getElementById("resultadosBusqueda");
-
     if (!contenedor) {
         console.warn("contenedor no encontrado en buscarController");
         return;
     }
-
     const productos = await listar_productos();
-
     const query = decodeURIComponent(params?.query || "").toLowerCase();
-
     const resultados = productos.filter(prod =>
         prod.nombre.toLowerCase().includes(query)
     );
-
     mostrarResultados(resultados, contenedor);
 };
 
 const mostrarResultados = (productos, contenedor) => {
-
     if (productos.length === 0) {
         contenedor.innerHTML += "<p>No se encontraron productos.</p>";
         return;
     }
-
     productos.forEach(producto => {
         const card = document.createElement('div');
         card.classList.add('card');
-
         const divimg = document.createElement('div');
         divimg.classList.add('card-img-container');
         // agregar imagen y contenido a la tarjeta
         const img = document.createElement('img');
-        // img.setAttribute('src', `/src/uploads/${producto.img}`); // ruta de la imagen por db
         img.setAttribute('src', `/src/uploads/${producto.imagen}`); // ruta de la imagen por defecto
         img.setAttribute('alt', producto.nombre);
         img.classList.add('card-img');

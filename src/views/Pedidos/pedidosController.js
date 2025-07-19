@@ -5,49 +5,38 @@ export const pedidosController = async () => {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     const container = document.querySelector(".container-pedidos");
     const saludo = document.querySelector(".saludo_usuario");
-
     if (saludo && usuario) {
         saludo.textContent = `Hola, ${usuario.nombre_usuario}!`;
     }
-
     if (!token || !usuario) {
         container.innerHTML = "<p>Debes iniciar sesión para ver tus pedidos.</p>";
         return;
     }
-
     try {
         const res = await fetch("http://localhost:3000/api/ventas/mis-pedidos", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         });
-
         const data = await res.json();
-
         if (!res.ok || !data.success) {
             throw new Error(data.message || "No se pudieron obtener los pedidos.");
         }
-
         const pedidos = data.pedidos;
-
         if (pedidos.length === 0) {
             container.innerHTML = "<h2>No tienes pedidos registrados.</h2>";
             return;
         }
-
         container.innerHTML = "<h1>Mis Pedidos</h1>";
-
         // crear wrapper para scroll si hay más de 3
         const pedidosWrapper = document.createElement("div");
         pedidosWrapper.classList.add("pedidos-wrapper");
         if (pedidos.length > 3) {
             pedidosWrapper.classList.add("scroll-container");
         }
-
         pedidos.forEach(pedido => {
             const pedidoBox = document.createElement("div");
             pedidoBox.classList.add("order-details-box");
-
             // Manejar la fecha de forma segura
             let fechaFormateada = "Fecha no disponible";
             if (pedido.fecha && !isNaN(new Date(pedido.fecha))) {
@@ -57,12 +46,10 @@ export const pedidosController = async () => {
                     day: 'numeric'
                 });
             }
-
             // Lista de productos
             const listaProductos = pedido.detalle.map(p =>
                 `<li>${p.nombre} (Cantidad: ${p.cantidad}) - $${parseFloat(p.precio_unitario).toLocaleString('es-CO')}</li>`
             ).join("");
-
             // Contenido del pedido
             pedidoBox.innerHTML = `
                 <div class="detail-row">
@@ -82,7 +69,6 @@ export const pedidosController = async () => {
                     <span class="value estado-${pedido.estado_pedido.toLowerCase()}">${pedido.estado_pedido}</span>
                 </div>
             `;
-
             // Botón para cancelar si el estado no es "cancelado"
             if (
                 pedido.estado_pedido.toLowerCase() !== "cancelado" &&
@@ -95,7 +81,6 @@ export const pedidosController = async () => {
                 const btnCancelar = document.createElement("button");
                 btnCancelar.classList.add("cancel-button");
                 btnCancelar.textContent = "CANCELAR PEDIDO";
-
                 btnCancelar.addEventListener("click", async () => {
                     const confirm = await Swal.fire({
                         title: "¿Estás seguro?",
@@ -105,7 +90,6 @@ export const pedidosController = async () => {
                         confirmButtonText: "Sí, cancelar",
                         cancelButtonText: "No"
                     });
-
                     if (confirm.isConfirmed) {
                         const cancelRes = await fetch(`http://localhost:3000/api/ventas/${pedido.id}/status`, {
                             method: "PUT",
@@ -115,9 +99,7 @@ export const pedidosController = async () => {
                             },
                             body: JSON.stringify({ estado_pedido: "Cancelado" })
                         });
-
                         const cancelData = await cancelRes.json();
-
                         if (cancelRes.ok) {
                             Swal.fire("Cancelado", "Tu pedido ha sido cancelado.", "success");
                             pedidosController(); // Recargar vista
@@ -126,15 +108,11 @@ export const pedidosController = async () => {
                         }
                     }
                 });
-
                 pedidoBox.appendChild(btnCancelar);
             }
-
             pedidosWrapper.appendChild(pedidoBox);
         });
-
         container.appendChild(pedidosWrapper);
-
     } catch (error) {
         console.error("Error al cargar pedidos:", error);
         container.innerHTML = `<p>Error al obtener tus pedidos. Intenta más tarde.</p>`;

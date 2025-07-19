@@ -31,8 +31,6 @@ export const registroController = async () => {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-
         if (!Validation.isNotEmpty(nombre_usuario.value) ||
             !Validation.isNotEmpty(apellido_usuario.value) ||
             !Validation.isNotEmpty(correo_usuario.value) ||
@@ -88,7 +86,6 @@ export const registroController = async () => {
             return;
         }
 
-
         const data = {
             nombre_usuario: nombre_usuario.value,
             apellido_usuario: apellido_usuario.value,
@@ -105,9 +102,7 @@ export const registroController = async () => {
                 },
                 body: JSON.stringify(data),
             });
-
             const result = await response.json();
-
             if (result.success) {
                 Swal.fire("¡Registro exitoso!", "Ahora puedes iniciar sesión", "success");
                 form.reset();

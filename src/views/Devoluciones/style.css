@@ -8,11 +8,11 @@
 }
 
 .returns-container{
-    max-width: 900px; /* Ajusta según tus necesidades */
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
 }
-/* Estilo para el párrafo introductorio en negrita (primer párrafo) */
+
 .intro-paragraph-bold {
     font-weight: bold;
     font-size: 1em;
@@ -21,7 +21,7 @@
 }
 
 .intro-paragraph-bold a {
-    color:var(--color-blue); /* Color del enlace, puedes ajustarlo */
+    color:var(--color-blue);
     text-decoration: none;
 }
 
@@ -29,17 +29,15 @@
     text-decoration: underline;
 }
 
-/* Estilo para los párrafos introductorios normales */
 .intro-paragraph {
     margin-bottom: 15px;
     line-height: 1.6;
     color: #555;
 }
 
-/* Estilo para la lista introductoria */
 .intro-list {
-    list-style-type: disc; /* Puntos para la lista */
-    margin-left: 20px; /* Sangría */
+    list-style-type: disc;
+    margin-left: 20px;
     margin-bottom: 20px;
     color: #555;
     line-height: 1.6;
@@ -50,15 +48,14 @@
     color: var(--color-green);
 }
 
-/* ... (El resto de tu CSS para .accordion, .accordion-item, .accordion-header, .accordion-content, etc. va aquí) ... */
 .accordion {
-    border-top: 1px solid #ddd; /* Top border for the whole accordion */
+    border-top: 1px solid #ddd;
 }
 
 .accordion-item {
     border-bottom: 1px solid #ddd;
     background-color: #fff;
-    margin-bottom: 0; /* No margin between items if using border-bottom */
+    margin-bottom: 0;
 }
 
 .accordion-header {
@@ -78,31 +75,30 @@
 .accordion-header .question {
     font-size: 1em;
     font-weight: bold;
-    color: black; /* Default question color */
+    color: black;
     transition: color 0.3s ease;
 }
 
 .accordion-header i {
     font-size: 1.5em;
-    color: var(--color-green); /* Default icon color */
+    color: var(--color-green);
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Styles when the accordion item is active (open) */
 .accordion-item.active .accordion-header .question {
-    color: #e00; /* Red color for active question */
+    color: #e00;
 }
 
 .accordion-item.active .accordion-header i {
-    transform: rotate(180deg); /* Rotate icon when active */
-    color: #e00; /* Red color for active icon */
+    transform: rotate(180deg);
+    color: #e00;
 }
 
 .accordion-content {
     padding: 0 20px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Smooth slide effect */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
     background-color: #fff;
 }
 
@@ -117,13 +113,13 @@
 }
 
 .accordion-content p:last-child {
-    margin-bottom: 0; /* No bottom margin for the last paragraph */
+    margin-bottom: 0;
 }
 .accordion-content li {
     margin: 0 20px;
 }
 .accordion-content a {
-    color: #007bff; /* Link color */
+    color: #007bff;
     text-decoration: none;
 }
 
@@ -131,7 +127,6 @@
     text-decoration: underline;
 }
 
-/* Asegúrate de que estas media queries estén al final de tu style.css */
 @media (max-width: 768px) {
     h1 {
         font-size: 2em;

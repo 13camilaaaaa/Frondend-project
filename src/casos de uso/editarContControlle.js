@@ -65,7 +65,7 @@ export const editarContController = () => {
             allowOutsideClick: false,
             allowEscapeKey: false,
             didOpen: () => {
-                Swal.showLoading(); // muestra el spinner
+                Swal.showLoading();
             }
         });
         try {

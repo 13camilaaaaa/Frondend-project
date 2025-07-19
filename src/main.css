@@ -15,9 +15,9 @@ Variables CSS Globales
     --color-fondo: #ffffff;
     --color-sombras: rgb(58, 101, 82);
     --color-letra: #000000;
-    --color-gris-claro: #f0f0f0; /* Nuevo: para hover de botones secundarios */
-    --color-borde-gris: #ccc; /* Nuevo: para bordes de botones secundarios */
-    --color-borde-input: #ddd; /* Nuevo: para bordes de inputs */
+    --color-gris-claro: #f0f0f0;
+    --color-borde-gris: #ccc;
+    --color-borde-input: #ddd;
 }
 
 html {
@@ -370,7 +370,6 @@ body {
 
 .conoce-mas {
     display: block;
-    /* Para que tome su propia línea */
     font-size: 0.9em;
     color: #000;
     text-decoration: none;
@@ -527,74 +526,72 @@ body {
 }
 
 .info-importante-seccion {
-    position: absolute; /* Posicionamiento absoluto respecto a .contenido_principal */
-    top: 30px; /* Alineado con el padding superior del .contenido_principal */
-    right: 40px; /* Alineado con el padding derecho del .contenido_principal */
-    display: flex; /* Para que el párrafo y el botón estén en línea */
-    align-items: center; /* Centra verticalmente el párrafo y el botón */
-    gap: 10px; /* Espacio entre el texto y el botón */
-    z-index: 10; /* Asegura que esté por encima de otros contenidos si hay superposición */
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
 }
 
 /* Estilos para el párrafo dentro del contenedor */
-.info-importante-seccion p { /* Afecta al p dentro del nuevo contenedor */
-    margin: 0; /* Elimina los márgenes predeterminados del párrafo */
-    font-size: 0.9em; /* Tamaño de fuente un poco más pequeño */
+.info-importante-seccion p {
+    margin: 0;
+    font-size: 0.9em;
     color: #555;
-    white-space: nowrap; /* Evita que el texto "Información Importante" se rompa en varias líneas */
+    white-space: nowrap;
 }
 
 /* Estilos para el botón de información (se mantiene igual) */
 .informacion-calle {
-    background-color: var(--color-green); /* Un color azul para el botón */
-    color: white; /* Color del icono */
+    background-color: var(--color-green);
+    color: white;
     border: none;
-    border-radius: 50%; /* Para que sea un botón circular */
-    width: 35px; /* Ancho del círculo */
-    height: 35px; /* Alto del círculo */
-    display: flex; /* Para centrar el icono dentro del círculo */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-    font-size: 1.2em; /* Tamaño base para el icono */
-    padding: 0; /* Elimina cualquier padding interno que el navegador pueda aplicar por defecto */
-    flex-shrink: 0; /* Evita que el botón se encoja si no hay espacio */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil para darle profundidad */
+    font-size: 1.2em;
+    padding: 0;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .informacion-calle:hover {
-    background-color: var(--color-blue); /* Color más oscuro al pasar el mouse */
-    transform: scale(1.05); /* Ligeramente más grande al pasar el mouse */
+    background-color: var(--color-blue);
+    transform: scale(1.05);
 }
 
-/* --- Icono de "Importante" (se mantiene igual, asumiendo Font Awesome) --- */
+/* --- Icono de "Importante"*/
 .informacion-calle::before {
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    content: '\f05a'; /* Código Unicode para el icono 'info-circle' */
+    content: '\f05a';
 }
-
-
 
 /* Style for the address card (now named .mensaje_sin_direcciones based on your HTML) */
 .mensaje_sin_direcciones {
-    background-color: #fff; /* White background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 25px 30px; /* Internal spacing */
-    position: relative; /* Needed for positioning the edit button if it were absolutely positioned */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px 30px;
+    position: relative;
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: flex-start; /* Align text to the left */
-    gap: 8px; /* Space between paragraphs */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
 }
 
 .mensaje_sin_direcciones p {
-    margin: 0; /* Remove default paragraph margins */
-    font-size: 1.1em; /* Slightly larger text for address details */
-    color: #555; /* Medium grey text color */
-    line-height: 1.4; /* Spacing between lines */
+    margin: 0;
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.4;
 }
 
 /* --- COMPONENTES REUTILIZABLES (Tarjetas, Campos, Botones) --- */
@@ -666,7 +663,7 @@ body {
 
 /* Campo que ocupa todo el ancho en grid (perfil y formularios) */
 .campo_perfil.ancho_completo,
-.campo_formulario.ancho_completo { /* Asumo que también puedes tener esto en formularios */
+.campo_formulario.ancho_completo {
     grid-column: span 2;
 }
 
@@ -674,7 +671,7 @@ body {
 .campo input[type="text"],
 .campo input[type="tel"],
 .campo input[type="date"],
-.campo input[type="email"], /* Añadido si usas email inputs en formularios */
+.campo input[type="email"],
 .campo select {
     width: 100%;
     padding: 10px 12px;
@@ -708,8 +705,8 @@ body {
     cursor: pointer;
     font-size: 0.9em;
     font-weight: bold;
-    border-radius: 5px; /* Unificado */
-    padding: 10px 20px; /* Un padding base que puede ser sobrescrito */
+    border-radius: 5px;
+    padding: 10px 20px;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
     text-transform: uppercase;
     text-align: center;
@@ -717,14 +714,14 @@ body {
 
 /* Botón Primario (ej. AÑADIR CALLE principal) */
 .btn-primary {
-    background-color: #f0ecec; /* Color de fondo actual que tenías en calle.css */
+    background-color: #f0ecec;
     color: var(--color-letra);
     border: 1px solid #333;
 }
 .btn-primary:hover {
     background-color: #555;
     border-color: #555;
-    color: #fff; /* Asegura que el texto se vea en hover oscuro */
+    color: #fff;
 }
 
 /* Botón Secundario (ej. Editar, Guardar, Devolución/Reembolso) */
@@ -739,14 +736,11 @@ body {
     color: #333;
 }
 
-/* Uso de las clases base en tus selectores existentes (HTML se actualizaría con estas clases) */
-
 /* Botón Editar de Perfil */
 .boton_editar {
     position: absolute;
     bottom: 30px;
     right: 30px;
-    /* No necesita padding si ya viene de btn-base o lo quieres igual */
 }
 
 /* Botón Guardar Cambios de Editar Perfil */
@@ -754,12 +748,12 @@ body {
     grid-column: span 2;
     justify-self: end;
     margin-top: 20px;
-    padding: 10px 30px; /* Sobrescribe padding base para ser más ancho */
+    padding: 10px 30px;
 }
 
 /* Botón "Devolución/Reembolso" */
-.boton_secundario { /* Esta clase puede seguir llamándose así en HTML */
-    min-width: 120px; /* Estilo específico de este botón */
+.boton_secundario {
+    min-width: 120px;
 }
 
 /* Botones de Editar/Eliminar Dirección */
@@ -770,15 +764,11 @@ body {
 }
 .boton_editar_direccion,
 .boton_eliminar_direccion {
-    border-radius: 4px; /* Un poco menos redondeado que btn-base */
-    padding: 8px 15px; /* Menor padding */
-    font-size: 0.85em; /* Menor tamaño de fuente */
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 0.85em;
 }
-/* Sus hover ya vienen de .btn-secondary:hover */
-
-
 /* --- ESTILOS ESPECÍFICOS DE PÁGINA (Calle, Editar Perfil) --- */
-
 /* Estilos específicos de la página de "Editar Perfil" */
 .encabezado_edicion {
     margin-bottom: 30px;
@@ -816,7 +806,6 @@ body {
     gap: 20px 40px;
 }
 
-
 /* Estilos específicos de la página de "Calle" */
 .encabezado_calle {
     display: flex;
@@ -843,101 +832,101 @@ body {
 
 
 .card {
-    background-color: #fff; /* White background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 25px 30px; /* Internal spacing */
-    margin-bottom: 20px; /* Space between cards */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px 30px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align content to the left */
+    align-items: flex-start;
 }
 
 .card:last-child {
-    margin-bottom: 0; /* No margin for the last card */
+    margin-bottom: 0;
 }
 
 .card h2 {
-    font-size: 1.4em; /* Size for section titles like "Contraseña" */
+    font-size: 1.4em;
     color: var(--color-letra);
-    margin-top: 0; /* Remove default top margin */
-    margin-bottom: 10px; /* Space below title */
-    font-weight: 600; /* Semi-bold */
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .card p {
     font-size: 1em;
     color: #555;
-    margin-bottom: 20px; /* Space below paragraph */
+    margin-bottom: 20px;
     line-height: 1.5;
 }
 
 /* Styles for the action buttons within the cards (e.g., DEFINIR CONTRASEÑA, VER SESIONES) */
 .btn-action {
-    background-color: transparent; /* Transparent background */
-    border: none; /* No border */
-    color: #333; /* Blue text color, common for interactive elements */
+    background-color: transparent;
+    border: none;
+    color: #333;
     font-size: 0.8em;
-    font-weight: 600; /* Semi-bold */
+    font-weight: 600;
     cursor: pointer;
-    text-transform: uppercase; /* Uppercase text */
-    padding: 8px 0; /* Vertical padding, no horizontal for text-like button */
+    text-transform: uppercase;
+    padding: 8px 0;
     transition: color 0.3s ease;
 }
 
 .btn-action:hover {
-    color: var(--color-blue); /* Darker blue on hover */
-    text-decoration: none; /* Underline on hover for emphasis */
+    color: var(--color-blue);
+    text-decoration: none;
 }
 
 
 /* ------------ auntenticacion ---------------- */
 .card_aut {
-    background-color: #fff; /* White background */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    padding: 25px 30px; /* Internal spacing */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px 30px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align content to the left */
+    align-items: flex-start;
 }
 /* Notification text for code sent */
 .notification-text {
     font-size: 1em;
     color: #555;
-    margin-bottom: 25px; /* Space below this text */
+    margin-bottom: 25px;
     line-height: 1.5;
 }
 
 /* Form group for labels and inputs */
 .form-group {
     width: 100%;
-    margin-bottom: 25px; /* Space between form groups */
-    position: relative; /* For button positioning */
+    margin-bottom: 25px;
+    position: relative;
 }
 
 .form-group label {
-    display: block; /* Make label take full width */
+    display: block;
     font-size: 0.9em;
     color: #777;
-    margin-bottom: 8px; /* Space between label and input */
+    margin-bottom: 8px;
     text-transform: uppercase;
     font-weight: 600;
 }
 
 .input-field {
-    width: calc(100% - 24px); /* Full width minus padding */
+    width: calc(100% - 24px);
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1em;
     color: #333;
-    box-sizing: border-box; /* Include padding in width */
+    box-sizing: border-box;
 }
 
 .input-field:focus {
     outline: none;
-    border-color: #007bff; /* Highlight on focus */
+    border-color: #007bff; 
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
@@ -945,14 +934,14 @@ body {
 .btn-resend {
     background-color: transparent;
     border: none;
-    color: #007bff; /* Blue text color */
+    color: #007bff;
     font-size: 0.9em;
     font-weight: 600;
     cursor: pointer;
     text-transform: uppercase;
     padding: 8px 0;
-    margin-top: 10px; /* Space above button */
-    align-self: flex-start; /* Align to the left within its context (flex column) */
+    margin-top: 10px;
+    align-self: flex-start;
     transition: color 0.3s ease;
 }
 
@@ -968,7 +957,7 @@ body {
 }
 
 .password-input-wrapper .input-field {
-    padding-right: 40px; /* Make space for the eye icon */
+    padding-right: 40px;
 }
 
 .toggle-password {
@@ -981,7 +970,7 @@ body {
     cursor: pointer;
     color: #888;
     font-size: 1.1em;
-    padding: 30px; /* Increase click area */
+    padding: 30px;
 }
 
 .toggle-password:hover {
@@ -992,27 +981,27 @@ body {
 .password-requirements {
     width: 100%;
     margin-top: 10px;
-    margin-bottom: 30px; /* Space before save button */
+    margin-bottom: 30px;
 }
 
 .password-requirements p {
     font-size: 0.95em;
     color: #555;
     margin-bottom: 15px;
-    margin-top: 0; /* Remove default top margin */
+    margin-top: 0;
 }
 
 .requirements-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 10px 20px; /* Vertical and horizontal gap */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
 }
 
 .requirement {
     display: flex;
     align-items: center;
     font-size: 0.9em;
-    color: #777; /* Default grey for requirements */
+    color: #777;
 }
 
 .requirement i {
@@ -1020,9 +1009,8 @@ body {
     font-size: 1.1em;
 }
 
-/* Styles for invalid requirements (red cross) */
 .requirement.invalid {
-    color: #dc3545; /* Bootstrap red color */
+    color: #dc3545;
 }
 
 .requirement.invalid i {
@@ -1031,7 +1019,7 @@ body {
 
 /* Styles for valid requirements (green check - not in current image, but good to have) */
 .requirement.valid {
-    color: #28a745; /* Bootstrap green color */
+    color: #28a745;
 }
 
 .requirement.valid i {
@@ -1040,33 +1028,32 @@ body {
 
 /* Save Password Button */
 .btn-save-password {
-    background-color: #f0f0f0; /* Greyed out as disabled in the image */
-    color: #aaa; /* Lighter text for disabled */
+    background-color: #f0f0f0;
+    color: #aaa;
     border: none;
     border-radius: 5px;
     padding: 12px 25px;
     font-size: 1em;
     font-weight: 600;
-    cursor: not-allowed; /* Indicates it's disabled */
+    cursor: not-allowed;
     text-transform: uppercase;
-    width: auto; /* Allow button to size to content */
-    align-self: flex-start; /* Align to the left */
+    width: auto;
+    align-self: flex-start;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Styles for when the save button becomes active (e.g., via JavaScript) */
 .btn-save-password:not([disabled]) {
-    background-color: #007bff; /* Blue when active */
+    background-color: #007bff;
     color: #fff;
     cursor: pointer;
 }
 
 .btn-save-password:not([disabled]):hover {
-    background-color: #0056b3; /* Darker blue on hover when active */
+    background-color: #0056b3; 
 }
 
 /* --- MEDIA QUERIES --- */
-
 /* Tablets y pantallas pequeñas de escritorio (768px y abajo) */
 @media (max-width: 768px) {
     /* Header (Consolidado) */
@@ -1083,7 +1070,7 @@ body {
     }
     .hamburger-menu-icon {
         display: block;
-        order: -2; /* Mueve a la izquierda */
+        order: -2;
         margin-right: 15px;
     }
     .menu__link--contacto {
@@ -1100,11 +1087,11 @@ body {
     }
     .search-header-container {
         display: flex;
-        order: 2; /* Va después de los elementos principales */
+        order: 2;
         width: 100%;
         margin-top: 10px;
         justify-content: center;
-        max-width: unset; /* Eliminar max-width para móvil */
+        max-width: unset;
     }
     .categories-bar,
     .search-desktop-container {
@@ -1195,9 +1182,9 @@ body {
         margin-top: 30px;
     }
 
-    /* Footer Responsive (si ya está en tu código, puede ir aquí) */
+    /* Footer Responsive */
     .footer-container {
-        grid-template-columns: repeat(2, 1fr); /* Ejemplo, 2 columnas */
+        grid-template-columns: repeat(2, 1fr);
     }
     .footer-social {
         justify-content: flex-start;
@@ -1220,7 +1207,7 @@ body {
         font-size: 1.6rem;
     }
     .mobile-nav {
-        width: 70%; /* Más ancho en móviles muy pequeños */
+        width: 70%;
     }
     .contenido_principal h1 {
         font-size: 1.5em;

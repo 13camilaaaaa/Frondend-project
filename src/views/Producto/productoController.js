@@ -1,4 +1,3 @@
-import { listar_productos } from "../../casos de uso/listarProductos";
 import Swal from "sweetalert2";
 import { openSidebar } from '../../componentes/carritoController';
 
@@ -127,7 +126,6 @@ export const productoController = async () => {
                         }
                     });
                 }
-
                 const productoAEnviar = {
                     id_producto: productoPendiente.id_producto,
                     cantidad: productoPendiente.cantidad,
@@ -135,8 +133,6 @@ export const productoController = async () => {
                     talla_nombre_al_momento: productoPendiente.talla,
                     color_nombre_al_momento: productoPendiente.color
                 };
-
-
                 try {
                     const res = await fetch("http://localhost:3000/api/carrito/agregar", {
                         method: "POST",
@@ -146,7 +142,6 @@ export const productoController = async () => {
                         },
                         body: JSON.stringify(productoAEnviar)
                     });
-
                     const data = await res.json();
                     if (res.ok) {
                         Swal.fire({
@@ -168,15 +163,12 @@ export const productoController = async () => {
                 }
             });
         }
-
     } catch (err) {
         console.error("Error en productoController:", err);
         Swal.fire("Error", "No se pudo mostrar el detalle del producto", "error");
     }
-
     const actualizarEstadoBotonesCantidad = () => {
         const cantidadActual = parseInt(inputCantidad.value);
-
         // deshabilita el "+" si ya es igual al stock
         if (cantidadActual >= producto.stock) {
             btnAumentar.disabled = true;
@@ -185,11 +177,9 @@ export const productoController = async () => {
                 title: "Stock insuficiente",
                 text: `Solo hay ${producto.stock} unidades disponibles.`,
             });
-
         } else {
             btnAumentar.disabled = false;
         }
-
         // deshabilita el "-" si la cantidad es 1
         if (cantidadActual <= 1) {
             btnDisminuir.disabled = true;
@@ -197,7 +187,6 @@ export const productoController = async () => {
             btnDisminuir.disabled = false;
         }
     };
-
 };
 
 

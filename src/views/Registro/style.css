@@ -1,160 +1,159 @@
-/* --- Estilos Globales Esenciales (en src/main.css o un reset.css) --- */
-/* Aseguran que el body ocupe toda la altura de la ventana para un centrado efectivo */
-
-
-/* --- Variables de Color (Puedes colocarlas en :root en src/main.css si quieres) --- */
 :root {
-    --color-green-dark: #41634C; /* Verde oscuro para el panel superior */
-    --color-white: #ffffff; /* Blanco para el panel inferior y fondo general */
-    --color-text-dark: #333; /* Color oscuro para títulos */
-    --color-text-medium: #555; /* Color medio para labels */
-    --color-input-border: #ddd; /* Color para bordes de input */
-    --color-button-hover: #3a5641; /* Un tono más oscuro para el hover del botón */
-    --color-link-hover: #0056b3; /* Color azul para enlaces al pasar el mouse */
+    --color-green-dark: #41634C;
+    /* Verde oscuro para el panel superior */
+    --color-white: #ffffff;
+    /* Blanco para el panel inferior y fondo general */
+    --color-text-dark: #333;
+    /* Color oscuro para títulos */
+    --color-text-medium: #555;
+    /* Color medio para labels */
+    --color-input-border: #ddd;
+    /* Color para bordes de input */
+    --color-button-hover: #3a5641;
+    /* Un tono más oscuro para el hover del botón */
+    --color-link-hover: #0056b3;
+    /* Color azul para enlaces al pasar el mouse */
 }
 
 /* --- Contenedor Principal de la Interfaz de Registro --- */
 .register-container {
     margin-top: 60px;
-    /* Centrar el contenedor en la pantalla */
-    display: flex; /* */
-    flex-direction: column; /* Apila el panel verde arriba y el blanco abajo */
-    justify-content: center; /* Centra verticalmente el contenido dentro de este contenedor */
-    align-items: center; /* Centra horizontalmente el contenido dentro de este contenedor */
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     /* Dimensiones generales del contenedor */
-    width: 380px; /* Un poco más ancho para el formulario de registro con más campos */
-    height: auto; /* Un poco más alto para acomodar más campos */
-    max-width: 90%; /* */
-    max-height: auto; /* Asegura que no sea demasiado alto en pantallas pequeñas (usamos vh por si el form es largo) */
-
-    background-color: var(--color-white); /* */
-    border-radius: 12px; /* */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* */
-    overflow: hidden; /* */
-
-    position: relative; /* en lugar de absolute */
-  margin: 40px auto; /* centrado verticalmente con espacio arriba */
+    width: 380px;
+    height: auto;
+    max-width: 90%;
+    max-height: auto;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    margin: 40px auto;
 }
 
 /* --- Panel Superior (Verde) --- */
 .register-top-panel {
-    flex-shrink: 0; /* */
-    width: 100%; /* */
-    height: 10%; /* Ajustado para que el panel blanco tenga más espacio para campos */
-    background-color: var(--color-green-dark); /* */
+    flex-shrink: 0;
+    width: 100%;
+    height: 10%;
+    background-color: var(--color-green-dark);
     border-radius: 12px;
-    display: flex; /* */
-    justify-content: center; /* */
-    align-items: center; /* */
-    padding: 20px; /* */
-    box-sizing: border-box; /* */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .register-brand-name {
-    color: var(--color-white); /* */
-    font-size: 2.2rem; /* */
-    font-weight: bold; /* */
-    text-align: center; /* */
-    margin: 0; /* */
+    color: var(--color-white);
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    letter-spacing: 2px; /* */
+    letter-spacing: 2px;
 }
 
 /* --- Panel Inferior (Blanco con Formulario) --- */
 .register-bottom-panel {
-    flex-grow: 1; /* */
-    width: 100%; /* */
-    background-color: var(--color-white); /* */
-    display: flex; /* */
-    flex-direction: column; /* */
-    justify-content: center; /* */
-    align-items: center; /* */
-    padding: 25px; /* Ligeramente menos padding para más campos */
-    box-sizing: border-box; /* */
-    text-align: center; /* */
+    flex-grow: 1;
+    width: 100%;
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    box-sizing: border-box;
+    text-align: center;
 }
 
 .register-form-title {
     font-size: 1.8rem;
-    color: var(--color-green-dark); /* */
-    margin-bottom: 20px; /* Menor margen para más campos */
+    color: var(--color-green-dark);
+    margin-bottom: 20px;
 }
 
 .register-form {
-    width: 100%; /* */
-    max-width: 280px; /* */
-    display: flex; /* */
-    flex-direction: column; /* */
-    gap: 15px; /* Espacio entre los campos del formulario (reducido un poco) */
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .register-form .form-group {
-    text-align: left; /* */
+    text-align: left;
 }
 
 .register-form label {
-    display: block; /* */
-    margin-bottom: 6px; /* */
-    font-weight: 600; /* */
-    color: var(--color-text-medium); /* */
-    font-size: 0.9rem; /* */
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--color-text-medium);
+    font-size: 0.9rem;
 }
 
 .register-form input[type="text"],
-.register-form input[type="email"], /* Añadido tipo email */
+.register-form input[type="email"],
+/* Añadido tipo email */
 .register-form input[type="password"] {
-    width: 100%; /* */
-    padding: 10px 12px; /* Ligeramente menos padding para inputs */
-    border: 1px solid var(--color-input-border); /* */
-    border-radius: 8px; /* */
-    font-size: 0.95rem; /* */
-    box-sizing: border-box; /* */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* */
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-input-border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .register-form input[type="text"]:focus,
 .register-form input[type="email"]:focus,
 .register-form input[type="password"]:focus {
-    outline: none; /* */
-    border-color: var(--color-green-dark); /* */
-    box-shadow: 0 0 0 3px rgba(65, 99, 76, 0.2); /* */
+    outline: none;
+    border-color: var(--color-green-dark);
+    box-shadow: 0 0 0 3px rgba(65, 99, 76, 0.2);
 }
 
 .register-button {
-    background-color: var(--color-green-dark); /* */
-    color: white; /* */
-    padding: 12px 20px; /* Ligeramente menos padding para el botón */
-    border: none; /* */
-    border-radius: 8px; /* */
-    font-size: 1rem; /* */
-    cursor: pointer; /* */
-    transition: background-color 0.3s ease, transform 0.1s ease; /* */
-    width: 100%; /* */
-    margin-top: 15px; /* */
+    background-color: var(--color-green-dark);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    width: 100%;
+    margin-top: 15px;
 }
 
 .register-button:hover {
-    background-color: var(--color-button-hover); /* */
-    transform: translateY(-1px); /* */
+    background-color: var(--color-button-hover);
+    transform: translateY(-1px);
 }
 
-.login-text { /* Cambio de register-text a login-text */
-    margin-top: 20px; /* Menor margen */
+.login-text {
+    margin-top: 20px;
     font-size: 0.85rem;
-    color: var(--color-text-medium); /* */
+    color: var(--color-text-medium);
 }
 
-.login-link { /* Cambio de register-link a login-link */
-    color: var(--color-green-dark); /* */
-    text-decoration: none; /* */
-    font-weight: bold; /* */
-    transition: color 0.3s ease; /* */
+.login-link {
+    color: var(--color-green-dark);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .login-link:hover {
-    color: var(--color-link-hover); /* */
-    text-decoration: underline; /* */
+    color: var(--color-link-hover);
+    text-decoration: underline;
 }
 
 
@@ -162,63 +161,64 @@
 
 @media (max-width: 768px) {
     .register-container {
-        width: 90%; /* */
-        height: auto; /* */
-        padding-bottom: 20px; /* */
+        width: 90%;
+        height: auto;
+        padding-bottom: 20px;
     }
 
     .register-top-panel {
-        height: 100px; /* */
+        height: 100px;
     }
 
     .register-brand-name {
-        font-size: 1.8rem; /* */
+        font-size: 1.8rem;
     }
 
     .register-bottom-panel {
-        padding: 20px; /* */
+        padding: 20px;
     }
 
     .register-form {
-        max-width: 280px; /* */
+        max-width: 280px;
     }
 
     .register-form-title {
-        font-size: 1.6rem; /* */
+        font-size: 1.6rem;
     }
 
     .register-button {
-        padding: 10px 15px; /* */
-        font-size: 0.95rem; /* */
+        padding: 10px 15px;
+        font-size: 0.95rem;
     }
 }
 
 @media (max-width: 480px) {
     .register-container {
-        width: 95%; /* */
+        width: 95%;
     }
 
     .register-top-panel {
-        height: 80px; /* */
+        height: 80px;
     }
 
     .register-brand-name {
-        font-size: 1.4rem; /* */
+        font-size: 1.4rem;
     }
 
     .register-bottom-panel {
-        padding: 10px; /* */
+        padding: 10px;
     }
 
     .register-form input[type="text"],
     .register-form input[type="email"],
     .register-form input[type="password"],
     .register-button {
-        padding: 8px 10px; /* */
-        font-size: 0.85rem; /* */
+        padding: 8px 10px;
+        font-size: 0.85rem;
     }
 
-    .login-text, .login-link {
-        font-size: 0.75rem; /* */
+    .login-text,
+    .login-link {
+        font-size: 0.75rem;
     }
 }

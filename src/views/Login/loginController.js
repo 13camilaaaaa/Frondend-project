@@ -3,16 +3,11 @@ import { Validation } from "../../helpers/Validation";
 
 export const loginController = async () => {
     await new Promise(requestAnimationFrame);
-
-    console.log("loginController loaded and executed!"); // Verifica si el controlador se carga
-
-
+    console.log("loginController loaded and executed!");
     const form = document.querySelector(".login-form");
     const email = document.querySelector("#login-username");
     const password = document.querySelector("#login-password");
 
-// Prevenir la re-ejecución del listener del formulario si el controlador se carga múltiples veces
-    // Es buena práctica asegurarse de que un listener solo se adjunte una vez.
     if (form.dataset.listenerAttached) {
         return;
     }
@@ -38,8 +33,6 @@ export const loginController = async () => {
             });
             return;
         }
-
-
         if (!Validation.isValidPassword(password.value)) {
             Swal.fire({
                 icon: "error",
@@ -64,17 +57,13 @@ export const loginController = async () => {
             });
 
             const result = await response.json();
-
             if (result.success) {
                 const { usuario, token, token_refresco } = result.data;
-
                 // guardar los datos en localStorage
                 localStorage.setItem("token", token);
-                localStorage.setItem("refresh_token", token_refresco); // opcional
+                localStorage.setItem("refresh_token", token_refresco);
                 localStorage.setItem("usuario", JSON.stringify(usuario));
-                
                 window.dispatchEvent(new Event('loginSuccess'));
-
                 // mostrar mensaje de bienvenida
                 Swal.fire({
                     icon: "success",
@@ -82,11 +71,9 @@ export const loginController = async () => {
                     showConfirmButton: false,
                     timer: 2000
                 });
-
                 // redireccionar a inicio y actualizar el header
                 location.hash = "";
                 window.dispatchEvent(new CustomEvent("modificarBotonSesion"));
-
             } else {
                 Swal.fire({
                     icon: "error",

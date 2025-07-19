@@ -1,7 +1,6 @@
 export const fetchConToken = async (url, options = {}) => {
     let token = localStorage.getItem("token");
 
-    // Agrega el token si existe
     options.headers = {
         ...options.headers,
         Authorization: `Bearer ${token}`,
@@ -26,12 +25,9 @@ export const fetchConToken = async (url, options = {}) => {
             if (refreshData.success && refreshData.data?.token) {
                 // actualizar token
                 localStorage.setItem("token", refreshData.data.token);
-
-                // (Opcional) Actualizar el refresh_token si el backend lo retorna
                 if (refreshData.data.refresh_token) {
                     localStorage.setItem("refresh_token", refreshData.data.refresh_token);
                 }
-
                 // reintentar petición original con nuevo token
                 options.headers.Authorization = `Bearer ${refreshData.data.token}`;
                 response = await fetch(`${API_URL}${url}`, options);
@@ -45,7 +41,6 @@ export const fetchConToken = async (url, options = {}) => {
             return null;
         }
     }
-
     return response;
 };
 

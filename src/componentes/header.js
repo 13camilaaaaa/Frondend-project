@@ -1,4 +1,4 @@
-
+import { listar_productos } from "../casos de uso/listarProductos.js";
 import { modificarBotonSesion } from "./modificarBotonSesion.js";
 
 const app = document.querySelector('#app');
@@ -195,7 +195,6 @@ if (hamburgerMenuIcon) {
         mobileNav.classList.toggle('is-open');
         hamburgerMenuIcon.classList.toggle('is-active');
         mobileNavOverlay.classList.toggle('active');
-
         if (mobileNav.classList.contains('is-open')) {
             mobileNav.setAttribute('aria-hidden', 'false');
             mobileNavOverlay.setAttribute('aria-hidden', 'false');
@@ -222,10 +221,9 @@ if (mobileNavOverlay) {
     });
 }
 
-// **OPCIONAL: Cierre al redimensionar la ventana (para tablets/desktop)**
 window.addEventListener('resize', () => {
     // Si la ventana es más ancha que un breakpoint de móvil y el menú está abierto
-    if (window.innerWidth > 768 && mobileNav.classList.contains('is-open')) { // Ajusta 768px a tu breakpoint
+    if (window.innerWidth > 768 && mobileNav.classList.contains('is-open')) {
         mobileNav.classList.remove('is-open');
         hamburgerMenuIcon.classList.remove('is-active');
         mobileNavOverlay.classList.remove('active');
@@ -240,17 +238,15 @@ header.append(hamburgerMenuIcon, menuDiv, categoriesBar, mobileNav, mobileNavOve
 function updateRossMilleBrand() {
     const screenWidth = window.innerWidth;
     const rossMilleElement = document.querySelector('.menu__brand');
-
-    if (rossMilleElement) { // Asegúrate de que el elemento exista
+    if (rossMilleElement) {
         if (screenWidth < 550) {
-            rossMilleElement.textContent = 'RM'; // O lo que desees para móvil
+            rossMilleElement.textContent = 'RM';
         } else {
             rossMilleElement.textContent = 'ROSS MILLE';
         }
     }
 }
 
-import { listar_productos } from "../casos de uso/listarProductos.js";
 
 // funcionalidad del buscador en el header
 (async () => {
@@ -262,29 +258,22 @@ import { listar_productos } from "../casos de uso/listarProductos.js";
     input.parentElement.appendChild(suggestionsContainer);
 
     const productos = await listar_productos();
-
     input.addEventListener("input", () => {
         const query = input.value.toLowerCase();
         suggestionsContainer.innerHTML = "";
-
         if (query === "") return;
-
         const resultados = productos.filter(prod =>
             prod.nombre.toLowerCase().includes(query)
         );
-
         resultados.forEach(prod => {
             const item = document.createElement("div");
             item.textContent = prod.nombre;
             item.classList.add("suggestion-item");
-
             item.addEventListener("click", () => {
                 input.value = prod.nombre;
                 suggestionsContainer.innerHTML = "";
                 window.location.hash = `#buscar/${encodeURIComponent(prod.nombre)}`;
             });
-
-
             suggestionsContainer.appendChild(item);
         });
     });
@@ -314,22 +303,18 @@ function activarBuscador(inputId) {
             suggestionsContainer.innerHTML = "";
 
             if (query === "") return;
-
             const resultados = productos.filter(prod =>
                 prod.nombre.toLowerCase().includes(query)
             );
-
             resultados.forEach(prod => {
                 const item = document.createElement("div");
                 item.textContent = prod.nombre;
                 item.classList.add("suggestion-item");
-
                 item.addEventListener("click", () => {
                     input.value = prod.nombre;
                     suggestionsContainer.innerHTML = "";
                     window.location.hash = `#buscar/${encodeURIComponent(prod.nombre)}`;
                 });
-
                 suggestionsContainer.appendChild(item);
             });
         });

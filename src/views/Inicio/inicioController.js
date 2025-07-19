@@ -11,7 +11,7 @@ export const inicioController = async () => {
     // crear contenedor dinámico dentro del app
     const contenedor = document.createElement('div');
     contenedor.id = 'contenedor-productos';
-    contenedor.classList.add('grid-productos'); // opcional para estilos
+    contenedor.classList.add('grid-productos');
 
     app.appendChild(contenedor); // insertamos el contenedor dentro de #app
 
@@ -25,7 +25,7 @@ export const inicioController = async () => {
         divimg.classList.add('card-img-container');
 
         const img = document.createElement('img');
-        img.setAttribute('src', `/src/uploads/${producto.imagen}`); // ruta de la imagen por defecto
+        img.setAttribute('src', `/src/uploads/${producto.imagen}`);
         img.setAttribute('alt', producto.nombre);
         img.classList.add('card-img');
         divimg.append(img);
@@ -44,19 +44,13 @@ export const inicioController = async () => {
         precio.classList.add('precio');
         precio.textContent = `$${producto.precio.toLocaleString()}`;
 
-
         // Agregamos la información al divinfo
-        divinfo.append(nombre, descripcion, precio); // Añade colorOptions aquí
-
+        divinfo.append(nombre, descripcion, precio);
         // Agregamos la imagen y la info a la tarjeta principal
         card.append(divimg, divinfo);
-
-        // Opcional: Hacer que toda la tarjeta sea clickable
-        // redirige al hacer clic
         card.addEventListener("click", () => {
             window.location.hash = `#productos/${producto.id}`;
         });
-
         return card;
     };
 

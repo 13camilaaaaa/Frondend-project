@@ -1,4 +1,3 @@
-// src/componentes/carritoController.js
 import { updateVentaView } from '../views/Venta/ventaController.js';
 import Swal from "sweetalert2";
 
@@ -9,7 +8,7 @@ let sidebarCartFooter;
 let cartIcon;
 let closeSidebarBtn;
 let sidebarOverlay;
-let shoppingBagSidebar; // Agregado para tener una referencia global al sidebar
+let shoppingBagSidebar;
 
 // =========================================================================
 // === Funciones Auxiliares (declaradas en el ámbito global del módulo) ===
@@ -94,7 +93,6 @@ const cargarContenidoDelCarrito = async () => {
                 const lastAdded = localStorage.getItem("ultimoProductoAnadido");
                 if (lastAdded) {
                     const lastAddedProduct = JSON.parse(lastAdded);
-                    // Para que la búsqueda sea más robusta, considera id_producto, talla, y color
                     const index = carritoItems.findIndex(item =>
                         item.id_producto === lastAddedProduct.id_producto &&
                         item.talla === lastAddedProduct.talla &&
@@ -388,7 +386,6 @@ const actualizarCantidadProducto = async (idItemCarrito, idProducto, talla, colo
         const itemIndex = carritoLocal.findIndex(item =>
             item.id_producto == idProducto && item.talla == talla && item.color == color
         );
-
         if (itemIndex > -1) {
             carritoLocal[itemIndex].cantidad = nuevaCantidad;
             if (carritoLocal[itemIndex].cantidad <= 0) {
@@ -438,7 +435,7 @@ const eliminarProductoDelCarrito = async (idItemCarrito, idProducto, talla, colo
             !(item.id_producto == idProducto && item.talla == talla && item.color == color)
         );
         localStorage.setItem("carritoTemporal", JSON.stringify(carritoLocal));
-        cargarContenidoDelCarrito(); // Recargar el carrito
+        cargarContenidoDelCarrito();
     }
     updateCartIconQuantity();
 };

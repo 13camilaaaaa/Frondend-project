@@ -9,10 +9,10 @@
             <div class="footer-section">
                 <h4>COLECCIONES</h4>
                 <ul>
-                    <li><a href="#/categorias/mujer">Mujer</a></li>
-                    <li><a href="#/categorias/hombre">Hombre</a></li>
-                    <li><a href="#/categorias/bebe">Bebé</a></li>
-                    <li><a href="#/categorias/niños">Niños</a></li>
+                    <li><a href="#categorias/Mujer">Mujer</a></li>
+                    <li><a href="#categorias/Hombre">Hombre</a></li>
+                    <li><a href="#categorias/Bebe">Bebé</a></li>
+                    <li><a href="#categorias/Ninos">Niños</a></li>
                 </ul>
             </div>
 
@@ -21,9 +21,8 @@
                 <ul>
                     <li><a href="#servicio-al-cliente">Servicio al cliente</a></li>
                     <li><a href="#login">Mi cuenta</a></li>
-                    <li><a href="#tiendas">Nuestras tiendas</a></li>
+                    <li><a href="/">Nuestras tiendas</a></li>
                     <li><a href="#contactanos">Contacto</a></li>
-                    <li><a href="#">Peticiones quejas y reclamos</a></li>
                 </ul>
             </div>
             </div>
